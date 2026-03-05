@@ -1,0 +1,1679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simply Earth — Design Foundations</title>
+<style>
+@font-face {
+  font-family: 'Brandon Text';
+  src: url('fonts/BrandonText-Light.woff2') format('woff2'), url('fonts/BrandonText-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Brandon Text';
+  src: url('fonts/BrandonText-Regular.woff2') format('woff2'), url('fonts/BrandonText-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Brandon Text';
+  src: url('fonts/BrandonText-RegularItalic.woff2') format('woff2'), url('fonts/BrandonText-RegularItalic.woff') format('woff');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Brandon Text';
+  src: url('fonts/BrandonText-Bold.woff2') format('woff2'), url('fonts/BrandonText-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Brandon Grotesque';
+  src: url('fonts/BrandonGrotesque-Regular.woff2') format('woff2'), url('fonts/BrandonGrotesque-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Brandon Grotesque';
+  src: url('fonts/BrandonGrotesque-Bold.woff2') format('woff2'), url('fonts/BrandonGrotesque-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+</style>
+<style>
+
+/* ─────────────────────────────────────────────
+   RESET & ROOT
+───────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* Brand Palette */
+  --coral:       #E67272;
+  --coral-light: #F4A8A8;
+  --coral-dark:  #C45050;
+  --teal:        #375D5A;
+  --teal-light:  #4E8480;
+  --teal-dark:   #2D5450;
+  --green:       #0A4A3C;
+
+  /* Neutrals */
+  --cream:       #F3EEE0;
+  --cream-dark:  #E8E0CC;
+  --mint:        #D1E5E1;
+  --mint-dark:   #A8CFCA;
+  --white:       #FEFEFE;
+  --bg:          #F7F7F5;
+  --border:      #E8E8E4;
+
+  /* Text */
+  --text-dark:   #1A1A1A;
+  --text-mid:    #555555;
+  --text-light:  #888888;
+  --text-xlight: #BBBBBB;
+
+  /* Typography */
+  --font-display: 'Brandon Grotesque', 'Futura', 'Century Gothic', sans-serif;
+  --font-body:    'Brandon Text', 'Gill Sans', 'Trebuchet MS', sans-serif;
+
+  /* Spacing scale (8px base) */
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  20px;
+  --sp-6:  24px;
+  --sp-8:  32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+  --sp-16: 64px;
+  --sp-20: 80px;
+
+  /* Radius */
+  --r-sm:   6px;
+  --r-md:   10px;
+  --r-lg:   14px;
+  --r-xl:   20px;
+  --r-pill: 999px;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.10);
+  --shadow-lg: 0 8px 40px rgba(0,0,0,0.12);
+
+  /* Grid */
+  --grid-cols: 12;
+  --grid-gutter-desktop: 24px;
+  --grid-gutter-tablet:  16px;
+  --grid-gutter-mobile:  12px;
+  --container-max: 1248px;
+}
+
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text-dark);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ─────────────────────────────────────────────
+   LAYOUT SHELL
+───────────────────────────────────────────── */
+.shell { display: flex; min-height: 100vh; }
+
+/* Sidebar nav */
+.sidenav {
+  width: 220px;
+  min-width: 220px;
+  background: var(--white);
+  border-right: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+}
+.sidenav-logo {
+  padding: var(--sp-5) var(--sp-5) var(--sp-4);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sp-2);
+}
+.sidenav-logo img {
+  height: 22px;
+  width: auto;
+  max-width: 140px;
+  display: block;
+}
+.sidenav-logo-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-light);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.3;
+  font-family: var(--font-body);
+}
+.sidenav-section {
+  padding: var(--sp-4) var(--sp-5) var(--sp-2);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--text-xlight);
+}
+.sidenav-link {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-5);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-mid);
+  text-decoration: none;
+  border-radius: 0;
+  transition: background 0.12s, color 0.12s;
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+}
+.sidenav-link:hover { background: var(--bg); color: var(--teal); }
+.sidenav-link.active { background: #EBF4F3; color: var(--teal); font-weight: 600; }
+.sidenav-link .nav-dot {
+  width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+}
+.sidenav-back {
+  margin-top: auto;
+  padding: var(--sp-4) var(--sp-5);
+  border-top: 1px solid var(--border);
+}
+.sidenav-back a {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; color: var(--text-light); text-decoration: none;
+  transition: color 0.15s;
+}
+.sidenav-back a:hover { color: var(--teal); }
+
+/* Main content */
+.main {
+  flex: 1;
+  overflow-x: hidden;
+}
+
+/* Page header */
+.page-header {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: var(--sp-10) var(--sp-12);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--sp-8);
+}
+.page-header-left {}
+.page-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--cream);
+  border-radius: var(--r-pill);
+  padding: 3px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--teal);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: var(--sp-3);
+}
+.page-title {
+  font-family: var(--font-display);
+  font-size: 40px;
+  color: var(--text-dark);
+  line-height: 1.15;
+  margin-bottom: var(--sp-3);
+}
+.page-desc {
+  font-size: 14px;
+  color: var(--text-mid);
+  max-width: 480px;
+  line-height: 1.7;
+}
+.page-header-logo { opacity: 0.12; }
+.page-header-logo img { height: 60px; width: auto; }
+
+/* Content area */
+.content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--sp-12);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-16);
+}
+
+/* Section */
+.section {}
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-8);
+  padding-bottom: var(--sp-4);
+  border-bottom: 2px solid var(--border);
+}
+.section-number {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--teal);
+  color: white;
+  font-size: 11px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--text-dark);
+  flex: 1;
+}
+.section-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--r-pill);
+  padding: 3px 10px;
+}
+
+/* Token label */
+.token {
+  display: inline-block;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 2px 7px;
+  font-family: 'SFMono-Regular', 'Consolas', monospace;
+  font-size: 11px;
+  color: var(--teal);
+  margin-left: 4px;
+}
+
+/* ─────────────────────────────────────────────
+   01 — COLORS
+───────────────────────────────────────────── */
+.color-groups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+}
+.color-group-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: var(--sp-3);
+}
+.color-row {
+  display: flex;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+}
+.color-swatch {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  cursor: pointer;
+}
+.color-swatch:hover .swatch-chip { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.swatch-chip {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--r-lg);
+  border: 1px solid rgba(0,0,0,0.06);
+  transition: transform 0.15s, box-shadow 0.15s;
+  position: relative;
+}
+.swatch-chip.large {
+  width: 100px;
+  height: 100px;
+}
+.swatch-info {}
+.swatch-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-dark);
+  line-height: 1.3;
+}
+.swatch-hex {
+  font-family: 'SFMono-Regular', 'Consolas', monospace;
+  font-size: 10px;
+  color: var(--text-light);
+}
+.swatch-var {
+  font-family: 'SFMono-Regular', 'Consolas', monospace;
+  font-size: 9px;
+  color: var(--text-xlight);
+}
+
+/* Usage chips */
+.color-usage {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  margin-top: var(--sp-3);
+}
+.usage-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: var(--r-pill);
+  background: var(--white);
+  border: 1px solid var(--border);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-mid);
+}
+.usage-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/* ─────────────────────────────────────────────
+   02 — TYPOGRAPHY
+───────────────────────────────────────────── */
+.type-view-toggle {
+  display: flex;
+  gap: var(--sp-2);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--r-pill);
+  padding: 3px;
+}
+.type-view-btn {
+  padding: 5px 14px;
+  border-radius: var(--r-pill);
+  border: none;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.type-view-btn.active {
+  background: var(--white);
+  color: var(--teal);
+  box-shadow: var(--shadow-xs);
+}
+
+.type-specimens { display: flex; flex-direction: column; gap: var(--sp-2); }
+.type-row {
+  background: var(--white);
+  border-radius: var(--r-lg);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: box-shadow 0.15s;
+}
+.type-row:hover { box-shadow: var(--shadow-sm); }
+.type-row-inner {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  align-items: center;
+  min-height: 72px;
+}
+.type-meta {
+  padding: var(--sp-4) var(--sp-5);
+  border-right: 1px solid var(--border);
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  height: 100%;
+  justify-content: center;
+}
+.type-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--teal);
+  letter-spacing: 0.04em;
+}
+.type-specs {
+  font-family: 'SFMono-Regular', 'Consolas', monospace;
+  font-size: 10px;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+.type-preview {
+  padding: var(--sp-5) var(--sp-6);
+  color: var(--text-dark);
+  line-height: 1.3;
+}
+.type-preview.on-dark {
+  background: var(--teal);
+  color: white;
+}
+.type-preview.on-cream {
+  background: var(--cream);
+}
+
+/* Display styles */
+.t-display-xl  { font-family: var(--font-display); font-size: 56px; font-weight: 400; line-height: 1.1; }
+.t-display-lg  { font-family: var(--font-display); font-size: 44px; font-weight: 400; line-height: 1.15; }
+.t-display-md  { font-family: var(--font-display); font-size: 36px; font-weight: 400; line-height: 1.2; }
+.t-display-sm  { font-family: var(--font-display); font-size: 28px; font-weight: 400; line-height: 1.25; }
+.t-display-xs  { font-family: var(--font-display); font-size: 22px; font-weight: 400; line-height: 1.3; }
+
+.t-body-xl    { font-family: var(--font-body); font-size: 18px; font-weight: 400; line-height: 1.6; }
+.t-body-lg    { font-family: var(--font-body); font-size: 16px; font-weight: 400; line-height: 1.65; }
+.t-body-md    { font-family: var(--font-body); font-size: 14px; font-weight: 400; line-height: 1.7; }
+.t-body-sm    { font-family: var(--font-body); font-size: 13px; font-weight: 400; line-height: 1.65; }
+.t-body-xs    { font-family: var(--font-body); font-size: 12px; font-weight: 400; line-height: 1.6; }
+
+.t-label-lg   { font-family: var(--font-body); font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1; }
+.t-label-md   { font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; line-height: 1; }
+.t-label-sm   { font-family: var(--font-body); font-size: 10px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; line-height: 1; }
+
+/* Mobile type scale (shown when mobile tab active) */
+.type-specimens[data-view="mobile"] .t-display-xl  { font-size: 36px; }
+.type-specimens[data-view="mobile"] .t-display-lg  { font-size: 30px; }
+.type-specimens[data-view="mobile"] .t-display-md  { font-size: 26px; }
+.type-specimens[data-view="mobile"] .t-display-sm  { font-size: 22px; }
+.type-specimens[data-view="mobile"] .t-display-xs  { font-size: 18px; }
+.type-specimens[data-view="mobile"] .t-body-xl     { font-size: 16px; }
+.type-specimens[data-view="mobile"] .t-body-lg     { font-size: 15px; }
+.type-specimens[data-view="mobile"] .t-body-md     { font-size: 14px; }
+.type-specimens[data-view="mobile"] .t-body-sm     { font-size: 13px; }
+.type-specimens[data-view="mobile"] .t-body-xs     { font-size: 11px; }
+
+.type-specimens[data-view="mobile"] .type-specs::after { content: ' · mobile'; color: var(--coral); }
+
+/* Scale indicator dots */
+.scale-change-up   { color: var(--coral); font-size: 9px; font-weight: 700; }
+.scale-change-same { color: var(--text-xlight); font-size: 9px; }
+
+/* ─────────────────────────────────────────────
+   03 — SPACING
+───────────────────────────────────────────── */
+.spacing-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+.spacing-row {
+  display: grid;
+  grid-template-columns: 80px 1fr 120px 100px;
+  align-items: center;
+  gap: var(--sp-4);
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  padding: var(--sp-3) var(--sp-4);
+}
+.spacing-label {
+  font-family: 'SFMono-Regular', 'Consolas', monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--teal);
+}
+.spacing-visual-wrap {
+  display: flex;
+  align-items: center;
+}
+.spacing-visual {
+  height: 20px;
+  background: linear-gradient(90deg, var(--coral) 0%, #E8A0A0 100%);
+  border-radius: 3px;
+  opacity: 0.7;
+}
+.spacing-px {
+  font-family: 'SFMono-Regular', 'Consolas', monospace;
+  font-size: 12px;
+  color: var(--text-mid);
+  text-align: right;
+}
+.spacing-use {
+  font-size: 11px;
+  color: var(--text-light);
+}
+
+/* ─────────────────────────────────────────────
+   04 — GRID
+───────────────────────────────────────────── */
+.grid-section {}
+.grid-device-tabs {
+  display: flex;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-6);
+  flex-wrap: wrap;
+}
+.grid-device-tab {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-3) var(--sp-5);
+  border-radius: var(--r-lg);
+  border: 1.5px solid var(--border);
+  background: var(--white);
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-mid);
+}
+.grid-device-tab.active { border-color: var(--teal); color: var(--teal); box-shadow: var(--shadow-sm); }
+.grid-device-icon { font-size: 16px; }
+
+.grid-spec-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-8);
+}
+.grid-spec-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: var(--sp-5);
+}
+.grid-spec-name {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: var(--sp-2);
+}
+.grid-spec-value {
+  font-family: 'SFMono-Regular', 'Consolas', monospace;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--teal);
+  margin-bottom: 3px;
+}
+.grid-spec-sub {
+  font-size: 11px;
+  color: var(--text-light);
+}
+
+/* Live grid visualizer */
+.grid-visualizer {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  padding: var(--sp-5);
+  overflow: hidden;
+}
+.grid-visualizer-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-light);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: var(--sp-4);
+}
+.grid-demo {
+  display: grid;
+  gap: var(--grid-gutter-desktop, 24px);
+  position: relative;
+}
+.grid-demo.cols-12 { grid-template-columns: repeat(12, 1fr); }
+.grid-demo.cols-4  { grid-template-columns: repeat(4, 1fr); }
+.grid-demo.cols-2  { grid-template-columns: repeat(2, 1fr); }
+.grid-col {
+  height: 48px;
+  background: rgba(55, 93, 90, 0.08);
+  border: 1px solid rgba(55, 93, 90, 0.15);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'SFMono-Regular', monospace;
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--teal);
+  opacity: 0.7;
+}
+.grid-col.span2 { grid-column: span 2; background: rgba(230, 114, 114, 0.08); border-color: rgba(230,114,114,0.2); color: var(--coral); }
+.grid-col.span3 { grid-column: span 3; background: rgba(230, 114, 114, 0.12); border-color: rgba(230,114,114,0.25); color: var(--coral); }
+.grid-col.span4 { grid-column: span 4; background: rgba(230, 114, 114, 0.12); border-color: rgba(230,114,114,0.25); color: var(--coral); }
+.grid-col.span6 { grid-column: span 6; background: rgba(10, 74, 60, 0.08); border-color: rgba(10,74,60,0.18); color: var(--green); }
+.grid-col.span8 { grid-column: span 8; background: rgba(10, 74, 60, 0.08); border-color: rgba(10,74,60,0.18); color: var(--green); }
+.grid-col.span12 { grid-column: span 12; background: rgba(243,238,224,1); border-color: var(--cream-dark); color: var(--teal); }
+
+.grid-layout-examples {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  margin-top: var(--sp-5);
+}
+.grid-example-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: var(--sp-2);
+}
+
+/* ─────────────────────────────────────────────
+   05 — RADIUS & SHADOWS
+───────────────────────────────────────────── */
+.radius-row {
+  display: flex;
+  gap: var(--sp-5);
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+.radius-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-3);
+}
+.radius-chip {
+  background: var(--mint);
+  border: 2px solid var(--mint-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.radius-label { font-size: 11px; font-weight: 600; color: var(--text-dark); }
+.radius-val   { font-family: monospace; font-size: 10px; color: var(--text-light); }
+
+.shadow-row {
+  display: flex;
+  gap: var(--sp-5);
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin-top: var(--sp-6);
+}
+.shadow-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-3);
+}
+.shadow-chip {
+  width: 80px; height: 80px;
+  background: var(--white);
+  border-radius: var(--r-lg);
+}
+.shadow-label { font-size: 11px; font-weight: 600; color: var(--text-dark); }
+.shadow-val   { font-family: monospace; font-size: 9px; color: var(--text-light); text-align: center; max-width: 110px; line-height: 1.4; }
+
+/* ─────────────────────────────────────────────
+   MOBILE HEADER
+───────────────────────────────────────────── */
+.mobile-topbar {
+  display: none;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: var(--sp-3) var(--sp-4);
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+.mobile-topbar img { height: 20px; max-width: 120px; }
+.mobile-menu-btn {
+  width: 36px; height: 36px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .sidenav { display: none; }
+  .mobile-topbar { display: flex; }
+  .page-header { padding: var(--sp-8) var(--sp-6); flex-direction: column; align-items: flex-start; }
+  .page-header-logo { display: none; }
+  .content { padding: var(--sp-8) var(--sp-5); gap: var(--sp-12); }
+  .grid-spec-cards { grid-template-columns: 1fr 1fr; }
+  .type-row-inner { grid-template-columns: 160px 1fr; }
+  .grid-demo.cols-12 { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .grid-spec-cards { grid-template-columns: 1fr; }
+  .type-row-inner { grid-template-columns: 1fr; }
+  .type-meta { border-right: none; border-bottom: 1px solid var(--border); height: auto; }
+  .radius-row { gap: var(--sp-4); }
+}
+
+/* ─────────────────────────────────────────────
+   COPY TOAST
+───────────────────────────────────────────── */
+.copy-toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--teal);
+  color: white;
+  padding: 9px 20px;
+  border-radius: var(--r-pill);
+  font-size: 13px;
+  font-weight: 600;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+  z-index: 9999;
+  white-space: nowrap;
+}
+.copy-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+</style>
+</head>
+<body>
+
+<div class="copy-toast" id="copyToast">Copied to clipboard!</div>
+
+<!-- Mobile top bar -->
+<div class="mobile-topbar">
+  <img src="https://simplyearth.com/images/simplyearth.svg" alt="Simply Earth" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+  <span style="display:none;font-family:'Brandon Grotesque','Futura','Century Gothic',sans-serif;font-size:18px;color:#0A4A3C;">Simply Earth</span>
+  <button class="mobile-menu-btn" onclick="document.querySelector('.sidenav').style.display='flex'">☰</button>
+</div>
+
+<div class="shell">
+
+  <!-- ── SIDEBAR ─────────────────────────────── -->
+  <nav class="sidenav">
+    <div class="sidenav-logo">
+      <img src="https://simplyearth.com/images/simplyearth.svg" alt="Simply Earth"
+        onerror="this.style.display='none';this.parentElement.querySelector('.logo-fallback').style.display='block'">
+      <span class="logo-fallback" style="display:none;font-family:'Brandon Grotesque','Futura','Century Gothic',sans-serif;font-size:16px;color:#0A4A3C;font-weight:400;">Simply Earth</span>
+      <div class="sidenav-logo-label">Design<br>Foundations</div>
+    </div>
+
+    <div class="sidenav-section">Foundations</div>
+    <a class="sidenav-link active" onclick="scrollTo('colors')">
+      <span class="nav-dot" style="background:#E67272;"></span> Colors
+    </a>
+    <a class="sidenav-link" onclick="scrollTo('typography')">
+      <span class="nav-dot" style="background:#375D5A;"></span> Typography
+    </a>
+    <a class="sidenav-link" onclick="scrollTo('spacing')">
+      <span class="nav-dot" style="background:#D1E5E1;border:1px solid #A8CFCA;"></span> Spacing
+    </a>
+    <a class="sidenav-link" onclick="scrollTo('grid')">
+      <span class="nav-dot" style="background:#F3EEE0;border:1px solid #C8C0A8;"></span> Grid
+    </a>
+    <a class="sidenav-link" onclick="scrollTo('radius')">
+      <span class="nav-dot" style="background:#0A4A3C;"></span> Radius & Shadows
+    </a>
+
+    <div class="sidenav-section" style="margin-top: 8px;">Links</div>
+    <a class="sidenav-link" href="index.html">
+      <span style="font-size:13px;">◈</span> Component Library
+    </a>
+
+    <div class="sidenav-back">
+      <a href="index.html">← Back to Design System</a>
+    </div>
+  </nav>
+
+  <!-- ── MAIN ──────────────────────────────────── -->
+  <main class="main">
+
+    <!-- Page header -->
+    <div class="page-header">
+      <div class="page-header-left">
+        <div class="page-eyebrow">🌿 Simply Earth · v1.0</div>
+        <h1 class="page-title">Design Foundations</h1>
+        <p class="page-desc">Core visual language — colors, typography, spacing, grid, and radius tokens used across all Simply Earth UI components.</p>
+      </div>
+      <div class="page-header-logo">
+        <img src="https://simplyearth.com/images/simplyearth.svg" alt="">
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- ══════════════════════════════════════
+           01  COLORS
+      ═══════════════════════════════════════ -->
+      <section class="section" id="colors">
+        <div class="section-header">
+          <div class="section-number">01</div>
+          <h2 class="section-title">Colors</h2>
+          <span class="section-badge">Brand Palette</span>
+        </div>
+
+        <div class="color-groups">
+
+          <!-- Brand Primary -->
+          <div>
+            <div class="color-group-label">Brand — Primary</div>
+            <div class="color-row">
+              <div class="color-swatch" onclick="copyHex('#E67272')">
+                <div class="swatch-chip large" style="background:#E67272;"></div>
+                <div class="swatch-info">
+                  <div class="swatch-name">Coral</div>
+                  <div class="swatch-hex">#E67272</div>
+                  <div class="swatch-var">--coral</div>
+                </div>
+              </div>
+              <div class="color-swatch" onclick="copyHex('#F4A8A8')">
+                <div class="swatch-chip large" style="background:#F4A8A8;"></div>
+                <div class="swatch-info">
+                  <div class="swatch-name">Coral Light</div>
+                  <div class="swatch-hex">#F4A8A8</div>
+                  <div class="swatch-var">--coral-light</div>
+                </div>
+              </div>
+              <div class="color-swatch" onclick="copyHex('#C45050')">
+                <div class="swatch-chip large" style="background:#C45050;"></div>
+                <div class="swatch-info">
+                  <div class="swatch-name">Coral Dark</div>
+                  <div class="swatch-hex">#C45050</div>
+                  <div class="swatch-var">--coral-dark</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Brand Secondary -->
+          <div>
+            <div class="color-group-label">Brand — Secondary</div>
+            <div class="color-row">
+              <div class="color-swatch" onclick="copyHex('#375D5A')">
+                <div class="swatch-chip large" style="background:#375D5A;"></div>
+                <div class="swatch-info">
+                  <div class="swatch-name">Teal</div>
+                  <div class="swatch-hex">#375D5A</div>
+                  <div class="swatch-var">--teal</div>
+                </div>
+              </div>
+              <div class="color-swatch" onclick="copyHex('#4E8480')">
+                <div class="swatch-chip large" style="background:#4E8480;"></div>
+                <div class="swatch-info">
+                  <div class="swatch-name">Teal Light</div>
+                  <div class="swatch-hex">#4E8480</div>
+                  <div class="swatch-var">--teal-light</div>
+                </div>
+              </div>
+              <div class="color-swatch" onclick="copyHex('#2D5450')">
+                <div class="swatch-chip large" style="background:#2D5450;"></div>
+                <div class="swatch-info">
+                  <div class="swatch-name">Teal Dark</div>
+                  <div class="swatch-hex">#2D5450</div>
+                  <div class="swatch-var">--teal-dark</div>
+                </div>
+              </div>
+              <div class="color-swatch" onclick="copyHex('#0A4A3C')">
+                <div class="swatch-chip large" style="background:#0A4A3C;"></div>
+                <div class="swatch-info">
+                  <div class="swatch-name">Forest Green</div>
+                  <div class="swatch-hex">#0A4A3C</div>
+                  <div class="swatch-var">--green</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Backgrounds -->
+          <div>
+            <div class="color-group-label">Backgrounds</div>
+            <div class="color-row">
+              <div class="color-swatch" onclick="copyHex('#F3EEE0')">
+                <div class="swatch-chip large" style="background:#F3EEE0;border:1px solid #E8E0CC;"></div>
+                <div class="swatch-info">
+                  <div class="swatch-name">Cream</div>
+                  <div class="swatch-hex">#F3EEE0</div>
+                  <div class="swatch-var">--cream</div>
+                </div>
+              </div>
+              <div class="color-swatch" onclick="copyHex('#D1E5E1')">
+                <div class="swatch-chip large" style="background:#D1E5E1;border:1px solid #A8CFCA;"></div>
+                <div class="swatch-info">
+                  <div class="swatch-name">Mint</div>
+                  <div class="swatch-hex">#D1E5E1</div>
+                  <div class="swatch-var">--mint</div>
+                </div>
+              </div>
+              <div class="color-swatch" onclick="copyHex('#FEFEFE')">
+                <div class="swatch-chip large" style="background:#FEFEFE;border:1px solid #E8E8E4;"></div>
+                <div class="swatch-info">
+                  <div class="swatch-name">White</div>
+                  <div class="swatch-hex">#FEFEFE</div>
+                  <div class="swatch-var">--white</div>
+                </div>
+              </div>
+              <div class="color-swatch" onclick="copyHex('#F7F7F5')">
+                <div class="swatch-chip large" style="background:#F7F7F5;border:1px solid #E8E8E4;"></div>
+                <div class="swatch-info">
+                  <div class="swatch-name">App BG</div>
+                  <div class="swatch-hex">#F7F7F5</div>
+                  <div class="swatch-var">--bg</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Text -->
+          <div>
+            <div class="color-group-label">Text</div>
+            <div class="color-row">
+              <div class="color-swatch" onclick="copyHex('#1A1A1A')">
+                <div class="swatch-chip" style="background:#1A1A1A;"></div>
+                <div class="swatch-info">
+                  <div class="swatch-name">Dark</div>
+                  <div class="swatch-hex">#1A1A1A</div>
+                  <div class="swatch-var">--text-dark</div>
+                </div>
+              </div>
+              <div class="color-swatch" onclick="copyHex('#555555')">
+                <div class="swatch-chip" style="background:#555555;"></div>
+                <div class="swatch-info">
+                  <div class="swatch-name">Mid</div>
+                  <div class="swatch-hex">#555555</div>
+                  <div class="swatch-var">--text-mid</div>
+                </div>
+              </div>
+              <div class="color-swatch" onclick="copyHex('#888888')">
+                <div class="swatch-chip" style="background:#888888;"></div>
+                <div class="swatch-info">
+                  <div class="swatch-name">Light</div>
+                  <div class="swatch-hex">#888888</div>
+                  <div class="swatch-var">--text-light</div>
+                </div>
+              </div>
+              <div class="color-swatch" onclick="copyHex('#BBBBBB')">
+                <div class="swatch-chip" style="background:#BBBBBB;"></div>
+                <div class="swatch-info">
+                  <div class="swatch-name">X-Light</div>
+                  <div class="swatch-hex">#BBBBBB</div>
+                  <div class="swatch-var">--text-xlight</div>
+                </div>
+              </div>
+              <div class="color-swatch" onclick="copyHex('#E8E8E4')">
+                <div class="swatch-chip" style="background:#E8E8E4;border:1px solid #DDD;"></div>
+                <div class="swatch-info">
+                  <div class="swatch-name">Border</div>
+                  <div class="swatch-hex">#E8E8E4</div>
+                  <div class="swatch-var">--border</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Usage Guide -->
+          <div>
+            <div class="color-group-label">Usage Guide</div>
+            <div class="color-usage">
+              <div class="usage-chip"><div class="usage-dot" style="background:#E67272;"></div>CTAs, buttons, badges, alerts, save tags</div>
+              <div class="usage-chip"><div class="usage-dot" style="background:#375D5A;"></div>Nav, headers, sub-nav, secondary CTAs, step labels</div>
+              <div class="usage-chip"><div class="usage-dot" style="background:#F3EEE0;"></div>Hero sections, cream backgrounds, card fills</div>
+              <div class="usage-chip"><div class="usage-dot" style="background:#D1E5E1;border:1px solid #A8CFCA;"></div>Mint backgrounds, supply sections, FAQ</div>
+              <div class="usage-chip"><div class="usage-dot" style="background:#0A4A3C;"></div>Logo, hero text emphasis, dark headings</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════
+           02  TYPOGRAPHY
+      ═══════════════════════════════════════ -->
+      <section class="section" id="typography">
+        <div class="section-header">
+          <div class="section-number">02</div>
+          <h2 class="section-title">Typography</h2>
+          <div style="margin-left:auto;display:flex;align-items:center;gap:12px;">
+            <div class="type-view-toggle">
+              <button class="type-view-btn active" onclick="setTypeView('desktop', this)">🖥 Desktop</button>
+              <button class="type-view-btn" onclick="setTypeView('mobile', this)">📱 Mobile</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Font families -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px;">
+          <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--r-xl);padding:28px;overflow:hidden;">
+            <div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-light);margin-bottom:12px;">Display Font</div>
+            <div style="font-family:'Brandon Grotesque','Futura','Century Gothic',sans-serif;font-size:32px;color:var(--teal);line-height:1.15;margin-bottom:8px;" style="font-family:'Brandon Grotesque','Futura',sans-serif;font-weight:700;">Brandon Grotesque</div>
+            <div style="font-family:'Brandon Grotesque','Futura','Century Gothic',sans-serif;font-size:15px;color:var(--text-mid);font-style:italic;">Hello, World!</div>
+            <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;">
+              <span class="token">Thin 100</span><span class="token">Light 300</span><span class="token">Regular 400</span><span class="token">Medium 500</span><span class="token">Bold 700</span><span class="token">Black 900</span>
+            </div>
+            <div style="margin-top:10px;font-size:11px;color:var(--text-light);">Adobe Fonts (Typekit) · Used for H1–H4, hero headlines, card titles</div>
+          </div>
+          <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--r-xl);padding:28px;overflow:hidden;">
+            <div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-light);margin-bottom:12px;">Body Font</div>
+            <div style="font-family:'Brandon Text','Gill Sans','Trebuchet MS',sans-serif;font-size:28px;font-weight:400;color:var(--teal);line-height:1.2;margin-bottom:8px;" style="font-family:'Brandon Text','Gill Sans',sans-serif;font-weight:400;">Brandon Text</div>
+            <div style="font-family:'Brandon Text','Gill Sans','Trebuchet MS',sans-serif;font-size:15px;font-weight:500;color:var(--text-mid);">Hello, World!</div>
+            <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;">
+              <span class="token">Light 300</span><span class="token">Regular 400</span><span class="token">Medium 500</span><span class="token">Bold 700</span><span class="token">Black 900</span>
+            </div>
+            <div style="margin-top:10px;font-size:11px;color:var(--text-light);">Adobe Fonts (Typekit) · Used for body, UI labels, nav, buttons</div>
+          </div>
+        </div>
+
+        <!-- Type scale specimens -->
+        <div class="type-specimens" id="typeSpecimens" data-view="desktop">
+
+          <!-- DISPLAY SCALE -->
+          <div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--coral);margin:8px 0 4px;">Display Scale · Brandon Grotesque</div>
+
+          <div class="type-row">
+            <div class="type-row-inner">
+              <div class="type-meta">
+                <div class="type-label">Display XL</div>
+                <div class="type-specs" id="spec-dxl">56px / 400 / 1.1lh</div>
+              </div>
+              <div class="type-preview on-cream">
+                <span class="t-display-xl">Hello, World!</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="type-row">
+            <div class="type-row-inner">
+              <div class="type-meta">
+                <div class="type-label">Display LG</div>
+                <div class="type-specs" id="spec-dlg">44px / 400 / 1.15lh</div>
+              </div>
+              <div class="type-preview">
+                <span class="t-display-lg">Hello, World!</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="type-row">
+            <div class="type-row-inner">
+              <div class="type-meta">
+                <div class="type-label">Display MD</div>
+                <div class="type-specs">36px / 400 / 1.2lh</div>
+              </div>
+              <div class="type-preview on-dark">
+                <span class="t-display-md">Hello, World!</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="type-row">
+            <div class="type-row-inner">
+              <div class="type-meta">
+                <div class="type-label">Display SM</div>
+                <div class="type-specs">28px / 400 / 1.25lh</div>
+              </div>
+              <div class="type-preview">
+                <span class="t-display-sm">Hello, World!</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="type-row">
+            <div class="type-row-inner">
+              <div class="type-meta">
+                <div class="type-label">Display XS</div>
+                <div class="type-specs">22px / 400 / 1.3lh</div>
+              </div>
+              <div class="type-preview on-cream">
+                <span class="t-display-xs">Hello, World!</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- BODY SCALE -->
+          <div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal);margin:20px 0 4px;">Body Scale · Brandon Text</div>
+
+          <div class="type-row">
+            <div class="type-row-inner">
+              <div class="type-meta">
+                <div class="type-label">Body XL</div>
+                <div class="type-specs">18px / 400 / 1.6lh</div>
+              </div>
+              <div class="type-preview">
+                <span class="t-body-xl">Hello, World! — The quick brown fox jumps over the lazy dog.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="type-row">
+            <div class="type-row-inner">
+              <div class="type-meta">
+                <div class="type-label">Body LG</div>
+                <div class="type-specs">16px / 400 / 1.65lh</div>
+              </div>
+              <div class="type-preview">
+                <span class="t-body-lg">Hello, World! — The quick brown fox jumps over the lazy dog.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="type-row">
+            <div class="type-row-inner">
+              <div class="type-meta">
+                <div class="type-label">Body MD</div>
+                <div class="type-specs">14px / 400 / 1.7lh</div>
+              </div>
+              <div class="type-preview on-cream">
+                <span class="t-body-md">Hello, World! — The quick brown fox jumps over the lazy dog.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="type-row">
+            <div class="type-row-inner">
+              <div class="type-meta">
+                <div class="type-label">Body SM</div>
+                <div class="type-specs">13px / 400 / 1.65lh</div>
+              </div>
+              <div class="type-preview">
+                <span class="t-body-sm">Hello, World! — The quick brown fox jumps over the lazy dog.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="type-row">
+            <div class="type-row-inner">
+              <div class="type-meta">
+                <div class="type-label">Body XS</div>
+                <div class="type-specs">12px / 400 / 1.6lh</div>
+              </div>
+              <div class="type-preview on-dark">
+                <span class="t-body-xs">Hello, World! — The quick brown fox jumps over the lazy dog.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- LABEL SCALE -->
+          <div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-light);margin:20px 0 4px;">Labels & UI Text · Brandon Text Uppercase</div>
+
+          <div class="type-row">
+            <div class="type-row-inner">
+              <div class="type-meta">
+                <div class="type-label">Label LG</div>
+                <div class="type-specs">13px / 700 / 0.08em</div>
+              </div>
+              <div class="type-preview">
+                <span class="t-label-lg" style="color:var(--teal);">Hello, World!</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="type-row">
+            <div class="type-row-inner">
+              <div class="type-meta">
+                <div class="type-label">Label MD</div>
+                <div class="type-specs">11px / 700 / 0.10em</div>
+              </div>
+              <div class="type-preview on-cream">
+                <span class="t-label-md" style="color:var(--teal);">Hello, World!</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="type-row">
+            <div class="type-row-inner">
+              <div class="type-meta">
+                <div class="type-label">Label SM</div>
+                <div class="type-specs">10px / 800 / 0.12em</div>
+              </div>
+              <div class="type-preview on-dark">
+                <span class="t-label-sm" style="color:rgba(255,255,255,0.7);">Hello, World!</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Mobile comparison note -->
+        <div id="mobileNote" style="display:none;background:var(--cream);border:1.5px solid var(--cream-dark);border-radius:var(--r-lg);padding:16px 20px;margin-top:16px;">
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--teal);margin-bottom:6px;">Mobile Scale Note</div>
+          <div style="font-size:13px;color:var(--text-mid);line-height:1.65;">Display sizes scale down significantly on mobile. Use <code style="font-size:11px;background:rgba(0,0,0,0.06);padding:1px 5px;border-radius:3px;">clamp()</code> in production — e.g. <code style="font-size:11px;background:rgba(0,0,0,0.06);padding:1px 5px;border-radius:3px;">clamp(36px, 5vw, 56px)</code> for Display XL. Body sizes stay consistent across breakpoints for readability.</div>
+        </div>
+
+      </section>
+
+      <!-- ══════════════════════════════════════
+           03  SPACING
+      ═══════════════════════════════════════ -->
+      <section class="section" id="spacing">
+        <div class="section-header">
+          <div class="section-number">03</div>
+          <h2 class="section-title">Spacing Scale</h2>
+          <span class="section-badge">8px Base</span>
+        </div>
+
+        <div class="spacing-grid">
+          <div class="spacing-row" style="background:var(--bg);border:none;padding:6px 16px;">
+            <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-xlight);">Token</div>
+            <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-xlight);">Visual</div>
+            <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-xlight);text-align:right;">px / rem</div>
+            <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-xlight);">Usage</div>
+          </div>
+          <div class="spacing-row">
+            <div class="spacing-label">--sp-1</div>
+            <div class="spacing-visual-wrap"><div class="spacing-visual" style="width:4px;"></div></div>
+            <div class="spacing-px">4px / 0.25rem</div>
+            <div class="spacing-use">Icon gap, tight inline</div>
+          </div>
+          <div class="spacing-row">
+            <div class="spacing-label">--sp-2</div>
+            <div class="spacing-visual-wrap"><div class="spacing-visual" style="width:8px;"></div></div>
+            <div class="spacing-px">8px / 0.5rem</div>
+            <div class="spacing-use">Tag gap, chip padding</div>
+          </div>
+          <div class="spacing-row">
+            <div class="spacing-label">--sp-3</div>
+            <div class="spacing-visual-wrap"><div class="spacing-visual" style="width:12px;"></div></div>
+            <div class="spacing-px">12px / 0.75rem</div>
+            <div class="spacing-use">List gap, small padding</div>
+          </div>
+          <div class="spacing-row">
+            <div class="spacing-label">--sp-4</div>
+            <div class="spacing-visual-wrap"><div class="spacing-visual" style="width:16px;"></div></div>
+            <div class="spacing-px">16px / 1rem</div>
+            <div class="spacing-use">Card padding, nav links</div>
+          </div>
+          <div class="spacing-row">
+            <div class="spacing-label">--sp-5</div>
+            <div class="spacing-visual-wrap"><div class="spacing-visual" style="width:20px;"></div></div>
+            <div class="spacing-px">20px / 1.25rem</div>
+            <div class="spacing-use">Section inner padding</div>
+          </div>
+          <div class="spacing-row">
+            <div class="spacing-label">--sp-6</div>
+            <div class="spacing-visual-wrap"><div class="spacing-visual" style="width:24px;"></div></div>
+            <div class="spacing-px">24px / 1.5rem</div>
+            <div class="spacing-use">Card gap, grid gutter</div>
+          </div>
+          <div class="spacing-row">
+            <div class="spacing-label">--sp-8</div>
+            <div class="spacing-visual-wrap"><div class="spacing-visual" style="width:32px;"></div></div>
+            <div class="spacing-px">32px / 2rem</div>
+            <div class="spacing-use">Section heading mb, form gap</div>
+          </div>
+          <div class="spacing-row">
+            <div class="spacing-label">--sp-10</div>
+            <div class="spacing-visual-wrap"><div class="spacing-visual" style="width:40px;"></div></div>
+            <div class="spacing-px">40px / 2.5rem</div>
+            <div class="spacing-use">Page header padding</div>
+          </div>
+          <div class="spacing-row">
+            <div class="spacing-label">--sp-12</div>
+            <div class="spacing-visual-wrap"><div class="spacing-visual" style="width:48px;"></div></div>
+            <div class="spacing-px">48px / 3rem</div>
+            <div class="spacing-use">Section padding vertical</div>
+          </div>
+          <div class="spacing-row">
+            <div class="spacing-label">--sp-16</div>
+            <div class="spacing-visual-wrap"><div class="spacing-visual" style="width:64px;"></div></div>
+            <div class="spacing-px">64px / 4rem</div>
+            <div class="spacing-use">Major section gap</div>
+          </div>
+          <div class="spacing-row">
+            <div class="spacing-label">--sp-20</div>
+            <div class="spacing-visual-wrap"><div class="spacing-visual" style="width:80px;"></div></div>
+            <div class="spacing-px">80px / 5rem</div>
+            <div class="spacing-use">Page hero padding</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════
+           04  GRID
+      ═══════════════════════════════════════ -->
+      <section class="section" id="grid">
+        <div class="section-header">
+          <div class="section-number">04</div>
+          <h2 class="section-title">Grid System</h2>
+          <span class="section-badge">12-Column</span>
+        </div>
+
+        <!-- Device spec cards -->
+        <div id="gridDeviceTabs" class="grid-device-tabs">
+          <button class="grid-device-tab active" onclick="selectGrid('desktop', this)">
+            <span class="grid-device-icon">🖥</span>
+            <div>
+              <div style="font-size:13px;font-weight:700;">Desktop</div>
+              <div style="font-size:10px;color:var(--text-light);font-weight:400;">≥ 1024px</div>
+            </div>
+          </button>
+          <button class="grid-device-tab" onclick="selectGrid('tablet', this)">
+            <span class="grid-device-icon">📟</span>
+            <div>
+              <div style="font-size:13px;font-weight:700;">Tablet</div>
+              <div style="font-size:10px;color:var(--text-light);font-weight:400;">768px – 1023px</div>
+            </div>
+          </button>
+          <button class="grid-device-tab" onclick="selectGrid('mobile', this)">
+            <span class="grid-device-icon">📱</span>
+            <div>
+              <div style="font-size:13px;font-weight:700;">Mobile</div>
+              <div style="font-size:10px;color:var(--text-light);font-weight:400;">< 768px</div>
+            </div>
+          </button>
+        </div>
+
+        <div class="grid-spec-cards" id="gridSpecCards">
+          <div class="grid-spec-card">
+            <div class="grid-spec-name">Columns</div>
+            <div class="grid-spec-value" id="gCols">12</div>
+            <div class="grid-spec-sub">Equal-width fluid columns</div>
+          </div>
+          <div class="grid-spec-card">
+            <div class="grid-spec-name">Gutter</div>
+            <div class="grid-spec-value" id="gGutter">24px</div>
+            <div class="grid-spec-sub">Between columns</div>
+          </div>
+          <div class="grid-spec-card">
+            <div class="grid-spec-name">Container Max</div>
+            <div class="grid-spec-value" id="gMax">1248px</div>
+            <div class="grid-spec-sub">Centered, padded sides</div>
+          </div>
+          <div class="grid-spec-card">
+            <div class="grid-spec-name">Margin</div>
+            <div class="grid-spec-value" id="gMargin">60px</div>
+            <div class="grid-spec-sub">Container side padding</div>
+          </div>
+          <div class="grid-spec-card">
+            <div class="grid-spec-name">Breakpoint</div>
+            <div class="grid-spec-value" id="gBreak">≥ 1024px</div>
+            <div class="grid-spec-sub">Activate at width</div>
+          </div>
+          <div class="grid-spec-card">
+            <div class="grid-spec-name">Row Height</div>
+            <div class="grid-spec-value">Auto</div>
+            <div class="grid-spec-sub">Content-driven rows</div>
+          </div>
+        </div>
+
+        <!-- Live grid visualizer -->
+        <div class="grid-visualizer">
+          <div class="grid-visualizer-label">12-Column Grid — Common Span Patterns</div>
+          <div class="grid-layout-examples">
+
+            <div>
+              <div class="grid-example-label">Full width (12)</div>
+              <div class="grid-demo cols-12">
+                <div class="grid-col span12">12</div>
+              </div>
+            </div>
+
+            <div>
+              <div class="grid-example-label">Half / Half (6 + 6)</div>
+              <div class="grid-demo cols-12">
+                <div class="grid-col span6">6</div>
+                <div class="grid-col span6">6</div>
+              </div>
+            </div>
+
+            <div>
+              <div class="grid-example-label">Hero Split (8 + 4)</div>
+              <div class="grid-demo cols-12">
+                <div class="grid-col span8">8</div>
+                <div class="grid-col span4">4</div>
+              </div>
+            </div>
+
+            <div>
+              <div class="grid-example-label">Thirds (4 + 4 + 4)</div>
+              <div class="grid-demo cols-12">
+                <div class="grid-col span4">4</div>
+                <div class="grid-col span4">4</div>
+                <div class="grid-col span4">4</div>
+              </div>
+            </div>
+
+            <div>
+              <div class="grid-example-label">Quarters (3 + 3 + 3 + 3)</div>
+              <div class="grid-demo cols-12">
+                <div class="grid-col span3">3</div>
+                <div class="grid-col span3">3</div>
+                <div class="grid-col span3">3</div>
+                <div class="grid-col span3">3</div>
+              </div>
+            </div>
+
+            <div>
+              <div class="grid-example-label">All 12 columns</div>
+              <div class="grid-demo cols-12">
+                <div class="grid-col">1</div><div class="grid-col">2</div>
+                <div class="grid-col">3</div><div class="grid-col">4</div>
+                <div class="grid-col">5</div><div class="grid-col">6</div>
+                <div class="grid-col">7</div><div class="grid-col">8</div>
+                <div class="grid-col">9</div><div class="grid-col">10</div>
+                <div class="grid-col">11</div><div class="grid-col">12</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════
+           05  RADIUS & SHADOWS
+      ═══════════════════════════════════════ -->
+      <section class="section" id="radius">
+        <div class="section-header">
+          <div class="section-number">05</div>
+          <h2 class="section-title">Radius & Shadows</h2>
+          <span class="section-badge">Visual Depth</span>
+        </div>
+
+        <div style="margin-bottom:var(--sp-6);">
+          <div class="color-group-label">Border Radius</div>
+          <div class="radius-row">
+            <div class="radius-item">
+              <div class="radius-chip" style="width:40px;height:40px;border-radius:6px;"></div>
+              <div class="radius-label">SM</div>
+              <div class="radius-val">--r-sm · 6px</div>
+            </div>
+            <div class="radius-item">
+              <div class="radius-chip" style="width:56px;height:56px;border-radius:10px;"></div>
+              <div class="radius-label">MD</div>
+              <div class="radius-val">--r-md · 10px</div>
+            </div>
+            <div class="radius-item">
+              <div class="radius-chip" style="width:72px;height:72px;border-radius:14px;"></div>
+              <div class="radius-label">LG</div>
+              <div class="radius-val">--r-lg · 14px</div>
+            </div>
+            <div class="radius-item">
+              <div class="radius-chip" style="width:88px;height:88px;border-radius:20px;"></div>
+              <div class="radius-label">XL</div>
+              <div class="radius-val">--r-xl · 20px</div>
+            </div>
+            <div class="radius-item">
+              <div class="radius-chip" style="width:56px;height:32px;border-radius:999px;"></div>
+              <div class="radius-label">Pill</div>
+              <div class="radius-val">--r-pill · 999px</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="color-group-label">Box Shadows</div>
+          <div class="shadow-row">
+            <div class="shadow-item">
+              <div class="shadow-chip" style="box-shadow:0 1px 3px rgba(0,0,0,0.06);"></div>
+              <div class="shadow-label">XS</div>
+              <div class="shadow-val">--shadow-xs<br>0 1px 3px · 6%</div>
+            </div>
+            <div class="shadow-item">
+              <div class="shadow-chip" style="box-shadow:0 2px 8px rgba(0,0,0,0.08);"></div>
+              <div class="shadow-label">SM</div>
+              <div class="shadow-val">--shadow-sm<br>0 2px 8px · 8%</div>
+            </div>
+            <div class="shadow-item">
+              <div class="shadow-chip" style="box-shadow:0 4px 20px rgba(0,0,0,0.10);"></div>
+              <div class="shadow-label">MD</div>
+              <div class="shadow-val">--shadow-md<br>0 4px 20px · 10%</div>
+            </div>
+            <div class="shadow-item">
+              <div class="shadow-chip" style="box-shadow:0 8px 40px rgba(0,0,0,0.12);"></div>
+              <div class="shadow-label">LG</div>
+              <div class="shadow-val">--shadow-lg<br>0 8px 40px · 12%</div>
+            </div>
+            <div class="shadow-item">
+              <div class="shadow-chip" style="box-shadow:0 4px 16px rgba(55,93,90,0.25);background:var(--teal);"></div>
+              <div class="shadow-label">Teal Glow</div>
+              <div class="shadow-val">Buttons · CTAs<br>0 4px 16px · teal</div>
+            </div>
+            <div class="shadow-item">
+              <div class="shadow-chip" style="box-shadow:0 4px 16px rgba(230,114,114,0.30);background:var(--coral);"></div>
+              <div class="shadow-label">Coral Glow</div>
+              <div class="shadow-val">Primary CTAs<br>0 4px 16px · coral</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Usage note -->
+        <div style="background:var(--mint);border:1.5px solid var(--mint-dark);border-radius:var(--r-lg);padding:16px 20px;margin-top:var(--sp-6);">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--teal);margin-bottom:6px;">Usage Rules</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;font-size:13px;color:var(--text-mid);line-height:1.55;">
+            <div>🟡 <b>XS</b> — default card border emphasis</div>
+            <div>🟠 <b>SM</b> — hover state, focused inputs</div>
+            <div>🔴 <b>MD</b> — modal overlays, dropdowns</div>
+            <div>🟣 <b>LG</b> — floating elements, hero cards</div>
+            <div>🟢 <b>Teal Glow</b> — secondary buttons on hover</div>
+            <div>🔵 <b>Coral Glow</b> — primary CTA hover state</div>
+          </div>
+        </div>
+
+      </section>
+
+    </div><!-- /content -->
+  </main>
+</div><!-- /shell -->
+
+<script>
+// ── Scroll to section ──────────────────────────
+function scrollTo(id) {
+  var el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.querySelectorAll('.sidenav-link').forEach(function(l) { l.classList.remove('active'); });
+  var links = document.querySelectorAll('.sidenav-link');
+  links.forEach(function(l) {
+    if (l.getAttribute('onclick') && l.getAttribute('onclick').indexOf(id) > -1) l.classList.add('active');
+  });
+}
+
+// ── Highlight active section on scroll ────────
+window.addEventListener('scroll', function() {
+  var ids = ['colors','typography','spacing','grid','radius'];
+  var current = ids[0];
+  ids.forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el && el.getBoundingClientRect().top < 120) current = id;
+  });
+  document.querySelectorAll('.sidenav-link').forEach(function(l) {
+    l.classList.remove('active');
+    if (l.getAttribute('onclick') && l.getAttribute('onclick').indexOf(current) > -1) l.classList.add('active');
+  });
+}, { passive: true });
+
+// ── Copy hex to clipboard ──────────────────────
+function copyHex(hex) {
+  navigator.clipboard.writeText(hex).catch(function() {});
+  var t = document.getElementById('copyToast');
+  t.textContent = 'Copied ' + hex;
+  t.classList.add('show');
+  setTimeout(function() { t.classList.remove('show'); }, 2000);
+}
+
+// ── Typography view toggle ─────────────────────
+var mobileSpecs = {
+  'Display XL':  '36px / 400 / 1.1lh',
+  'Display LG':  '30px / 400 / 1.15lh',
+  'Display MD':  '26px / 400 / 1.2lh',
+  'Display SM':  '22px / 400 / 1.25lh',
+  'Display XS':  '18px / 400 / 1.3lh',
+  'Body XL':     '16px / 400 / 1.6lh',
+  'Body LG':     '15px / 400 / 1.65lh',
+  'Body MD':     '14px / 400 / 1.7lh',
+  'Body SM':     '13px / 400 / 1.65lh',
+  'Body XS':     '11px / 400 / 1.6lh',
+  'Label LG':    '13px / 700 / 0.08em',
+  'Label MD':    '11px / 700 / 0.10em',
+  'Label SM':    '10px / 800 / 0.12em'
+};
+var desktopSpecs = {
+  'Display XL':  '56px / 400 / 1.1lh',
+  'Display LG':  '44px / 400 / 1.15lh',
+  'Display MD':  '36px / 400 / 1.2lh',
+  'Display SM':  '28px / 400 / 1.25lh',
+  'Display XS':  '22px / 400 / 1.3lh',
+  'Body XL':     '18px / 400 / 1.6lh',
+  'Body LG':     '16px / 400 / 1.65lh',
+  'Body MD':     '14px / 400 / 1.7lh',
+  'Body SM':     '13px / 400 / 1.65lh',
+  'Body XS':     '12px / 400 / 1.6lh',
+  'Label LG':    '13px / 700 / 0.08em',
+  'Label MD':    '11px / 700 / 0.10em',
+  'Label SM':    '10px / 800 / 0.12em'
+};
+
+function setTypeView(view, btn) {
+  var specimens = document.getElementById('typeSpecimens');
+  specimens.setAttribute('data-view', view);
+  document.querySelectorAll('.type-view-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  var note = document.getElementById('mobileNote');
+  note.style.display = view === 'mobile' ? 'block' : 'none';
+  var specs = view === 'mobile' ? mobileSpecs : desktopSpecs;
+  document.querySelectorAll('.type-meta').forEach(function(meta) {
+    var label = meta.querySelector('.type-label');
+    var specEl = meta.querySelector('.type-specs');
+    if (label && specEl && specs[label.textContent]) {
+      specEl.textContent = specs[label.textContent];
+    }
+  });
+}
+
+// ── Grid device toggle ─────────────────────────
+var gridData = {
+  desktop: { cols: '12', gutter: '24px', max: '1248px', margin: '60px', bp: '≥ 1024px' },
+  tablet:  { cols: '8',  gutter: '16px', max: '1024px', margin: '40px', bp: '768–1023px' },
+  mobile:  { cols: '4',  gutter: '12px', max: '100%',   margin: '20px', bp: '< 768px' }
+};
+
+function selectGrid(device, btn) {
+  document.querySelectorAll('.grid-device-tab').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  var d = gridData[device];
+  document.getElementById('gCols').textContent    = d.cols;
+  document.getElementById('gGutter').textContent  = d.gutter;
+  document.getElementById('gMax').textContent     = d.max;
+  document.getElementById('gMargin').textContent  = d.margin;
+  document.getElementById('gBreak').textContent   = d.bp;
+}
+</script>
+
+</body>
+</html>
