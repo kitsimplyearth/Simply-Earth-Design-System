@@ -156,6 +156,30 @@ body {
 }
 .topbar-btn-primary:hover { background: var(--color-primary-hover); }
 
+/* Topbar responsive */
+@media (max-width: 640px) {
+  :root { --topbar-h: 96px; }
+  .topbar {
+    flex-wrap: wrap;
+    height: auto;
+    min-height: var(--topbar-h);
+    padding: 10px 14px 10px;
+    gap: 8px;
+    align-content: center;
+  }
+  .topbar-logo { font-size: 16px; gap: 8px; }
+  .topbar-logo-icon { width: 28px; height: 28px; font-size: 14px; }
+  .topbar-search-wrap {
+    order: 3;
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin: 0;
+  }
+  .topbar-search-kbd { display: none; }
+  .topbar-right { gap: 8px; flex-shrink: 0; }
+  .topbar-btn-foundations { display: none; }
+}
+
 /* ============================================================
    FILTER BAR (below topbar)
    ============================================================ */
@@ -885,7 +909,7 @@ body > .ds-divider { display: none !important; }
   <div class="topbar-right">
     <!-- Add Block button disabled -->
     <!-- <button class="topbar-btn topbar-btn-ghost" onclick="openAddDrawer()">+ Add Block</button> -->
-    <a class="topbar-btn topbar-btn-ghost" href="simply-earth-foundations.html" style="text-decoration:none;">Design Foundations</a>
+    <a class="topbar-btn topbar-btn-ghost topbar-btn-foundations" href="simply-earth-foundations.html" style="text-decoration:none;">Design Foundations</a>
     <button class="topbar-btn topbar-btn-primary" onclick="exportAll()">⬇ Export All</button>
   </div>
 </header>
