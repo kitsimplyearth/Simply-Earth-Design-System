@@ -7,12 +7,6 @@
 <style>
 @font-face {
   font-family: 'Brandon Text';
-  src: url('fonts/BrandonText-Light.woff2') format('woff2'), url('fonts/BrandonText-Light.woff') format('woff');
-  font-weight: 300;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Brandon Text';
   src: url('fonts/BrandonText-Regular.woff2') format('woff2'), url('fonts/BrandonText-Regular.woff') format('woff');
   font-weight: 400;
   font-style: normal;
@@ -476,35 +470,38 @@ body {
   background: var(--cream);
 }
 
-/* Heading scale — Brandon Grotesque · line-heights on 4pt grid */
-.t-display-xl  { font-family: var(--font-display); font-size: 48px; font-weight: 700; line-height: 1.17; } /* lh ≈ 56px */
-.t-display-lg  { font-family: var(--font-display); font-size: 36px; font-weight: 700; line-height: 1.22; } /* lh ≈ 44px */
+/* Heading scale — Brandon Grotesque · Desktop ≥ 1024px · line-heights on 4pt grid */
+.t-display-xl  { font-family: var(--font-display); font-size: 60px; font-weight: 700; line-height: 1.07; } /* lh ≈ 64px */
+.t-display-lg  { font-family: var(--font-display); font-size: 40px; font-weight: 700; line-height: 1.2;  } /* lh ≈ 48px */
 .t-display-md  { font-family: var(--font-display); font-size: 28px; font-weight: 700; line-height: 1.28; } /* lh ≈ 36px */
-.t-display-sm  { font-family: var(--font-display); font-size: 20px; font-weight: 700; line-height: 1.4; }  /* lh ≈ 28px */
-.t-display-xs  { font-family: var(--font-display); font-size: 16px; font-weight: 700; line-height: 1.5; }  /* lh ≈ 24px */
+.t-display-sm  { font-family: var(--font-display); font-size: 20px; font-weight: 700; line-height: 1.4;  } /* lh ≈ 28px */
+.t-display-xs  { font-family: var(--font-display); font-size: 16px; font-weight: 700; line-height: 1.5;  } /* lh ≈ 24px */
 
 /* Body scale — Brandon Text · line-heights on 4pt grid */
 .t-body-xl    { font-family: var(--font-body); font-size: 18px; font-weight: 400; line-height: 1.56; } /* lh ≈ 28px */
-.t-body-lg    { font-family: var(--font-body); font-size: 16px; font-weight: 400; line-height: 1.5; }  /* lh ≈ 24px */
-.t-body-md    { font-family: var(--font-body); font-size: 14px; font-weight: 400; line-height: 1.43; } /* lh ≈ 20px */
-.t-body-sm    { font-family: var(--font-body); font-size: 13px; font-weight: 400; line-height: 1.54; } /* lh ≈ 20px */
+.t-body-lg    { font-family: var(--font-body); font-size: 16px; font-weight: 400; line-height: 1.5;  } /* lh ≈ 24px */
+.t-body-md    { font-family: var(--font-body); font-size: 15px; font-weight: 400; line-height: 1.6;  } /* lh ≈ 24px */
+.t-body-sm    { font-family: var(--font-body); font-size: 14px; font-weight: 400; line-height: 1.43; } /* lh ≈ 20px */
 .t-body-xs    { font-family: var(--font-body); font-size: 12px; font-weight: 400; line-height: 1.33; } /* lh ≈ 16px */
 
 .t-label-lg   { font-family: var(--font-body); font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1; }
 .t-label-md   { font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; line-height: 1; }
 .t-label-sm   { font-family: var(--font-body); font-size: 10px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; line-height: 1; }
 
-/* Mobile type scale — heading sizes scale down, body stays consistent */
-.type-specimens[data-view="mobile"] .t-display-xl  { font-size: 32px; } /* lh ≈ 40px */
-.type-specimens[data-view="mobile"] .t-display-lg  { font-size: 24px; } /* lh ≈ 32px */
-.type-specimens[data-view="mobile"] .t-display-md  { font-size: 20px; } /* lh ≈ 28px */
+/* Tablet 768–1023px */
+.type-specimens[data-view="tablet"] .t-display-xl  { font-size: 48px; } /* lh ≈ 56px */
+.type-specimens[data-view="tablet"] .t-display-lg  { font-size: 36px; } /* lh ≈ 44px */
+.type-specimens[data-view="tablet"] .t-display-md  { font-size: 26px; } /* lh ≈ 32px */
+.type-specimens[data-view="tablet"] .t-display-sm  { font-size: 20px; }
+.type-specimens[data-view="tablet"] .t-display-xs  { font-size: 16px; }
+
+/* Mobile < 768px */
+.type-specimens[data-view="mobile"] .t-display-xl  { font-size: 36px; } /* lh ≈ 40px */
+.type-specimens[data-view="mobile"] .t-display-lg  { font-size: 28px; } /* lh ≈ 32px */
+.type-specimens[data-view="mobile"] .t-display-md  { font-size: 22px; } /* lh ≈ 28px */
 .type-specimens[data-view="mobile"] .t-display-sm  { font-size: 18px; } /* lh ≈ 24px */
 .type-specimens[data-view="mobile"] .t-display-xs  { font-size: 16px; }
-.type-specimens[data-view="mobile"] .t-body-xl     { font-size: 16px; }
-.type-specimens[data-view="mobile"] .t-body-lg     { font-size: 16px; }
-.type-specimens[data-view="mobile"] .t-body-md     { font-size: 14px; }
-.type-specimens[data-view="mobile"] .t-body-sm     { font-size: 13px; }
-.type-specimens[data-view="mobile"] .t-body-xs     { font-size: 12px; }
+/* Body stays consistent across all breakpoints */
 
 .type-specimens[data-view="mobile"] .type-specs::after { content: ' · mobile'; color: var(--coral); }
 
@@ -1051,6 +1048,7 @@ body {
           <div style="margin-left:auto;display:flex;align-items:center;gap:12px;">
             <div class="type-view-toggle">
               <button class="type-view-btn active" onclick="setTypeView('desktop', this)">🖥 Desktop</button>
+              <button class="type-view-btn" onclick="setTypeView('tablet', this)">📟 Tablet</button>
               <button class="type-view-btn" onclick="setTypeView('mobile', this)">📱 Mobile</button>
             </div>
           </div>
@@ -1063,7 +1061,7 @@ body {
             <div style="font-family:'Brandon Grotesque','Futura','Century Gothic',sans-serif;font-size:32px;color:var(--teal);line-height:1.15;margin-bottom:8px;" style="font-family:'Brandon Grotesque','Futura',sans-serif;font-weight:700;">Brandon Grotesque</div>
             <div style="font-family:'Brandon Grotesque','Futura','Century Gothic',sans-serif;font-size:15px;color:var(--text-mid);font-style:italic;">Hello, World!</div>
             <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;">
-              <span class="token">Thin 100</span><span class="token">Light 300</span><span class="token">Regular 400</span><span class="token">Medium 500</span><span class="token">Bold 700</span><span class="token">Black 900</span>
+              <span class="token">Regular 400</span><span class="token">Medium 500</span><span class="token">Bold 700</span><span class="token">Black 900</span>
             </div>
             <div style="margin-top:10px;font-size:11px;color:var(--text-light);">Self-hosted · Used for H1–H4, hero headlines, card titles</div>
           </div>
@@ -1072,7 +1070,7 @@ body {
             <div style="font-family:'Brandon Text','Gill Sans','Trebuchet MS',sans-serif;font-size:28px;font-weight:400;color:var(--teal);line-height:1.2;margin-bottom:8px;" style="font-family:'Brandon Text','Gill Sans',sans-serif;font-weight:400;">Brandon Text</div>
             <div style="font-family:'Brandon Text','Gill Sans','Trebuchet MS',sans-serif;font-size:15px;font-weight:500;color:var(--text-mid);">Hello, World!</div>
             <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;">
-              <span class="token">Light 300</span><span class="token">Regular 400</span><span class="token">Medium 500</span><span class="token">Bold 700</span><span class="token">Black 900</span>
+              <span class="token">Regular 400</span><span class="token">Medium 500</span><span class="token">Bold 700</span><span class="token">Black 900</span>
             </div>
             <div style="margin-top:10px;font-size:11px;color:var(--text-light);">Self-hosted · Used for body copy, UI labels, nav, buttons</div>
           </div>
@@ -1088,7 +1086,7 @@ body {
             <div class="type-row-inner">
               <div class="type-meta">
                 <div class="type-label">H1 · Hero</div>
-                <div class="type-specs">48px / 700 / 56lh</div>
+                <div class="type-specs">60px / 700 / 64lh</div>
               </div>
               <div class="type-preview on-cream">
                 <span class="t-display-xl">Make Natural Products at Home</span>
@@ -1100,7 +1098,7 @@ body {
             <div class="type-row-inner">
               <div class="type-meta">
                 <div class="type-label">H2 · Section</div>
-                <div class="type-specs">36px / 700 / 44lh</div>
+                <div class="type-specs">40px / 700 / 48lh</div>
               </div>
               <div class="type-preview">
                 <span class="t-display-lg">3 Simple Steps to Start Your DIY Journey</span>
@@ -1251,7 +1249,7 @@ body {
         <!-- Mobile comparison note -->
         <div id="mobileNote" style="display:none;background:var(--cream);border:1.5px solid var(--cream-dark);border-radius:var(--r-lg);padding:16px 20px;margin-top:16px;">
           <div style="font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--teal);margin-bottom:6px;">Mobile Scale Note</div>
-          <div style="font-size:13px;color:var(--text-mid);line-height:1.65;">Heading sizes scale down on mobile while body text stays consistent. Use <code style="font-size:11px;background:rgba(0,0,0,0.06);padding:1px 5px;border-radius:3px;">clamp()</code> in production — e.g. <code style="font-size:11px;background:rgba(0,0,0,0.06);padding:1px 5px;border-radius:3px;">clamp(32px, 5vw, 48px)</code> for H1. All line-heights remain on the 4pt grid across breakpoints.</div>
+          <div style="font-size:13px;color:var(--text-mid);line-height:1.65;">Heading sizes step down across 3 breakpoints while body stays consistent. Use <code style="font-size:11px;background:rgba(0,0,0,0.06);padding:1px 5px;border-radius:3px;">clamp()</code> in production — e.g. <code style="font-size:11px;background:rgba(0,0,0,0.06);padding:1px 5px;border-radius:3px;">clamp(36px, 5vw, 60px)</code> for H1. All line-heights remain on the 4pt grid across breakpoints.</div>
         </div>
 
       </section>
@@ -1614,34 +1612,49 @@ function copyHex(hex) {
 
 // ── Typography view toggle ─────────────────────
 var mobileSpecs = {
-  'H1 · Hero':      '32px / 700 / 40lh',
-  'H2 · Section':   '24px / 700 / 32lh',
-  'H3 · Sub-section': '20px / 700 / 28lh',
-  'H4 · Card Title': '18px / 700 / 24lh',
-  'H5 · Eyebrow':   '16px / 700 / 24lh',
-  'Body XL':        '16px / 400 / 24lh',
-  'Body LG':        '16px / 400 / 24lh',
-  'Body MD':        '14px / 400 / 20lh',
-  'Body SM':        '13px / 400 / 20lh',
-  'Body XS':        '12px / 400 / 16lh',
-  'Label LG':       '13px / 700 / 0.08em',
-  'Label MD':       '11px / 700 / 0.10em',
-  'Label SM':       '10px / 800 / 0.12em'
+  'H1 · Hero':        '36px / 700 / 40lh',
+  'H2 · Section':     '28px / 700 / 32lh',
+  'H3 · Sub-section': '22px / 700 / 28lh',
+  'H4 · Card Title':  '18px / 700 / 24lh',
+  'H5 · Eyebrow':     '16px / 700 / 24lh',
+  'Body XL':          '18px / 400 / 28lh',
+  'Body LG':          '16px / 400 / 24lh',
+  'Body MD':          '15px / 400 / 24lh',
+  'Body SM':          '14px / 400 / 20lh',
+  'Body XS':          '12px / 400 / 16lh',
+  'Label LG':         '13px / 700 / 0.08em',
+  'Label MD':         '11px / 700 / 0.10em',
+  'Label SM':         '10px / 800 / 0.12em'
+};
+var tabletSpecs = {
+  'H1 · Hero':        '48px / 700 / 56lh',
+  'H2 · Section':     '36px / 700 / 44lh',
+  'H3 · Sub-section': '26px / 700 / 32lh',
+  'H4 · Card Title':  '20px / 700 / 28lh',
+  'H5 · Eyebrow':     '16px / 700 / 24lh',
+  'Body XL':          '18px / 400 / 28lh',
+  'Body LG':          '16px / 400 / 24lh',
+  'Body MD':          '15px / 400 / 24lh',
+  'Body SM':          '14px / 400 / 20lh',
+  'Body XS':          '12px / 400 / 16lh',
+  'Label LG':         '13px / 700 / 0.08em',
+  'Label MD':         '11px / 700 / 0.10em',
+  'Label SM':         '10px / 800 / 0.12em'
 };
 var desktopSpecs = {
-  'H1 · Hero':      '48px / 700 / 56lh',
-  'H2 · Section':   '36px / 700 / 44lh',
+  'H1 · Hero':        '60px / 700 / 64lh',
+  'H2 · Section':     '40px / 700 / 48lh',
   'H3 · Sub-section': '28px / 700 / 36lh',
-  'H4 · Card Title': '20px / 700 / 28lh',
-  'H5 · Eyebrow':   '16px / 700 / 24lh',
-  'Body XL':        '18px / 400 / 28lh',
-  'Body LG':        '16px / 400 / 24lh',
-  'Body MD':        '14px / 400 / 20lh',
-  'Body SM':        '13px / 400 / 20lh',
-  'Body XS':        '12px / 400 / 16lh',
-  'Label LG':       '13px / 700 / 0.08em',
-  'Label MD':       '11px / 700 / 0.10em',
-  'Label SM':       '10px / 800 / 0.12em'
+  'H4 · Card Title':  '20px / 700 / 28lh',
+  'H5 · Eyebrow':     '16px / 700 / 24lh',
+  'Body XL':          '18px / 400 / 28lh',
+  'Body LG':          '16px / 400 / 24lh',
+  'Body MD':          '15px / 400 / 24lh',
+  'Body SM':          '14px / 400 / 20lh',
+  'Body XS':          '12px / 400 / 16lh',
+  'Label LG':         '13px / 700 / 0.08em',
+  'Label MD':         '11px / 700 / 0.10em',
+  'Label SM':         '10px / 800 / 0.12em'
 };
 
 function setTypeView(view, btn) {
@@ -1651,7 +1664,7 @@ function setTypeView(view, btn) {
   btn.classList.add('active');
   var note = document.getElementById('mobileNote');
   note.style.display = view === 'mobile' ? 'block' : 'none';
-  var specs = view === 'mobile' ? mobileSpecs : desktopSpecs;
+  var specs = view === 'mobile' ? mobileSpecs : view === 'tablet' ? tabletSpecs : desktopSpecs;
   document.querySelectorAll('.type-meta').forEach(function(meta) {
     var label = meta.querySelector('.type-label');
     var specEl = meta.querySelector('.type-specs');
