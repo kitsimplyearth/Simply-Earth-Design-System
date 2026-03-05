@@ -52,8 +52,10 @@
 
 :root {
   /* Brand colors */
-  --color-primary: #E67272;
-  --color-secondary: #375D5A;
+  --color-primary:           #E67272; /* Primary buttons, hero & sales sections */
+  --color-primary-hover:     #C45050; /* Primary button :hover only */
+  --color-secondary:         #375D5A; /* Secondary buttons, backgrounds, nav */
+  --color-secondary-hover:   #0A4A3C; /* Secondary button :hover — also text color */
   --color-text-green: #0A4A3C;
   --color-text-dark: #1A1A1A;
   --color-text-mid: #555;
@@ -158,7 +160,7 @@ body {
 .topbar-btn-primary {
   background: var(--color-primary); color: white;
 }
-.topbar-btn-primary:hover { background: #d45f5f; }
+.topbar-btn-primary:hover { background: var(--color-primary-hover); }
 
 /* ============================================================
    FILTER BAR (below topbar)
@@ -542,7 +544,7 @@ body {
   cursor: pointer; transition: all 0.15s;
 }
 .card-tag:hover { background: #C4E4DA; color: #1A3A38; border-color: #A0CCBF; }
-.card-tag.page-tag { background: #FEE8E8; color: #C45050; border-color: #F4C0C0; }
+.card-tag.page-tag { background: #FEE8E8; color: var(--color-primary-hover); border-color: #F4C0C0; }
 .card-tag.layout-tag { background: #D8EEE8; color: #2D5450; border-color: #B8DDD4; }
 
 .card-meta {
@@ -1238,7 +1240,8 @@ body > .ds-divider { display: none !important; }
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --color-primary:#E67272;--color-secondary:#375D5A;
+  --color-primary:#E67272;--color-primary-hover:#C45050;
+  --color-secondary:#375D5A;--color-secondary-hover:#0A4A3C;
   --color-text-green:#0A4A3C;--color-text-dark:#1A1A1A;
   --color-text-alt:#434343;--color-text-mid:#555;
   --color-bg-cream:#F3EEE0;--color-bg-mint:#D1E5E1;
@@ -1397,8 +1400,10 @@ body{font-family:var(--font-body);color:var(--color-text-dark);background:white;
   --fw-bold:    700;
   --fw-black:   900;
 
-  --color-primary:     #E67272;
-  --color-secondary:   #375D5A;
+  --color-primary:         #E67272;
+  --color-primary-hover:   #C45050;
+  --color-secondary:       #375D5A;
+  --color-secondary-hover: #0A4A3C;
   --color-bg-mint:     #D1E5E1;
   --color-bg-cream:    #F3EEE0;
   --color-bg-white:    #FEFEFE;
@@ -6179,8 +6184,10 @@ function reapplyCachedThumbs() {
   --fw-bold:    700;
   --fw-black:   900;
 
-  --color-primary:     #E67272;
-  --color-secondary:   #375D5A;
+  --color-primary:         #E67272;
+  --color-primary-hover:   #C45050;
+  --color-secondary:       #375D5A;
+  --color-secondary-hover: #0A4A3C;
   --color-bg-mint:     #D1E5E1;
   --color-bg-cream:    #F3EEE0;
   --color-bg-white:    #FEFEFE;

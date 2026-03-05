@@ -51,13 +51,12 @@
 
 :root {
   /* Brand Palette */
-  --coral:       #E67272;
-  --coral-light: #F4A8A8;
-  --coral-dark:  #C45050;
-  --teal:        #375D5A;
-  --teal-light:  #4E8480;
-  --teal-dark:   #2D5450;
-  --green:       #0A4A3C;
+  --coral:           #E67272; /* Primary button, hero & sales sections */
+  --coral-hover:     #C45050; /* Primary button :hover state */
+  --teal:            #375D5A; /* Secondary button, backgrounds */
+  --teal-light:      #4E8480;
+  --teal-dark:       #2D5450;
+  --green:           #0A4A3C; /* Text color only · Secondary button :hover */
 
   /* Neutrals */
   --cream:       #F3EEE0;
@@ -477,34 +476,35 @@ body {
   background: var(--cream);
 }
 
-/* Display styles */
-.t-display-xl  { font-family: var(--font-display); font-size: 56px; font-weight: 400; line-height: 1.1; }
-.t-display-lg  { font-family: var(--font-display); font-size: 44px; font-weight: 400; line-height: 1.15; }
-.t-display-md  { font-family: var(--font-display); font-size: 36px; font-weight: 400; line-height: 1.2; }
-.t-display-sm  { font-family: var(--font-display); font-size: 28px; font-weight: 400; line-height: 1.25; }
-.t-display-xs  { font-family: var(--font-display); font-size: 22px; font-weight: 400; line-height: 1.3; }
+/* Heading scale — Brandon Grotesque · line-heights on 4pt grid */
+.t-display-xl  { font-family: var(--font-display); font-size: 48px; font-weight: 700; line-height: 1.17; } /* lh ≈ 56px */
+.t-display-lg  { font-family: var(--font-display); font-size: 36px; font-weight: 700; line-height: 1.22; } /* lh ≈ 44px */
+.t-display-md  { font-family: var(--font-display); font-size: 28px; font-weight: 700; line-height: 1.28; } /* lh ≈ 36px */
+.t-display-sm  { font-family: var(--font-display); font-size: 20px; font-weight: 700; line-height: 1.4; }  /* lh ≈ 28px */
+.t-display-xs  { font-family: var(--font-display); font-size: 16px; font-weight: 700; line-height: 1.5; }  /* lh ≈ 24px */
 
-.t-body-xl    { font-family: var(--font-body); font-size: 18px; font-weight: 400; line-height: 1.6; }
-.t-body-lg    { font-family: var(--font-body); font-size: 16px; font-weight: 400; line-height: 1.65; }
-.t-body-md    { font-family: var(--font-body); font-size: 14px; font-weight: 400; line-height: 1.7; }
-.t-body-sm    { font-family: var(--font-body); font-size: 13px; font-weight: 400; line-height: 1.65; }
-.t-body-xs    { font-family: var(--font-body); font-size: 12px; font-weight: 400; line-height: 1.6; }
+/* Body scale — Brandon Text · line-heights on 4pt grid */
+.t-body-xl    { font-family: var(--font-body); font-size: 18px; font-weight: 400; line-height: 1.56; } /* lh ≈ 28px */
+.t-body-lg    { font-family: var(--font-body); font-size: 16px; font-weight: 400; line-height: 1.5; }  /* lh ≈ 24px */
+.t-body-md    { font-family: var(--font-body); font-size: 14px; font-weight: 400; line-height: 1.43; } /* lh ≈ 20px */
+.t-body-sm    { font-family: var(--font-body); font-size: 13px; font-weight: 400; line-height: 1.54; } /* lh ≈ 20px */
+.t-body-xs    { font-family: var(--font-body); font-size: 12px; font-weight: 400; line-height: 1.33; } /* lh ≈ 16px */
 
 .t-label-lg   { font-family: var(--font-body); font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1; }
 .t-label-md   { font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; line-height: 1; }
 .t-label-sm   { font-family: var(--font-body); font-size: 10px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; line-height: 1; }
 
-/* Mobile type scale (shown when mobile tab active) */
-.type-specimens[data-view="mobile"] .t-display-xl  { font-size: 36px; }
-.type-specimens[data-view="mobile"] .t-display-lg  { font-size: 30px; }
-.type-specimens[data-view="mobile"] .t-display-md  { font-size: 26px; }
-.type-specimens[data-view="mobile"] .t-display-sm  { font-size: 22px; }
-.type-specimens[data-view="mobile"] .t-display-xs  { font-size: 18px; }
+/* Mobile type scale — heading sizes scale down, body stays consistent */
+.type-specimens[data-view="mobile"] .t-display-xl  { font-size: 32px; } /* lh ≈ 40px */
+.type-specimens[data-view="mobile"] .t-display-lg  { font-size: 24px; } /* lh ≈ 32px */
+.type-specimens[data-view="mobile"] .t-display-md  { font-size: 20px; } /* lh ≈ 28px */
+.type-specimens[data-view="mobile"] .t-display-sm  { font-size: 18px; } /* lh ≈ 24px */
+.type-specimens[data-view="mobile"] .t-display-xs  { font-size: 16px; }
 .type-specimens[data-view="mobile"] .t-body-xl     { font-size: 16px; }
-.type-specimens[data-view="mobile"] .t-body-lg     { font-size: 15px; }
+.type-specimens[data-view="mobile"] .t-body-lg     { font-size: 16px; }
 .type-specimens[data-view="mobile"] .t-body-md     { font-size: 14px; }
 .type-specimens[data-view="mobile"] .t-body-sm     { font-size: 13px; }
-.type-specimens[data-view="mobile"] .t-body-xs     { font-size: 11px; }
+.type-specimens[data-view="mobile"] .t-body-xs     { font-size: 12px; }
 
 .type-specimens[data-view="mobile"] .type-specs::after { content: ' · mobile'; color: var(--coral); }
 
@@ -818,19 +818,19 @@ body {
     </div>
 
     <div class="sidenav-section">Foundations</div>
-    <a class="sidenav-link active" onclick="scrollTo('colors')">
+    <a class="sidenav-link active" onclick="scrollToSection('colors')">
       <span class="nav-dot" style="background:#E67272;"></span> Colors
     </a>
-    <a class="sidenav-link" onclick="scrollTo('typography')">
+    <a class="sidenav-link" onclick="scrollToSection('typography')">
       <span class="nav-dot" style="background:#375D5A;"></span> Typography
     </a>
-    <a class="sidenav-link" onclick="scrollTo('spacing')">
+    <a class="sidenav-link" onclick="scrollToSection('spacing')">
       <span class="nav-dot" style="background:#D1E5E1;border:1px solid #A8CFCA;"></span> Spacing
     </a>
-    <a class="sidenav-link" onclick="scrollTo('grid')">
+    <a class="sidenav-link" onclick="scrollToSection('grid')">
       <span class="nav-dot" style="background:#F3EEE0;border:1px solid #C8C0A8;"></span> Grid
     </a>
-    <a class="sidenav-link" onclick="scrollTo('radius')">
+    <a class="sidenav-link" onclick="scrollToSection('radius')">
       <span class="nav-dot" style="background:#0A4A3C;"></span> Radius & Shadows
     </a>
 
@@ -880,25 +880,19 @@ body {
               <div class="color-swatch" onclick="copyHex('#E67272')">
                 <div class="swatch-chip large" style="background:#E67272;"></div>
                 <div class="swatch-info">
-                  <div class="swatch-name">Coral</div>
+                  <div class="swatch-name">Coral <span style="display:inline-block;background:#E67272;color:white;font-size:9px;font-weight:700;padding:1px 6px;border-radius:4px;letter-spacing:0.04em;vertical-align:middle;">PRIMARY</span></div>
                   <div class="swatch-hex">#E67272</div>
                   <div class="swatch-var">--coral</div>
-                </div>
-              </div>
-              <div class="color-swatch" onclick="copyHex('#F4A8A8')">
-                <div class="swatch-chip large" style="background:#F4A8A8;"></div>
-                <div class="swatch-info">
-                  <div class="swatch-name">Coral Light</div>
-                  <div class="swatch-hex">#F4A8A8</div>
-                  <div class="swatch-var">--coral-light</div>
+                  <div style="margin-top:4px;font-size:10px;color:var(--text-light);line-height:1.4;">Primary buttons (Add to Cart)<br>Hero & sales sections</div>
                 </div>
               </div>
               <div class="color-swatch" onclick="copyHex('#C45050')">
                 <div class="swatch-chip large" style="background:#C45050;"></div>
                 <div class="swatch-info">
-                  <div class="swatch-name">Coral Dark</div>
+                  <div class="swatch-name">Coral Dark <span style="display:inline-block;background:#888;color:white;font-size:9px;font-weight:700;padding:1px 6px;border-radius:4px;letter-spacing:0.04em;vertical-align:middle;">HOVER</span></div>
                   <div class="swatch-hex">#C45050</div>
-                  <div class="swatch-var">--coral-dark</div>
+                  <div class="swatch-var">--coral-hover</div>
+                  <div style="margin-top:4px;font-size:10px;color:var(--text-light);line-height:1.4;">Primary button :hover state only</div>
                 </div>
               </div>
             </div>
@@ -911,9 +905,19 @@ body {
               <div class="color-swatch" onclick="copyHex('#375D5A')">
                 <div class="swatch-chip large" style="background:#375D5A;"></div>
                 <div class="swatch-info">
-                  <div class="swatch-name">Teal</div>
+                  <div class="swatch-name">Teal <span style="display:inline-block;background:#375D5A;color:white;font-size:9px;font-weight:700;padding:1px 6px;border-radius:4px;letter-spacing:0.04em;vertical-align:middle;">SECONDARY</span></div>
                   <div class="swatch-hex">#375D5A</div>
                   <div class="swatch-var">--teal</div>
+                  <div style="margin-top:4px;font-size:10px;color:var(--text-light);line-height:1.4;">Secondary buttons<br>Section backgrounds, nav</div>
+                </div>
+              </div>
+              <div class="color-swatch" onclick="copyHex('#0A4A3C')">
+                <div class="swatch-chip large" style="background:#0A4A3C;"></div>
+                <div class="swatch-info">
+                  <div class="swatch-name">Forest Green <span style="display:inline-block;background:#888;color:white;font-size:9px;font-weight:700;padding:1px 6px;border-radius:4px;letter-spacing:0.04em;vertical-align:middle;">HOVER · TEXT</span></div>
+                  <div class="swatch-hex">#0A4A3C</div>
+                  <div class="swatch-var">--green</div>
+                  <div style="margin-top:4px;font-size:10px;color:var(--text-light);line-height:1.4;">Text color only<br>Secondary button :hover state</div>
                 </div>
               </div>
               <div class="color-swatch" onclick="copyHex('#4E8480')">
@@ -930,14 +934,6 @@ body {
                   <div class="swatch-name">Teal Dark</div>
                   <div class="swatch-hex">#2D5450</div>
                   <div class="swatch-var">--teal-dark</div>
-                </div>
-              </div>
-              <div class="color-swatch" onclick="copyHex('#0A4A3C')">
-                <div class="swatch-chip large" style="background:#0A4A3C;"></div>
-                <div class="swatch-info">
-                  <div class="swatch-name">Forest Green</div>
-                  <div class="swatch-hex">#0A4A3C</div>
-                  <div class="swatch-var">--green</div>
                 </div>
               </div>
             </div>
@@ -1031,13 +1027,14 @@ body {
 
           <!-- Usage Guide -->
           <div>
-            <div class="color-group-label">Usage Guide</div>
+            <div class="color-group-label">Usage Rules</div>
             <div class="color-usage">
-              <div class="usage-chip"><div class="usage-dot" style="background:#E67272;"></div>CTAs, buttons, badges, alerts, save tags</div>
-              <div class="usage-chip"><div class="usage-dot" style="background:#375D5A;"></div>Nav, headers, sub-nav, secondary CTAs, step labels</div>
-              <div class="usage-chip"><div class="usage-dot" style="background:#F3EEE0;"></div>Hero sections, cream backgrounds, card fills</div>
-              <div class="usage-chip"><div class="usage-dot" style="background:#D1E5E1;border:1px solid #A8CFCA;"></div>Mint backgrounds, supply sections, FAQ</div>
-              <div class="usage-chip"><div class="usage-dot" style="background:#0A4A3C;"></div>Logo, hero text emphasis, dark headings</div>
+              <div class="usage-chip"><div class="usage-dot" style="background:#E67272;"></div><strong>Primary only</strong> — Add to Cart, hero CTAs, sales sections</div>
+              <div class="usage-chip"><div class="usage-dot" style="background:#C45050;"></div><strong>Primary :hover only</strong> — never use as a base color</div>
+              <div class="usage-chip"><div class="usage-dot" style="background:#375D5A;"></div><strong>Secondary</strong> — secondary buttons, nav, section backgrounds</div>
+              <div class="usage-chip"><div class="usage-dot" style="background:#0A4A3C;"></div><strong>Text + Secondary :hover</strong> — headings, body text, secondary button hover</div>
+              <div class="usage-chip"><div class="usage-dot" style="background:#F3EEE0;border:1px solid #E8E0CC;"></div>Cream — hero backgrounds, card fills</div>
+              <div class="usage-chip"><div class="usage-dot" style="background:#D1E5E1;border:1px solid #A8CFCA;"></div>Mint — section backgrounds, trust bars</div>
             </div>
           </div>
 
@@ -1068,7 +1065,7 @@ body {
             <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;">
               <span class="token">Thin 100</span><span class="token">Light 300</span><span class="token">Regular 400</span><span class="token">Medium 500</span><span class="token">Bold 700</span><span class="token">Black 900</span>
             </div>
-            <div style="margin-top:10px;font-size:11px;color:var(--text-light);">Adobe Fonts (Typekit) · Used for H1–H4, hero headlines, card titles</div>
+            <div style="margin-top:10px;font-size:11px;color:var(--text-light);">Self-hosted · Used for H1–H4, hero headlines, card titles</div>
           </div>
           <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--r-xl);padding:28px;overflow:hidden;">
             <div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-light);margin-bottom:12px;">Body Font</div>
@@ -1077,24 +1074,24 @@ body {
             <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:8px;">
               <span class="token">Light 300</span><span class="token">Regular 400</span><span class="token">Medium 500</span><span class="token">Bold 700</span><span class="token">Black 900</span>
             </div>
-            <div style="margin-top:10px;font-size:11px;color:var(--text-light);">Adobe Fonts (Typekit) · Used for body, UI labels, nav, buttons</div>
+            <div style="margin-top:10px;font-size:11px;color:var(--text-light);">Self-hosted · Used for body copy, UI labels, nav, buttons</div>
           </div>
         </div>
 
         <!-- Type scale specimens -->
         <div class="type-specimens" id="typeSpecimens" data-view="desktop">
 
-          <!-- DISPLAY SCALE -->
-          <div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--coral);margin:8px 0 4px;">Display Scale · Brandon Grotesque</div>
+          <!-- HEADING SCALE -->
+          <div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--coral);margin:8px 0 4px;">Heading Scale · Brandon Grotesque · line-heights on 4pt grid</div>
 
           <div class="type-row">
             <div class="type-row-inner">
               <div class="type-meta">
-                <div class="type-label">Display XL</div>
-                <div class="type-specs" id="spec-dxl">56px / 400 / 1.1lh</div>
+                <div class="type-label">H1 · Hero</div>
+                <div class="type-specs">48px / 700 / 56lh</div>
               </div>
               <div class="type-preview on-cream">
-                <span class="t-display-xl">Hello, World!</span>
+                <span class="t-display-xl">Make Natural Products at Home</span>
               </div>
             </div>
           </div>
@@ -1102,11 +1099,11 @@ body {
           <div class="type-row">
             <div class="type-row-inner">
               <div class="type-meta">
-                <div class="type-label">Display LG</div>
-                <div class="type-specs" id="spec-dlg">44px / 400 / 1.15lh</div>
+                <div class="type-label">H2 · Section</div>
+                <div class="type-specs">36px / 700 / 44lh</div>
               </div>
               <div class="type-preview">
-                <span class="t-display-lg">Hello, World!</span>
+                <span class="t-display-lg">3 Simple Steps to Start Your DIY Journey</span>
               </div>
             </div>
           </div>
@@ -1114,11 +1111,11 @@ body {
           <div class="type-row">
             <div class="type-row-inner">
               <div class="type-meta">
-                <div class="type-label">Display MD</div>
-                <div class="type-specs">36px / 400 / 1.2lh</div>
+                <div class="type-label">H3 · Sub-section</div>
+                <div class="type-specs">28px / 700 / 36lh</div>
               </div>
               <div class="type-preview on-dark">
-                <span class="t-display-md">Hello, World!</span>
+                <span class="t-display-md">What You'll Get in Your Box</span>
               </div>
             </div>
           </div>
@@ -1126,11 +1123,11 @@ body {
           <div class="type-row">
             <div class="type-row-inner">
               <div class="type-meta">
-                <div class="type-label">Display SM</div>
-                <div class="type-specs">28px / 400 / 1.25lh</div>
+                <div class="type-label">H4 · Card Title</div>
+                <div class="type-specs">20px / 700 / 28lh</div>
               </div>
               <div class="type-preview">
-                <span class="t-display-sm">Hello, World!</span>
+                <span class="t-display-sm">From Nature to Your Natural Home</span>
               </div>
             </div>
           </div>
@@ -1138,26 +1135,26 @@ body {
           <div class="type-row">
             <div class="type-row-inner">
               <div class="type-meta">
-                <div class="type-label">Display XS</div>
-                <div class="type-specs">22px / 400 / 1.3lh</div>
+                <div class="type-label">H5 · Eyebrow</div>
+                <div class="type-specs">16px / 700 / 24lh</div>
               </div>
               <div class="type-preview on-cream">
-                <span class="t-display-xs">Hello, World!</span>
+                <span class="t-display-xs">Simply Earth Recipe Box</span>
               </div>
             </div>
           </div>
 
           <!-- BODY SCALE -->
-          <div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal);margin:20px 0 4px;">Body Scale · Brandon Text</div>
+          <div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal);margin:20px 0 4px;">Body Scale · Brandon Text · line-heights on 4pt grid</div>
 
           <div class="type-row">
             <div class="type-row-inner">
               <div class="type-meta">
                 <div class="type-label">Body XL</div>
-                <div class="type-specs">18px / 400 / 1.6lh</div>
+                <div class="type-specs">18px / 400 / 28lh</div>
               </div>
               <div class="type-preview">
-                <span class="t-body-xl">Hello, World! — The quick brown fox jumps over the lazy dog.</span>
+                <span class="t-body-xl">Each month, you'll receive 4 full-size essential oils and everything you need to make natural products at home.</span>
               </div>
             </div>
           </div>
@@ -1166,10 +1163,10 @@ body {
             <div class="type-row-inner">
               <div class="type-meta">
                 <div class="type-label">Body LG</div>
-                <div class="type-specs">16px / 400 / 1.65lh</div>
+                <div class="type-specs">16px / 400 / 24lh</div>
               </div>
               <div class="type-preview">
-                <span class="t-body-lg">Hello, World! — The quick brown fox jumps over the lazy dog.</span>
+                <span class="t-body-lg">Each month, you'll receive 4 full-size essential oils and everything you need to make natural products at home.</span>
               </div>
             </div>
           </div>
@@ -1178,10 +1175,10 @@ body {
             <div class="type-row-inner">
               <div class="type-meta">
                 <div class="type-label">Body MD</div>
-                <div class="type-specs">14px / 400 / 1.7lh</div>
+                <div class="type-specs">14px / 400 / 20lh</div>
               </div>
               <div class="type-preview on-cream">
-                <span class="t-body-md">Hello, World! — The quick brown fox jumps over the lazy dog.</span>
+                <span class="t-body-md">Each month, you'll receive 4 full-size essential oils and everything you need to make natural products at home.</span>
               </div>
             </div>
           </div>
@@ -1190,10 +1187,10 @@ body {
             <div class="type-row-inner">
               <div class="type-meta">
                 <div class="type-label">Body SM</div>
-                <div class="type-specs">13px / 400 / 1.65lh</div>
+                <div class="type-specs">13px / 400 / 20lh</div>
               </div>
               <div class="type-preview">
-                <span class="t-body-sm">Hello, World! — The quick brown fox jumps over the lazy dog.</span>
+                <span class="t-body-sm">Each month, you'll receive 4 full-size essential oils and everything you need to make natural products at home.</span>
               </div>
             </div>
           </div>
@@ -1202,10 +1199,10 @@ body {
             <div class="type-row-inner">
               <div class="type-meta">
                 <div class="type-label">Body XS</div>
-                <div class="type-specs">12px / 400 / 1.6lh</div>
+                <div class="type-specs">12px / 400 / 16lh</div>
               </div>
               <div class="type-preview on-dark">
-                <span class="t-body-xs">Hello, World! — The quick brown fox jumps over the lazy dog.</span>
+                <span class="t-body-xs">Each month, you'll receive 4 full-size essential oils and everything you need to make natural products at home.</span>
               </div>
             </div>
           </div>
@@ -1220,7 +1217,7 @@ body {
                 <div class="type-specs">13px / 700 / 0.08em</div>
               </div>
               <div class="type-preview">
-                <span class="t-label-lg" style="color:var(--teal);">Hello, World!</span>
+                <span class="t-label-lg" style="color:var(--teal);">Simply Earth Recipe Box</span>
               </div>
             </div>
           </div>
@@ -1232,7 +1229,7 @@ body {
                 <div class="type-specs">11px / 700 / 0.10em</div>
               </div>
               <div class="type-preview on-cream">
-                <span class="t-label-md" style="color:var(--teal);">Hello, World!</span>
+                <span class="t-label-md" style="color:var(--teal);">Free Shipping + 20% Off</span>
               </div>
             </div>
           </div>
@@ -1244,7 +1241,7 @@ body {
                 <div class="type-specs">10px / 800 / 0.12em</div>
               </div>
               <div class="type-preview on-dark">
-                <span class="t-label-sm" style="color:rgba(255,255,255,0.7);">Hello, World!</span>
+                <span class="t-label-sm" style="color:rgba(255,255,255,0.7);">Trusted by 10,000+ DIYers</span>
               </div>
             </div>
           </div>
@@ -1254,7 +1251,7 @@ body {
         <!-- Mobile comparison note -->
         <div id="mobileNote" style="display:none;background:var(--cream);border:1.5px solid var(--cream-dark);border-radius:var(--r-lg);padding:16px 20px;margin-top:16px;">
           <div style="font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--teal);margin-bottom:6px;">Mobile Scale Note</div>
-          <div style="font-size:13px;color:var(--text-mid);line-height:1.65;">Display sizes scale down significantly on mobile. Use <code style="font-size:11px;background:rgba(0,0,0,0.06);padding:1px 5px;border-radius:3px;">clamp()</code> in production — e.g. <code style="font-size:11px;background:rgba(0,0,0,0.06);padding:1px 5px;border-radius:3px;">clamp(36px, 5vw, 56px)</code> for Display XL. Body sizes stay consistent across breakpoints for readability.</div>
+          <div style="font-size:13px;color:var(--text-mid);line-height:1.65;">Heading sizes scale down on mobile while body text stays consistent. Use <code style="font-size:11px;background:rgba(0,0,0,0.06);padding:1px 5px;border-radius:3px;">clamp()</code> in production — e.g. <code style="font-size:11px;background:rgba(0,0,0,0.06);padding:1px 5px;border-radius:3px;">clamp(32px, 5vw, 48px)</code> for H1. All line-heights remain on the 4pt grid across breakpoints.</div>
         </div>
 
       </section>
@@ -1266,7 +1263,15 @@ body {
         <div class="section-header">
           <div class="section-number">03</div>
           <h2 class="section-title">Spacing Scale</h2>
-          <span class="section-badge">8px Base</span>
+          <span class="section-badge">4pt Grid</span>
+        </div>
+
+        <div style="background:var(--mint);border:1.5px solid var(--mint-dark);border-radius:var(--r-lg);padding:14px 20px;margin-bottom:24px;display:flex;align-items:flex-start;gap:12px;">
+          <div style="font-size:18px;flex-shrink:0;">▦</div>
+          <div>
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--teal);margin-bottom:4px;">4pt Grid System</div>
+            <div style="font-size:13px;color:var(--text-mid);line-height:1.6;">All spacing values are multiples of <strong>4px</strong> — the base unit. Micro gaps (4px, 8px, 12px) use the smallest steps; layout-level spacing (32px+) uses larger multiples. This ensures consistent visual rhythm across all components.</div>
+          </div>
         </div>
 
         <div class="spacing-grid">
@@ -1574,7 +1579,7 @@ body {
 
 <script>
 // ── Scroll to section ──────────────────────────
-function scrollTo(id) {
+function scrollToSection(id) {
   var el = document.getElementById(id);
   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   document.querySelectorAll('.sidenav-link').forEach(function(l) { l.classList.remove('active'); });
@@ -1609,34 +1614,34 @@ function copyHex(hex) {
 
 // ── Typography view toggle ─────────────────────
 var mobileSpecs = {
-  'Display XL':  '36px / 400 / 1.1lh',
-  'Display LG':  '30px / 400 / 1.15lh',
-  'Display MD':  '26px / 400 / 1.2lh',
-  'Display SM':  '22px / 400 / 1.25lh',
-  'Display XS':  '18px / 400 / 1.3lh',
-  'Body XL':     '16px / 400 / 1.6lh',
-  'Body LG':     '15px / 400 / 1.65lh',
-  'Body MD':     '14px / 400 / 1.7lh',
-  'Body SM':     '13px / 400 / 1.65lh',
-  'Body XS':     '11px / 400 / 1.6lh',
-  'Label LG':    '13px / 700 / 0.08em',
-  'Label MD':    '11px / 700 / 0.10em',
-  'Label SM':    '10px / 800 / 0.12em'
+  'H1 · Hero':      '32px / 700 / 40lh',
+  'H2 · Section':   '24px / 700 / 32lh',
+  'H3 · Sub-section': '20px / 700 / 28lh',
+  'H4 · Card Title': '18px / 700 / 24lh',
+  'H5 · Eyebrow':   '16px / 700 / 24lh',
+  'Body XL':        '16px / 400 / 24lh',
+  'Body LG':        '16px / 400 / 24lh',
+  'Body MD':        '14px / 400 / 20lh',
+  'Body SM':        '13px / 400 / 20lh',
+  'Body XS':        '12px / 400 / 16lh',
+  'Label LG':       '13px / 700 / 0.08em',
+  'Label MD':       '11px / 700 / 0.10em',
+  'Label SM':       '10px / 800 / 0.12em'
 };
 var desktopSpecs = {
-  'Display XL':  '56px / 400 / 1.1lh',
-  'Display LG':  '44px / 400 / 1.15lh',
-  'Display MD':  '36px / 400 / 1.2lh',
-  'Display SM':  '28px / 400 / 1.25lh',
-  'Display XS':  '22px / 400 / 1.3lh',
-  'Body XL':     '18px / 400 / 1.6lh',
-  'Body LG':     '16px / 400 / 1.65lh',
-  'Body MD':     '14px / 400 / 1.7lh',
-  'Body SM':     '13px / 400 / 1.65lh',
-  'Body XS':     '12px / 400 / 1.6lh',
-  'Label LG':    '13px / 700 / 0.08em',
-  'Label MD':    '11px / 700 / 0.10em',
-  'Label SM':    '10px / 800 / 0.12em'
+  'H1 · Hero':      '48px / 700 / 56lh',
+  'H2 · Section':   '36px / 700 / 44lh',
+  'H3 · Sub-section': '28px / 700 / 36lh',
+  'H4 · Card Title': '20px / 700 / 28lh',
+  'H5 · Eyebrow':   '16px / 700 / 24lh',
+  'Body XL':        '18px / 400 / 28lh',
+  'Body LG':        '16px / 400 / 24lh',
+  'Body MD':        '14px / 400 / 20lh',
+  'Body SM':        '13px / 400 / 20lh',
+  'Body XS':        '12px / 400 / 16lh',
+  'Label LG':       '13px / 700 / 0.08em',
+  'Label MD':       '11px / 700 / 0.10em',
+  'Label SM':       '10px / 800 / 0.12em'
 };
 
 function setTypeView(view, btn) {
