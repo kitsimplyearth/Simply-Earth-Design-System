@@ -4,8 +4,44 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Simply Earth — Design System</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: 'Brandon Text';
+  src: url('fonts/BrandonText-Light.woff2') format('woff2'), url('fonts/BrandonText-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Brandon Text';
+  src: url('fonts/BrandonText-Regular.woff2') format('woff2'), url('fonts/BrandonText-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Brandon Text';
+  src: url('fonts/BrandonText-RegularItalic.woff2') format('woff2'), url('fonts/BrandonText-RegularItalic.woff') format('woff');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Brandon Text';
+  src: url('fonts/BrandonText-Bold.woff2') format('woff2'), url('fonts/BrandonText-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Brandon Grotesque';
+  src: url('fonts/BrandonGrotesque-Regular.woff2') format('woff2'), url('fonts/BrandonGrotesque-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Brandon Grotesque';
+  src: url('fonts/BrandonGrotesque-Bold.woff2') format('woff2'), url('fonts/BrandonGrotesque-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+</style>
 <style>
 /* ============================================================
    DESIGN SYSTEM SHELL — Flowbase-style Component Library
@@ -33,8 +69,8 @@
   --sidebar-w: 260px;
   --topbar-h: 60px;
   --subbar-h: 52px;
-  --font-ui: 'DM Sans', sans-serif;
-  --font-display: 'DM Serif Display', serif;
+  --font-ui: 'Brandon Text', sans-serif;
+  --font-display: 'Brandon Grotesque', sans-serif;
 
   /* Radius */
   --r-sm: 6px;
