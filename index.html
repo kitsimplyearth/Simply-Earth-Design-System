@@ -887,7 +887,8 @@ body > .ds-divider { display: none !important; }
     <span class="topbar-search-kbd">⌘K</span>
   </div>
   <div class="topbar-right">
-    <button class="topbar-btn topbar-btn-ghost" onclick="openAddDrawer()">+ Add Block</button>
+    <!-- Add Block button disabled -->
+    <!-- <button class="topbar-btn topbar-btn-ghost" onclick="openAddDrawer()">+ Add Block</button> -->
     <button class="topbar-btn topbar-btn-primary" onclick="exportAll()">⬇ Export All</button>
   </div>
 </header>
@@ -952,6 +953,9 @@ body > .ds-divider { display: none !important; }
       <div class="sidebar-page-item" onclick="setFilter(null,'category',this)" data-filter="category">
         Category Page <span class="page-count" id="count-category">7</span>
       </div>
+      <div class="sidebar-page-item" onclick="setFilter(null,'product-detail',this)" data-filter="product-detail">
+        Product Detail Page <span class="page-count" id="count-product-detail">0</span>
+      </div>
     </div>
   </div>
 
@@ -1014,7 +1018,7 @@ body > .ds-divider { display: none !important; }
       <h1 class="promo-h1">Page blocks for Figma, Webflow &amp; Code</h1>
       <p class="promo-sub">Browse all UI sections from the Simply Earth brand. Copy any block as responsive HTML — desktop down to mobile, ready to paste into Figma or your codebase.</p>
       <div class="promo-actions">
-        <button class="promo-btn-main" onclick="openAddDrawer()">+ Add New Block</button>
+        <!-- <button class="promo-btn-main" onclick="openAddDrawer()">+ Add New Block</button> -->
         <span class="promo-btn-link" onclick="document.getElementById('globalSearch').focus()">Search blocks →</span>
       </div>
     </div>
@@ -1053,11 +1057,11 @@ body > .ds-divider { display: none !important; }
 </main>
 </div><!-- /app-layout -->
 
-<!-- ADD BLOCK FAB -->
-<button class="add-block-fab" onclick="openAddDrawer()" title="Add new block">
+<!-- ADD BLOCK FAB (disabled) -->
+<!-- <button class="add-block-fab" onclick="openAddDrawer()" title="Add new block">
   +
   <span class="fab-tooltip">Add new block</span>
-</button>
+</button> -->
 
 <!-- ============================================================
      MODAL — Preview & Copy
@@ -1145,8 +1149,8 @@ body > .ds-divider { display: none !important; }
 <!-- ============================================================
      ADD BLOCK DRAWER
 ============================================================ -->
-<div class="add-drawer-overlay" id="drawerOverlay" onclick="closeAddDrawer()"></div>
-<div class="add-drawer" id="addDrawer">
+<div class="add-drawer-overlay" id="drawerOverlay" onclick="closeAddDrawer()" style="display:none"></div>
+<div class="add-drawer" id="addDrawer" style="display:none">
   <div class="drawer-header">
     <div class="drawer-title">Add New Block</div>
     <div class="drawer-sub">Paste your HTML block and it will appear in the library</div>
@@ -3791,6 +3795,71 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
 
 /* CAT 07 — SHOP FOOTER reuses sp-footer styles */
 
+/* CAT 08 — FILTER SIDEBAR PANEL */
+.cat-filter-panel { background: white; border: 1.5px solid var(--color-border); border-radius: var(--r-lg); overflow: hidden; max-width: 260px; font-family: var(--font-ui); }
+.cat-filter-section { border-bottom: 1px solid var(--color-border); }
+.cat-filter-section:last-child { border-bottom: none; }
+.cat-filter-heading { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; font-size: 13px; font-weight: 700; color: var(--color-text-dark); cursor: pointer; user-select: none; background: none; border: none; width: 100%; text-align: left; font-family: var(--font-ui); }
+.cat-filter-chevron { font-size: 12px; color: var(--color-text-light); transition: transform 0.2s; display: inline-block; }
+.cat-filter-section.collapsed .cat-filter-chevron { transform: rotate(-90deg); }
+.cat-filter-items { padding: 0 16px 14px; display: flex; flex-direction: column; gap: 8px; }
+.cat-filter-section.collapsed .cat-filter-items { display: none; }
+.cat-filter-item { display: flex; align-items: center; gap: 9px; font-size: 13px; color: var(--color-text-dark); cursor: pointer; }
+.cat-filter-cb { width: 16px; height: 16px; flex-shrink: 0; accent-color: var(--color-secondary); cursor: pointer; }
+
+/* CAT 09 — CATEGORY LISTING LAYOUT */
+.cat-listing-wrap { padding: 24px; background: white; border-radius: var(--r-lg); }
+.cat-listing-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+.cat-listing-count { font-size: 14px; font-weight: 600; color: var(--color-text-dark); }
+.cat-sort-select { height: 36px; padding: 0 12px; border: 1.5px solid var(--color-border); border-radius: var(--r-md); background: white; font-family: var(--font-ui); font-size: 13px; color: var(--color-text-dark); outline: none; cursor: pointer; }
+.cat-listing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 900px) { .cat-listing-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .cat-listing-grid { grid-template-columns: 1fr; } }
+.cat-listing-card { background: white; border-radius: var(--r-lg); border: 1.5px solid var(--color-border); overflow: hidden; transition: box-shadow 0.2s; }
+.cat-listing-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+.cat-listing-urgency { position: absolute; top: 10px; left: 10px; background: var(--color-primary); color: white; border-radius: var(--r-pill); padding: 3px 10px; font-size: 11px; font-weight: 700; z-index: 2; }
+.cat-listing-certs { position: absolute; top: 8px; right: 8px; display: flex; flex-direction: column; align-items: center; gap: 3px; z-index: 2; }
+.cat-cert-badge { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 7px; font-weight: 700; text-align: center; line-height: 1.2; letter-spacing: 0.02em; }
+.cat-cert-badge.mosa { background: #3B7A3B; color: white; }
+.cat-cert-badge.usda { background: white; border: 1.5px solid #5A9A5A; color: #3B7A3B; }
+.cat-listing-body { padding: 12px 14px 14px; }
+.cat-listing-name { font-size: 13px; font-weight: 700; color: var(--color-secondary); margin-bottom: 4px; line-height: 1.3; display: block; }
+.cat-listing-stars { display: flex; align-items: center; gap: 5px; margin-bottom: 6px; }
+.cat-listing-star-icons { color: #E8A000; font-size: 13px; letter-spacing: -1px; }
+.cat-listing-review-count { font-size: 12px; color: var(--color-text-mid); }
+.cat-listing-price-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+.cat-listing-was { font-size: 12px; color: var(--color-text-light); text-decoration: line-through; }
+.cat-listing-now { font-size: 14px; font-weight: 700; color: var(--color-text-dark); }
+.cat-listing-size-label { font-size: 12px; color: var(--color-text-light); }
+.cat-listing-save { font-size: 11px; font-weight: 600; background: #EBF4F3; color: var(--color-secondary); border-radius: var(--r-sm); padding: 2px 7px; margin-left: auto; }
+.cat-listing-size-select { width: 100%; height: 34px; margin-bottom: 8px; border: 1.5px solid var(--color-border); border-radius: var(--r-md); background: white; padding: 0 10px; font-family: var(--font-ui); font-size: 13px; color: var(--color-text-dark); outline: none; cursor: pointer; -webkit-appearance: none; appearance: none; }
+.cat-listing-atc { width: 100%; height: 38px; background: var(--color-primary); color: white; border: none; border-radius: var(--r-md); font-family: var(--font-ui); font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.15s; }
+.cat-listing-atc:hover { background: #d45f5f; }
+
+/* ═══════════════════════════════════════════════════════════════
+   PRODUCT DETAIL PAGE BLOCKS — simplyearth.com/products/...
+   ═══════════════════════════════════════════════════════════════ */
+/* PDP 01 — REVIEW TICKER */
+.pdp-ticker{background:white;border-bottom:1px solid var(--color-border);padding:10px 0;overflow:hidden;}.pdp-ticker-track{display:flex;gap:10px;overflow-x:auto;padding:0 20px;scrollbar-width:none;}.pdp-ticker-track::-webkit-scrollbar{display:none;}.pdp-ticker-card{flex-shrink:0;background:var(--color-bg-mint);border-radius:var(--r-md);padding:8px 12px;min-width:150px;max-width:180px;}.pdp-ticker-stars{color:#E8A000;font-size:10px;margin-bottom:2px;}.pdp-ticker-quote{font-size:11px;font-weight:600;color:var(--color-text-dark);margin-bottom:2px;}.pdp-ticker-name{font-size:10px;color:var(--color-text-light);}
+/* PDP 02 — PRODUCT HERO */
+.pdp-hero{background:white;padding:32px 0;}.pdp-hero-inner{max-width:960px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}@media(max-width:768px){.pdp-hero-inner{grid-template-columns:1fr;gap:24px;}}.pdp-gallery-main{aspect-ratio:1/1;background:var(--color-bg-app);border-radius:var(--r-lg);display:flex;align-items:center;justify-content:center;margin-bottom:10px;overflow:hidden;}.pdp-gallery-thumbs{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;}.pdp-gallery-thumbs::-webkit-scrollbar{display:none;}.pdp-thumb{width:52px;height:52px;border-radius:var(--r-md);background:var(--color-bg-app);border:2px solid transparent;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;overflow:hidden;}.pdp-thumb.active{border-color:var(--color-secondary);}.pdp-info-title{font-family:var(--font-display);font-size:32px;color:var(--color-text-dark);line-height:1.15;margin-bottom:8px;}.pdp-info-stars{display:flex;align-items:center;gap:8px;margin-bottom:10px;}.pdp-info-star-icons{color:#E8A000;font-size:15px;}.pdp-info-review-count{font-size:13px;color:var(--color-secondary);text-decoration:underline;cursor:pointer;}.pdp-price-row{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;}.pdp-price-now{font-size:20px;font-weight:700;color:var(--color-text-dark);}.pdp-price-was{font-size:14px;color:var(--color-text-light);text-decoration:line-through;}.pdp-price-save{font-size:12px;color:var(--color-text-light);}.pdp-subscribe-pill{display:inline-flex;align-items:center;gap:6px;background:var(--color-secondary);color:white;border-radius:var(--r-pill);padding:5px 14px;font-size:12px;font-weight:700;margin-bottom:14px;cursor:pointer;}.pdp-attrs{display:flex;flex-direction:column;gap:6px;margin-bottom:18px;}.pdp-attr{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--color-text-mid);}.pdp-attr-check{color:var(--color-secondary);flex-shrink:0;}.pdp-size-label{font-size:13px;font-weight:600;color:var(--color-text-dark);margin-bottom:8px;}.pdp-size-options{display:flex;gap:10px;margin-bottom:18px;}.pdp-size-btn{display:flex;align-items:center;gap:8px;flex:1;padding:10px 14px;border-radius:var(--r-md);border:2px solid var(--color-border);background:white;cursor:pointer;font-family:var(--font-ui);font-size:13px;font-weight:500;color:var(--color-text-dark);transition:all 0.15s;}.pdp-size-btn.active{border-color:var(--color-secondary);}.pdp-size-radio{width:16px;height:16px;border-radius:50%;border:2px solid #CCC;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.15s;}.pdp-size-btn.active .pdp-size-radio{border-color:var(--color-secondary);background:var(--color-secondary);}.pdp-size-dot{width:6px;height:6px;background:white;border-radius:50%;display:block;}.pdp-purchase-label{font-size:13px;font-weight:600;color:var(--color-text-dark);margin-bottom:8px;}.pdp-purchase-options{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}.pdp-purchase-option{display:flex;align-items:flex-start;justify-content:space-between;padding:12px 16px;border-radius:var(--r-md);border:2px solid var(--color-border);cursor:pointer;transition:all 0.15s;}.pdp-purchase-option.active{border-color:var(--color-secondary);background:#F0F8F7;}.pdp-purchase-left{display:flex;align-items:flex-start;gap:10px;}.pdp-purchase-radio{width:18px;height:18px;border-radius:50%;border:2px solid #CCC;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:all 0.15s;}.pdp-purchase-option.active .pdp-purchase-radio{border-color:var(--color-secondary);background:var(--color-secondary);}.pdp-purchase-option-name{font-size:13px;font-weight:500;color:var(--color-text-dark);}.pdp-purchase-option-sub{font-size:11px;color:var(--color-text-light);margin-top:2px;}.pdp-purchase-price{font-size:14px;font-weight:700;color:var(--color-text-dark);}.pdp-atc-btn{width:100%;height:52px;background:var(--color-primary);color:white;border:none;border-radius:var(--r-md);font-family:var(--font-ui);font-size:16px;font-weight:700;letter-spacing:0.04em;cursor:pointer;transition:background 0.15s;margin-bottom:14px;}.pdp-atc-btn:hover{background:#d45f5f;}.pdp-guarantees{display:flex;flex-direction:column;gap:7px;}.pdp-guarantee{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--color-text-mid);}.pdp-guarantee-icon{font-size:15px;}
+/* PDP 03 — TAB BAR */
+.pdp-tabs{background:white;border-top:1px solid var(--color-border);border-bottom:1px solid var(--color-border);display:flex;padding:0 24px;}.pdp-tab{padding:14px 20px;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-text-light);cursor:pointer;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 0.15s;background:none;font-family:var(--font-ui);}.pdp-tab.active{color:var(--color-text-dark);border-bottom-color:var(--color-text-dark);}.pdp-tab:hover{color:var(--color-text-dark);}
+/* PDP 04 — BENEFITS */
+.pdp-benefits{background:white;padding:48px 0;}.pdp-benefits-inner{max-width:960px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}@media(max-width:768px){.pdp-benefits-inner{grid-template-columns:1fr;}}.pdp-benefits-h2{font-family:var(--font-display);font-size:26px;color:var(--color-text-dark);line-height:1.2;margin-bottom:24px;}.pdp-benefit-cards{display:flex;flex-direction:column;gap:10px;}.pdp-benefit-card{display:flex;align-items:center;gap:14px;background:var(--color-bg-cream);border-radius:var(--r-lg);padding:14px 18px;}.pdp-benefit-icon{width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.05);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}.pdp-benefit-label{font-size:14px;font-weight:500;color:var(--color-text-dark);}.pdp-benefits-visual{position:relative;display:flex;align-items:center;justify-content:center;min-height:240px;background:var(--color-bg-app);border-radius:var(--r-xl);}.pdp-benefits-play{width:52px;height:52px;background:rgba(55,93,90,0.85);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:18px;position:absolute;z-index:2;cursor:pointer;}.pdp-benefit-float{position:absolute;font-size:9px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--color-text-dark);display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;}.pdp-benefit-float-icon{font-size:16px;}
+/* PDP 05 — MARQUEE */
+.pdp-marquee{background:var(--color-secondary);padding:10px 0;overflow:hidden;}.pdp-marquee-track{display:flex;white-space:nowrap;}.pdp-marquee-item{display:inline-flex;align-items:center;gap:8px;padding:0 16px;font-size:11px;font-weight:700;letter-spacing:0.1em;color:white;text-transform:uppercase;}.pdp-marquee-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.5);flex-shrink:0;}
+/* PDP 06 — QUALITY + ACCORDION */
+.pdp-quality{background:white;padding:48px 0;}.pdp-quality-inner{max-width:960px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;}@media(max-width:768px){.pdp-quality-inner{grid-template-columns:1fr;}}.pdp-quality-img-wrap{position:relative;background:#EDE8DE;border-radius:var(--r-xl);min-height:300px;display:flex;align-items:center;justify-content:center;overflow:visible;}.pdp-quality-badge{position:absolute;background:#F5EFE0;border-radius:50%;width:78px;height:78px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;text-align:center;line-height:1.3;color:var(--color-text-dark);border:2px solid white;}.pdp-quality-h2{font-family:var(--font-display);font-size:24px;color:var(--color-text-dark);line-height:1.2;margin-bottom:20px;}.pdp-accordion{border-top:1px solid var(--color-border);margin-bottom:20px;}.pdp-accordion-item{border-bottom:1px solid var(--color-border);}.pdp-accordion-header{display:flex;align-items:center;justify-content:space-between;padding:14px 0;font-size:14px;font-weight:400;color:var(--color-text-dark);cursor:pointer;background:none;border:none;width:100%;text-align:left;font-family:var(--font-ui);}.pdp-accordion-minus{font-size:18px;color:var(--color-text-light);line-height:1;}.pdp-cert-btn{display:inline-flex;align-items:center;gap:8px;background:var(--color-primary);color:white;border:none;border-radius:var(--r-pill);padding:10px 20px;font-family:var(--font-ui);font-size:13px;font-weight:600;cursor:pointer;transition:background 0.15s;}.pdp-cert-btn:hover{background:#d45f5f;}
+/* PDP 07 — COMPARISON TABLE */
+.pdp-compare{background:white;padding:48px 0;}.pdp-compare-inner{max-width:760px;margin:0 auto;padding:0 24px;}.pdp-compare-h2{font-family:var(--font-display);font-size:24px;text-align:center;color:var(--color-text-dark);margin-bottom:28px;}.pdp-compare-table{width:100%;border-collapse:collapse;border:1px solid var(--color-border);border-radius:var(--r-lg);overflow:hidden;}.pdp-compare-table th,.pdp-compare-table td{padding:13px 16px;text-align:center;font-size:13px;border-bottom:1px solid var(--color-border);}.pdp-compare-table th:first-child,.pdp-compare-table td:first-child{text-align:left;font-weight:400;color:var(--color-text-mid);}.pdp-compare-table tr:last-child td{border-bottom:none;}.pdp-th-label{font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--color-text-light);}.pdp-th-se{background:var(--color-secondary);color:white!important;font-size:13px;font-weight:700;}.pdp-th-other{font-size:13px;font-weight:600;color:var(--color-text-dark);}.pdp-col-se{background:#F0F8F7;}.pdp-check-green{color:#2E7D32;font-size:18px;}.pdp-check-gray{color:#BBB;font-size:18px;}.pdp-check-x{color:var(--color-primary);font-size:14px;font-weight:700;}
+/* PDP 08 — REVIEWS */
+.pdp-reviews{background:white;padding:40px 0;border-top:1px solid var(--color-border);}.pdp-reviews-inner{max-width:960px;margin:0 auto;padding:0 24px;}.pdp-rating-summary{display:flex;align-items:flex-start;gap:20px;margin-bottom:20px;flex-wrap:wrap;}.pdp-rating-big{font-size:48px;font-weight:700;color:var(--color-text-dark);line-height:1;}.pdp-rating-right{display:flex;flex-direction:column;gap:3px;}.pdp-rating-stars-row{color:#E8A000;font-size:16px;}.pdp-rating-based{font-size:12px;color:var(--color-text-light);margin-bottom:6px;}.pdp-rating-bars{display:flex;flex-direction:column;gap:3px;}.pdp-rating-bar-row{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--color-text-mid);white-space:nowrap;}.pdp-rating-bar-track{width:120px;height:7px;background:var(--color-bg-app);border-radius:4px;overflow:hidden;}.pdp-rating-bar-fill{height:100%;background:#E8A000;border-radius:4px;}.pdp-rating-actions{display:flex;gap:10px;margin-left:auto;align-items:flex-start;flex-wrap:wrap;}.pdp-rating-action-btn{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 14px;border-radius:var(--r-md);border:1.5px solid var(--color-border);background:white;font-family:var(--font-ui);font-size:12px;font-weight:600;color:var(--color-text-dark);cursor:pointer;}.pdp-review-tabs{display:flex;border-bottom:1px solid var(--color-border);margin-bottom:14px;}.pdp-review-tab{padding:10px 0;margin-right:24px;font-size:13px;font-weight:600;color:var(--color-text-light);cursor:pointer;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;background:none;font-family:var(--font-ui);}.pdp-review-tab.active{color:var(--color-text-dark);border-bottom-color:var(--color-text-dark);}.pdp-review-filter-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:16px;}.pdp-review-search-wrap{position:relative;min-width:160px;}.pdp-review-search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:12px;color:#AAA;}.pdp-review-search{width:100%;height:34px;border:1.5px solid var(--color-border);border-radius:var(--r-md);padding:0 12px 0 28px;font-family:var(--font-ui);font-size:12px;outline:none;}.pdp-review-chip{height:28px;padding:0 12px;border-radius:var(--r-pill);border:1.5px solid var(--color-border);background:white;font-family:var(--font-ui);font-size:11px;font-weight:500;color:var(--color-text-mid);cursor:pointer;}.pdp-review-sort{height:32px;padding:0 10px;border:1.5px solid var(--color-border);border-radius:var(--r-md);background:white;font-family:var(--font-ui);font-size:12px;color:var(--color-text-dark);outline:none;cursor:pointer;margin-left:auto;}.pdp-review-card{border:1px solid var(--color-border);border-radius:var(--r-lg);padding:20px;margin-bottom:16px;}.pdp-review-card-top{display:flex;align-items:center;gap:10px;margin-bottom:8px;}.pdp-review-avatar{width:36px;height:36px;border-radius:50%;background:var(--color-secondary);color:white;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;}.pdp-review-author{flex:1;}.pdp-review-name{font-size:13px;font-weight:700;color:var(--color-text-dark);}.pdp-review-location{font-size:11px;color:var(--color-text-light);}.pdp-review-date{font-size:11px;color:var(--color-text-light);}.pdp-review-stars{color:#E8A000;font-size:13px;margin-bottom:4px;}.pdp-review-title{font-size:13px;font-weight:700;color:var(--color-text-dark);margin-bottom:6px;}.pdp-review-body{font-size:13px;color:var(--color-text-mid);line-height:1.6;margin-bottom:10px;}.pdp-review-variant{font-size:11px;color:var(--color-text-light);margin-bottom:10px;}.pdp-review-footer{display:flex;align-items:center;justify-content:space-between;}.pdp-review-share{font-size:12px;color:var(--color-text-light);cursor:pointer;}.pdp-review-helpful{font-size:12px;color:var(--color-text-light);display:flex;align-items:center;gap:8px;}.pdp-brand-reply{background:var(--color-bg-app);border-radius:var(--r-md);padding:14px 16px;margin-top:12px;}.pdp-brand-reply-header{display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:var(--color-text-dark);margin-bottom:4px;}.pdp-brand-reply-body{font-size:12px;color:var(--color-text-mid);line-height:1.6;}
+/* PDP 09 — RELATED PRODUCTS */
+.pdp-related{background:var(--color-bg-app);padding:48px 0;}.pdp-related-inner{max-width:960px;margin:0 auto;padding:0 24px;}.pdp-related-h2{font-family:var(--font-display);font-size:26px;text-align:center;color:var(--color-text-dark);margin-bottom:28px;}.pdp-related-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}@media(max-width:900px){.pdp-related-grid{grid-template-columns:repeat(2,1fr);}}@media(max-width:480px){.pdp-related-grid{grid-template-columns:1fr;}}.pdp-related-card{background:white;border-radius:var(--r-lg);border:1.5px solid var(--color-border);overflow:hidden;}.pdp-related-img{aspect-ratio:1/1;background:var(--color-bg-app);display:flex;align-items:center;justify-content:center;}.pdp-related-body{padding:10px 12px 12px;}.pdp-related-name{font-size:13px;font-weight:700;color:var(--color-secondary);margin-bottom:4px;line-height:1.3;}.pdp-related-stars{color:#E8A000;font-size:11px;margin-bottom:2px;}.pdp-related-reviews{font-size:11px;color:var(--color-text-light);margin-bottom:6px;}.pdp-related-price-row{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-bottom:8px;}.pdp-related-was{font-size:11px;color:var(--color-text-light);text-decoration:line-through;}.pdp-related-now{font-size:13px;font-weight:700;color:var(--color-text-dark);}.pdp-related-size{font-size:11px;color:var(--color-text-light);}.pdp-related-save{font-size:10px;font-weight:600;background:#EBF4F3;color:var(--color-secondary);border-radius:3px;padding:1px 5px;margin-left:auto;}.pdp-related-select{width:100%;height:30px;margin-bottom:6px;border:1.5px solid var(--color-border);border-radius:var(--r-md);background:white;padding:0 8px;font-family:var(--font-ui);font-size:12px;color:var(--color-text-dark);outline:none;cursor:pointer;-webkit-appearance:none;appearance:none;}.pdp-related-atc{width:100%;height:34px;background:var(--color-primary);color:white;border:none;border-radius:var(--r-md);font-family:var(--font-ui);font-size:13px;font-weight:600;cursor:pointer;}
+/* PDP 10 — STICKY ATC BAR */
+.pdp-sticky-bar{background:white;border-top:2px solid var(--color-border);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 -4px 20px rgba(0,0,0,0.06);}.pdp-sticky-left{display:flex;flex-direction:column;gap:3px;}.pdp-sticky-name{font-size:14px;font-weight:700;color:var(--color-text-dark);}.pdp-sticky-stars{color:#E8A000;font-size:13px;}.pdp-sticky-btn{height:44px;padding:0 28px;background:var(--color-secondary);color:white;border:none;border-radius:var(--r-md);font-family:var(--font-ui);font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;transition:background 0.15s;}.pdp-sticky-btn:hover{background:#2A4A47;}
+
 /* ── FOOTER ── */
 .sub-footer {
   background: white; padding: 40px 0 24px;
@@ -4159,6 +4228,61 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
 .cat-btn-view-all:hover { background: #2A4A47; }
 
 /* CAT 07 — SHOP FOOTER reuses sp-footer styles */
+
+/* CAT 08 — FILTER SIDEBAR PANEL */
+.cat-filter-panel { background: white; border: 1.5px solid var(--color-border); border-radius: var(--r-lg); overflow: hidden; max-width: 260px; font-family: var(--font-ui); }
+.cat-filter-section { border-bottom: 1px solid var(--color-border); }
+.cat-filter-section:last-child { border-bottom: none; }
+.cat-filter-heading { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; font-size: 13px; font-weight: 700; color: var(--color-text-dark); cursor: pointer; user-select: none; background: none; border: none; width: 100%; text-align: left; font-family: var(--font-ui); }
+.cat-filter-chevron { font-size: 12px; color: var(--color-text-light); transition: transform 0.2s; display: inline-block; }
+.cat-filter-section.collapsed .cat-filter-chevron { transform: rotate(-90deg); }
+.cat-filter-items { padding: 0 16px 14px; display: flex; flex-direction: column; gap: 8px; }
+.cat-filter-section.collapsed .cat-filter-items { display: none; }
+.cat-filter-item { display: flex; align-items: center; gap: 9px; font-size: 13px; color: var(--color-text-dark); cursor: pointer; }
+.cat-filter-cb { width: 16px; height: 16px; flex-shrink: 0; accent-color: var(--color-secondary); cursor: pointer; }
+
+/* CAT 09 — CATEGORY LISTING LAYOUT */
+.cat-listing-wrap { padding: 24px; background: white; border-radius: var(--r-lg); }
+.cat-listing-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+.cat-listing-count { font-size: 14px; font-weight: 600; color: var(--color-text-dark); }
+.cat-sort-select { height: 36px; padding: 0 12px; border: 1.5px solid var(--color-border); border-radius: var(--r-md); background: white; font-family: var(--font-ui); font-size: 13px; color: var(--color-text-dark); outline: none; cursor: pointer; }
+.cat-listing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 900px) { .cat-listing-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .cat-listing-grid { grid-template-columns: 1fr; } }
+.cat-listing-card { background: white; border-radius: var(--r-lg); border: 1.5px solid var(--color-border); overflow: hidden; transition: box-shadow 0.2s; }
+.cat-listing-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+.cat-listing-urgency { position: absolute; top: 10px; left: 10px; background: var(--color-primary); color: white; border-radius: var(--r-pill); padding: 3px 10px; font-size: 11px; font-weight: 700; z-index: 2; }
+.cat-listing-certs { position: absolute; top: 8px; right: 8px; display: flex; flex-direction: column; align-items: center; gap: 3px; z-index: 2; }
+.cat-cert-badge { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 7px; font-weight: 700; text-align: center; line-height: 1.2; letter-spacing: 0.02em; }
+.cat-cert-badge.mosa { background: #3B7A3B; color: white; }
+.cat-cert-badge.usda { background: white; border: 1.5px solid #5A9A5A; color: #3B7A3B; }
+.cat-listing-body { padding: 12px 14px 14px; }
+.cat-listing-name { font-size: 13px; font-weight: 700; color: var(--color-secondary); margin-bottom: 4px; line-height: 1.3; display: block; }
+.cat-listing-stars { display: flex; align-items: center; gap: 5px; margin-bottom: 6px; }
+.cat-listing-star-icons { color: #E8A000; font-size: 13px; letter-spacing: -1px; }
+.cat-listing-review-count { font-size: 12px; color: var(--color-text-mid); }
+.cat-listing-price-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+.cat-listing-was { font-size: 12px; color: var(--color-text-light); text-decoration: line-through; }
+.cat-listing-now { font-size: 14px; font-weight: 700; color: var(--color-text-dark); }
+.cat-listing-size-label { font-size: 12px; color: var(--color-text-light); }
+.cat-listing-save { font-size: 11px; font-weight: 600; background: #EBF4F3; color: var(--color-secondary); border-radius: var(--r-sm); padding: 2px 7px; margin-left: auto; }
+.cat-listing-size-select { width: 100%; height: 34px; margin-bottom: 8px; border: 1.5px solid var(--color-border); border-radius: var(--r-md); background: white; padding: 0 10px; font-family: var(--font-ui); font-size: 13px; color: var(--color-text-dark); outline: none; cursor: pointer; -webkit-appearance: none; appearance: none; }
+.cat-listing-atc { width: 100%; height: 38px; background: var(--color-primary); color: white; border: none; border-radius: var(--r-md); font-family: var(--font-ui); font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.15s; }
+.cat-listing-atc:hover { background: #d45f5f; }
+
+/* ═══════════════════════════════════════════════════════════════
+   PRODUCT DETAIL PAGE BLOCKS
+   ═══════════════════════════════════════════════════════════════ */
+.pdp-ticker{background:white;border-bottom:1px solid var(--color-border);padding:10px 0;overflow:hidden;}.pdp-ticker-track{display:flex;gap:10px;overflow-x:auto;padding:0 20px;scrollbar-width:none;}.pdp-ticker-track::-webkit-scrollbar{display:none;}.pdp-ticker-card{flex-shrink:0;background:var(--color-bg-mint);border-radius:var(--r-md);padding:8px 12px;min-width:150px;max-width:180px;}.pdp-ticker-stars{color:#E8A000;font-size:10px;margin-bottom:2px;}.pdp-ticker-quote{font-size:11px;font-weight:600;color:var(--color-text-dark);margin-bottom:2px;}.pdp-ticker-name{font-size:10px;color:var(--color-text-light);}
+.pdp-hero{background:white;padding:32px 0;}.pdp-hero-inner{max-width:960px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}@media(max-width:768px){.pdp-hero-inner{grid-template-columns:1fr;gap:24px;}}.pdp-gallery-main{aspect-ratio:1/1;background:var(--color-bg-app);border-radius:var(--r-lg);display:flex;align-items:center;justify-content:center;margin-bottom:10px;overflow:hidden;}.pdp-gallery-thumbs{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;}.pdp-gallery-thumbs::-webkit-scrollbar{display:none;}.pdp-thumb{width:52px;height:52px;border-radius:var(--r-md);background:var(--color-bg-app);border:2px solid transparent;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;overflow:hidden;}.pdp-thumb.active{border-color:var(--color-secondary);}.pdp-info-title{font-family:var(--font-display);font-size:32px;color:var(--color-text-dark);line-height:1.15;margin-bottom:8px;}.pdp-info-stars{display:flex;align-items:center;gap:8px;margin-bottom:10px;}.pdp-info-star-icons{color:#E8A000;font-size:15px;}.pdp-info-review-count{font-size:13px;color:var(--color-secondary);text-decoration:underline;cursor:pointer;}.pdp-price-row{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;}.pdp-price-now{font-size:20px;font-weight:700;color:var(--color-text-dark);}.pdp-price-was{font-size:14px;color:var(--color-text-light);text-decoration:line-through;}.pdp-price-save{font-size:12px;color:var(--color-text-light);}.pdp-subscribe-pill{display:inline-flex;align-items:center;gap:6px;background:var(--color-secondary);color:white;border-radius:var(--r-pill);padding:5px 14px;font-size:12px;font-weight:700;margin-bottom:14px;cursor:pointer;}.pdp-attrs{display:flex;flex-direction:column;gap:6px;margin-bottom:18px;}.pdp-attr{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--color-text-mid);}.pdp-attr-check{color:var(--color-secondary);flex-shrink:0;}.pdp-size-label{font-size:13px;font-weight:600;color:var(--color-text-dark);margin-bottom:8px;}.pdp-size-options{display:flex;gap:10px;margin-bottom:18px;}.pdp-size-btn{display:flex;align-items:center;gap:8px;flex:1;padding:10px 14px;border-radius:var(--r-md);border:2px solid var(--color-border);background:white;cursor:pointer;font-family:var(--font-ui);font-size:13px;font-weight:500;color:var(--color-text-dark);transition:all 0.15s;}.pdp-size-btn.active{border-color:var(--color-secondary);}.pdp-size-radio{width:16px;height:16px;border-radius:50%;border:2px solid #CCC;display:flex;align-items:center;justify-content:center;flex-shrink:0;}.pdp-size-btn.active .pdp-size-radio{border-color:var(--color-secondary);background:var(--color-secondary);}.pdp-size-dot{width:6px;height:6px;background:white;border-radius:50%;display:block;}.pdp-purchase-label{font-size:13px;font-weight:600;color:var(--color-text-dark);margin-bottom:8px;}.pdp-purchase-options{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}.pdp-purchase-option{display:flex;align-items:flex-start;justify-content:space-between;padding:12px 16px;border-radius:var(--r-md);border:2px solid var(--color-border);cursor:pointer;transition:all 0.15s;}.pdp-purchase-option.active{border-color:var(--color-secondary);background:#F0F8F7;}.pdp-purchase-left{display:flex;align-items:flex-start;gap:10px;}.pdp-purchase-radio{width:18px;height:18px;border-radius:50%;border:2px solid #CCC;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}.pdp-purchase-option.active .pdp-purchase-radio{border-color:var(--color-secondary);background:var(--color-secondary);}.pdp-purchase-option-name{font-size:13px;font-weight:500;color:var(--color-text-dark);}.pdp-purchase-option-sub{font-size:11px;color:var(--color-text-light);margin-top:2px;}.pdp-purchase-price{font-size:14px;font-weight:700;color:var(--color-text-dark);}.pdp-atc-btn{width:100%;height:52px;background:var(--color-primary);color:white;border:none;border-radius:var(--r-md);font-family:var(--font-ui);font-size:16px;font-weight:700;letter-spacing:0.04em;cursor:pointer;transition:background 0.15s;margin-bottom:14px;}.pdp-atc-btn:hover{background:#d45f5f;}.pdp-guarantees{display:flex;flex-direction:column;gap:7px;}.pdp-guarantee{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--color-text-mid);}.pdp-guarantee-icon{font-size:15px;}
+.pdp-tabs{background:white;border-top:1px solid var(--color-border);border-bottom:1px solid var(--color-border);display:flex;padding:0 24px;}.pdp-tab{padding:14px 20px;font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-text-light);cursor:pointer;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all 0.15s;background:none;font-family:var(--font-ui);}.pdp-tab.active{color:var(--color-text-dark);border-bottom-color:var(--color-text-dark);}.pdp-tab:hover{color:var(--color-text-dark);}
+.pdp-benefits{background:white;padding:48px 0;}.pdp-benefits-inner{max-width:960px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}@media(max-width:768px){.pdp-benefits-inner{grid-template-columns:1fr;}}.pdp-benefits-h2{font-family:var(--font-display);font-size:26px;color:var(--color-text-dark);line-height:1.2;margin-bottom:24px;}.pdp-benefit-cards{display:flex;flex-direction:column;gap:10px;}.pdp-benefit-card{display:flex;align-items:center;gap:14px;background:var(--color-bg-cream);border-radius:var(--r-lg);padding:14px 18px;}.pdp-benefit-icon{width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,0.05);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}.pdp-benefit-label{font-size:14px;font-weight:500;color:var(--color-text-dark);}.pdp-benefits-visual{position:relative;display:flex;align-items:center;justify-content:center;min-height:240px;background:var(--color-bg-app);border-radius:var(--r-xl);}.pdp-benefits-play{width:52px;height:52px;background:rgba(55,93,90,0.85);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-size:18px;position:absolute;z-index:2;cursor:pointer;}.pdp-benefit-float{position:absolute;font-size:9px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--color-text-dark);display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;}.pdp-benefit-float-icon{font-size:16px;}
+.pdp-marquee{background:var(--color-secondary);padding:10px 0;overflow:hidden;}.pdp-marquee-track{display:flex;white-space:nowrap;}.pdp-marquee-item{display:inline-flex;align-items:center;gap:8px;padding:0 16px;font-size:11px;font-weight:700;letter-spacing:0.1em;color:white;text-transform:uppercase;}.pdp-marquee-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.5);flex-shrink:0;}
+.pdp-quality{background:white;padding:48px 0;}.pdp-quality-inner{max-width:960px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;}@media(max-width:768px){.pdp-quality-inner{grid-template-columns:1fr;}}.pdp-quality-img-wrap{position:relative;background:#EDE8DE;border-radius:var(--r-xl);min-height:300px;display:flex;align-items:center;justify-content:center;overflow:visible;}.pdp-quality-badge{position:absolute;background:#F5EFE0;border-radius:50%;width:78px;height:78px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;text-align:center;line-height:1.3;color:var(--color-text-dark);border:2px solid white;}.pdp-quality-h2{font-family:var(--font-display);font-size:24px;color:var(--color-text-dark);line-height:1.2;margin-bottom:20px;}.pdp-accordion{border-top:1px solid var(--color-border);margin-bottom:20px;}.pdp-accordion-item{border-bottom:1px solid var(--color-border);}.pdp-accordion-header{display:flex;align-items:center;justify-content:space-between;padding:14px 0;font-size:14px;font-weight:400;color:var(--color-text-dark);cursor:pointer;background:none;border:none;width:100%;text-align:left;font-family:var(--font-ui);}.pdp-accordion-minus{font-size:18px;color:var(--color-text-light);line-height:1;}.pdp-cert-btn{display:inline-flex;align-items:center;gap:8px;background:var(--color-primary);color:white;border:none;border-radius:var(--r-pill);padding:10px 20px;font-family:var(--font-ui);font-size:13px;font-weight:600;cursor:pointer;}
+.pdp-compare{background:white;padding:48px 0;}.pdp-compare-inner{max-width:760px;margin:0 auto;padding:0 24px;}.pdp-compare-h2{font-family:var(--font-display);font-size:24px;text-align:center;color:var(--color-text-dark);margin-bottom:28px;}.pdp-compare-table{width:100%;border-collapse:collapse;border:1px solid var(--color-border);border-radius:var(--r-lg);overflow:hidden;}.pdp-compare-table th,.pdp-compare-table td{padding:13px 16px;text-align:center;font-size:13px;border-bottom:1px solid var(--color-border);}.pdp-compare-table th:first-child,.pdp-compare-table td:first-child{text-align:left;font-weight:400;color:var(--color-text-mid);}.pdp-compare-table tr:last-child td{border-bottom:none;}.pdp-th-label{font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--color-text-light);}.pdp-th-se{background:var(--color-secondary);color:white!important;font-size:13px;font-weight:700;}.pdp-th-other{font-size:13px;font-weight:600;color:var(--color-text-dark);}.pdp-col-se{background:#F0F8F7;}.pdp-check-green{color:#2E7D32;font-size:18px;}.pdp-check-gray{color:#BBB;font-size:18px;}.pdp-check-x{color:var(--color-primary);font-size:14px;font-weight:700;}
+.pdp-reviews{background:white;padding:40px 0;border-top:1px solid var(--color-border);}.pdp-reviews-inner{max-width:960px;margin:0 auto;padding:0 24px;}.pdp-rating-summary{display:flex;align-items:flex-start;gap:20px;margin-bottom:20px;flex-wrap:wrap;}.pdp-rating-big{font-size:48px;font-weight:700;color:var(--color-text-dark);line-height:1;}.pdp-rating-right{display:flex;flex-direction:column;gap:3px;}.pdp-rating-stars-row{color:#E8A000;font-size:16px;}.pdp-rating-based{font-size:12px;color:var(--color-text-light);margin-bottom:6px;}.pdp-rating-bars{display:flex;flex-direction:column;gap:3px;}.pdp-rating-bar-row{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--color-text-mid);white-space:nowrap;}.pdp-rating-bar-track{width:120px;height:7px;background:var(--color-bg-app);border-radius:4px;overflow:hidden;}.pdp-rating-bar-fill{height:100%;background:#E8A000;border-radius:4px;}.pdp-rating-actions{display:flex;gap:10px;margin-left:auto;align-items:flex-start;flex-wrap:wrap;}.pdp-rating-action-btn{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 14px;border-radius:var(--r-md);border:1.5px solid var(--color-border);background:white;font-family:var(--font-ui);font-size:12px;font-weight:600;color:var(--color-text-dark);cursor:pointer;}.pdp-review-tabs{display:flex;border-bottom:1px solid var(--color-border);margin-bottom:14px;}.pdp-review-tab{padding:10px 0;margin-right:24px;font-size:13px;font-weight:600;color:var(--color-text-light);cursor:pointer;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;background:none;font-family:var(--font-ui);}.pdp-review-tab.active{color:var(--color-text-dark);border-bottom-color:var(--color-text-dark);}.pdp-review-filter-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:16px;}.pdp-review-search-wrap{position:relative;min-width:160px;}.pdp-review-search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:12px;color:#AAA;}.pdp-review-search{width:100%;height:34px;border:1.5px solid var(--color-border);border-radius:var(--r-md);padding:0 12px 0 28px;font-family:var(--font-ui);font-size:12px;outline:none;}.pdp-review-chip{height:28px;padding:0 12px;border-radius:var(--r-pill);border:1.5px solid var(--color-border);background:white;font-family:var(--font-ui);font-size:11px;font-weight:500;color:var(--color-text-mid);cursor:pointer;}.pdp-review-sort{height:32px;padding:0 10px;border:1.5px solid var(--color-border);border-radius:var(--r-md);background:white;font-family:var(--font-ui);font-size:12px;color:var(--color-text-dark);outline:none;cursor:pointer;margin-left:auto;}.pdp-review-card{border:1px solid var(--color-border);border-radius:var(--r-lg);padding:20px;margin-bottom:16px;}.pdp-review-card-top{display:flex;align-items:center;gap:10px;margin-bottom:8px;}.pdp-review-avatar{width:36px;height:36px;border-radius:50%;background:var(--color-secondary);color:white;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;}.pdp-review-author{flex:1;}.pdp-review-name{font-size:13px;font-weight:700;color:var(--color-text-dark);}.pdp-review-date{font-size:11px;color:var(--color-text-light);}.pdp-review-stars{color:#E8A000;font-size:13px;margin-bottom:4px;}.pdp-review-title{font-size:13px;font-weight:700;color:var(--color-text-dark);margin-bottom:6px;}.pdp-review-body{font-size:13px;color:var(--color-text-mid);line-height:1.6;margin-bottom:10px;}.pdp-review-variant{font-size:11px;color:var(--color-text-light);margin-bottom:10px;}.pdp-review-footer{display:flex;align-items:center;justify-content:space-between;}.pdp-review-share{font-size:12px;color:var(--color-text-light);cursor:pointer;}.pdp-review-helpful{font-size:12px;color:var(--color-text-light);display:flex;align-items:center;gap:8px;}.pdp-brand-reply{background:var(--color-bg-app);border-radius:var(--r-md);padding:14px 16px;margin-top:12px;}.pdp-brand-reply-header{display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:var(--color-text-dark);margin-bottom:4px;}.pdp-brand-reply-body{font-size:12px;color:var(--color-text-mid);line-height:1.6;}
+.pdp-related{background:var(--color-bg-app);padding:48px 0;}.pdp-related-inner{max-width:960px;margin:0 auto;padding:0 24px;}.pdp-related-h2{font-family:var(--font-display);font-size:26px;text-align:center;color:var(--color-text-dark);margin-bottom:28px;}.pdp-related-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}@media(max-width:900px){.pdp-related-grid{grid-template-columns:repeat(2,1fr);}}@media(max-width:480px){.pdp-related-grid{grid-template-columns:1fr;}}.pdp-related-card{background:white;border-radius:var(--r-lg);border:1.5px solid var(--color-border);overflow:hidden;}.pdp-related-img{aspect-ratio:1/1;background:var(--color-bg-app);display:flex;align-items:center;justify-content:center;}.pdp-related-body{padding:10px 12px 12px;}.pdp-related-name{font-size:13px;font-weight:700;color:var(--color-secondary);margin-bottom:4px;line-height:1.3;}.pdp-related-stars{color:#E8A000;font-size:11px;margin-bottom:2px;}.pdp-related-reviews{font-size:11px;color:var(--color-text-light);margin-bottom:6px;}.pdp-related-price-row{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-bottom:8px;}.pdp-related-was{font-size:11px;color:var(--color-text-light);text-decoration:line-through;}.pdp-related-now{font-size:13px;font-weight:700;color:var(--color-text-dark);}.pdp-related-size{font-size:11px;color:var(--color-text-light);}.pdp-related-save{font-size:10px;font-weight:600;background:#EBF4F3;color:var(--color-secondary);border-radius:3px;padding:1px 5px;margin-left:auto;}.pdp-related-select{width:100%;height:30px;margin-bottom:6px;border:1.5px solid var(--color-border);border-radius:var(--r-md);background:white;padding:0 8px;font-family:var(--font-ui);font-size:12px;color:var(--color-text-dark);outline:none;cursor:pointer;-webkit-appearance:none;appearance:none;}.pdp-related-atc{width:100%;height:34px;background:var(--color-primary);color:white;border:none;border-radius:var(--r-md);font-family:var(--font-ui);font-size:13px;font-weight:600;cursor:pointer;}
+.pdp-sticky-bar{background:white;border-top:2px solid var(--color-border);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 -4px 20px rgba(0,0,0,0.06);}.pdp-sticky-left{display:flex;flex-direction:column;gap:3px;}.pdp-sticky-name{font-size:14px;font-weight:700;color:var(--color-text-dark);}.pdp-sticky-stars{color:#E8A000;font-size:13px;}.pdp-sticky-btn{height:44px;padding:0 28px;background:var(--color-secondary);color:white;border:none;border-radius:var(--r-md);font-family:var(--font-ui);font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;transition:background 0.15s;}.pdp-sticky-btn:hover{background:#2A4A47;}
 
 </style>
 </template>
@@ -4564,6 +4688,127 @@ const BLOCKS_DATA = [
     thumb_emoji: '🔧',
     thumb_bg: '#FAFAF8',
     desc: 'Supplies section: roll-on bottles, amber glass, tools, sticker sheets. Stars + pricing + Add to Cart.'
+  },
+  {
+    id: 'cat-filter-sidebar',
+    name: 'Category Filter Sidebar Panel',
+    page: 'category',
+    tags: ['filter','sidebar','checkboxes','collapsible','season','benefits','aroma','safety'],
+    date: '2026-03-05',
+    thumb_emoji: '🔽',
+    thumb_bg: '#FFFFFF',
+    desc: 'Collapsible checkbox filter panel with 4 sections: Season, Benefits, Aroma, Safety. Matches the left sidebar on the single oils listing page.'
+  },
+  {
+    id: 'cat-listing-layout',
+    name: 'Category Listing – Count + Sort + 3-Col Grid',
+    page: 'category',
+    tags: ['products','grid','3-col','listing','sort','count','low-stock','organic','bg-white'],
+    date: '2026-03-05',
+    thumb_emoji: '📋',
+    thumb_bg: '#FAFAF8',
+    desc: 'Product count + Sort dropdown + 3-col product grid. Includes standard card, low-stock urgency badge variant, and USDA/MOSA organic certification badge variant.'
+  },
+  // ── PRODUCT DETAIL PAGE — simplyearth.com/products/... ─────────────
+  {
+    id: 'pdp-ticker',
+    name: 'Product Page – Review Ticker Strip',
+    page: 'product-detail',
+    tags: ['reviews','ticker','scroll','social-proof','bg-white'],
+    date: '2026-03-05',
+    thumb_emoji: '⭐',
+    thumb_bg: '#F0F8F7',
+    desc: 'Horizontal scrolling strip of mini review cards (stars + short quote + name) below the main nav.'
+  },
+  {
+    id: 'pdp-hero',
+    name: 'Product Detail Hero – Gallery + Purchase Panel',
+    page: 'product-detail',
+    tags: ['hero','gallery','purchase','size-selector','subscribe','atc','bg-white'],
+    date: '2026-03-05',
+    thumb_emoji: '🫙',
+    thumb_bg: '#F5F1EC',
+    desc: '50/50: image gallery (main + thumbnails) left · title, stars, price/savings, subscribe pill, attribute bullets, size radio, purchase options, full-width ATC button, guarantee trust lines right.'
+  },
+  {
+    id: 'pdp-tabs',
+    name: 'Product Detail – Tab Navigation',
+    page: 'product-detail',
+    tags: ['tabs','navigation','quality','details','reviews','bg-white'],
+    date: '2026-03-05',
+    thumb_emoji: '📑',
+    thumb_bg: '#FFFFFF',
+    desc: 'Horizontal tab bar: Quality · Details · Reviews. Active tab with bottom underline.'
+  },
+  {
+    id: 'pdp-benefits',
+    name: 'Product Benefits Section',
+    page: 'product-detail',
+    tags: ['benefits','content','icon-cards','video','bg-white'],
+    date: '2026-03-05',
+    thumb_emoji: '✨',
+    thumb_bg: '#FFFFFF',
+    desc: 'Left: display H2 + 3 icon benefit cards (cream bg). Right: bottle visual with floating benefit labels + video play button.'
+  },
+  {
+    id: 'pdp-marquee',
+    name: 'Product Page – Marquee Trust Ticker',
+    page: 'product-detail',
+    tags: ['marquee','trust','ticker','bg-teal','guarantee'],
+    date: '2026-03-05',
+    thumb_emoji: '🌿',
+    thumb_bg: '#375D5A',
+    desc: 'Full-width teal scrolling marquee repeating "EARTH-TASTIC GUARANTEE · TRY IT RISK-FREE".'
+  },
+  {
+    id: 'pdp-quality',
+    name: 'Product Quality + Details Accordion',
+    page: 'product-detail',
+    tags: ['quality','accordion','badges','image','bg-white'],
+    date: '2026-03-05',
+    thumb_emoji: '🔬',
+    thumb_bg: '#F5F0E8',
+    desc: '50/50: product photo with GC/MS TESTED / CERTIFIED PURE / ETHICALLY SOURCED badge overlays left · H2 + 5 accordion items + View Certificate of Purity CTA right.'
+  },
+  {
+    id: 'pdp-compare',
+    name: 'Competitor Comparison Table',
+    page: 'product-detail',
+    tags: ['table','comparison','vs','bg-white'],
+    date: '2026-03-05',
+    thumb_emoji: '📊',
+    thumb_bg: '#FFFFFF',
+    desc: '"Switch to a Better Essential Oil Now" · 3-col table: Simply Earth (teal/highlighted) vs Amazon Brands vs MLM Companies across 5 criteria.'
+  },
+  {
+    id: 'pdp-reviews',
+    name: 'Product Reviews Section',
+    page: 'product-detail',
+    tags: ['reviews','ratings','filter','ugc','brand-reply','bg-white'],
+    date: '2026-03-05',
+    thumb_emoji: '💬',
+    thumb_bg: '#FFFFFF',
+    desc: 'Rating summary + star distribution bars + Ask/Write buttons + filter chips + full review card (avatar, stars, title, body, variant, helpfulness) + brand reply block.'
+  },
+  {
+    id: 'pdp-related',
+    name: 'Related Products – You May Like Grid',
+    page: 'product-detail',
+    tags: ['products','grid','4-col','recommendations','bg-offwhite'],
+    date: '2026-03-05',
+    thumb_emoji: '🛒',
+    thumb_bg: '#F7F7F5',
+    desc: '"Other Products You May Like" centered heading + 4-col product cards with bottle visuals, stars, pricing, optional size selector, Add to Cart.'
+  },
+  {
+    id: 'pdp-sticky',
+    name: 'Sticky Add to Cart Bar',
+    page: 'product-detail',
+    tags: ['sticky','atc','bar','fixed','bg-white'],
+    date: '2026-03-05',
+    thumb_emoji: '📌',
+    thumb_bg: '#FFFFFF',
+    desc: 'Fixed bottom bar: product name + star rating left · "Add To Cart – $11.99 ($37.33)" teal button right. Shown on scroll.'
   },
 ];
 
@@ -5139,8 +5384,8 @@ function createCard(block) {
   card.dataset.page = block.page;
   card.dataset.tags = block.tags.join(',');
 
-  const pageLabel = block.page === 'ui-kit' ? 'UI Kit' : block.page === 'recipe-box' ? 'Recipe Box' : block.page === 'shop' ? 'Shop' : block.page === 'category' ? 'Category' : 'Other';
-  const pageColor = block.page === 'ui-kit' ? '#D05A5A' : block.page === 'recipe-box' ? '#E67272' : block.page === 'shop' ? '#375D5A' : block.page === 'category' ? '#C87878' : '#AAA';
+  const pageLabel = block.page === 'ui-kit' ? 'UI Kit' : block.page === 'recipe-box' ? 'Recipe Box' : block.page === 'shop' ? 'Shop' : block.page === 'category' ? 'Category' : block.page === 'product-detail' ? 'Product Detail' : 'Other';
+  const pageColor = block.page === 'ui-kit' ? '#D05A5A' : block.page === 'recipe-box' ? '#E67272' : block.page === 'shop' ? '#375D5A' : block.page === 'category' ? '#C87878' : block.page === 'product-detail' ? '#5B7A6E' : '#AAA';
   const dateStr = formatDate(block.date);
 
   const displayTags = block.tags.slice(0, 3);
@@ -5199,6 +5444,7 @@ function updateSidebarCounts() {
   document.getElementById('count-recipe-box').textContent = blocks.filter(b => b.page === 'recipe-box').length;
   document.getElementById('count-shop').textContent = blocks.filter(b => b.page === 'shop').length;
   document.getElementById('count-category').textContent = blocks.filter(b => b.page === 'category').length;
+  document.getElementById('count-product-detail').textContent = blocks.filter(b => b.page === 'product-detail').length;
 }
 
 // ============================================================
@@ -10964,6 +11210,537 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
       <div class="cat-view-all-wrap"><a class="cat-btn-view-all" href="#">View All</a></div>
     </div>
   </section>
+</div>
+<div class="ds-divider"></div>
+
+<!-- CAT BLOCK 08 — FILTER SIDEBAR PANEL -->
+<div class="block-section" id="cat-filter-sidebar">
+  <div class="block-label">Cat Block 08 — Filter Sidebar Panel <span class="tag">White bg · 4 collapsible sections · Season / Benefits / Aroma / Safety checkboxes</span></div>
+  <section style="background:var(--color-bg-app);padding:32px;display:flex;justify-content:center;">
+    <div class="cat-filter-panel">
+      <div class="cat-filter-section">
+        <button class="cat-filter-heading" onclick="this.closest('.cat-filter-section').classList.toggle('collapsed')">Season <span class="cat-filter-chevron">∧</span></button>
+        <div class="cat-filter-items">
+          <label class="cat-filter-item"><input type="checkbox" class="cat-filter-cb"> Winter</label>
+          <label class="cat-filter-item"><input type="checkbox" class="cat-filter-cb"> Spring</label>
+          <label class="cat-filter-item"><input type="checkbox" class="cat-filter-cb"> Summer</label>
+          <label class="cat-filter-item"><input type="checkbox" class="cat-filter-cb"> Fall</label>
+          <label class="cat-filter-item"><input type="checkbox" class="cat-filter-cb"> Christmas</label>
+        </div>
+      </div>
+      <div class="cat-filter-section">
+        <button class="cat-filter-heading" onclick="this.closest('.cat-filter-section').classList.toggle('collapsed')">Benefits <span class="cat-filter-chevron">∧</span></button>
+        <div class="cat-filter-items">
+          <label class="cat-filter-item"><input type="checkbox" class="cat-filter-cb"> Cleaning</label>
+          <label class="cat-filter-item"><input type="checkbox" class="cat-filter-cb"> Immunity</label>
+          <label class="cat-filter-item"><input type="checkbox" class="cat-filter-cb"> Respiration</label>
+          <label class="cat-filter-item"><input type="checkbox" class="cat-filter-cb"> Digestion</label>
+          <label class="cat-filter-item"><input type="checkbox" class="cat-filter-cb"> Relief</label>
+          <label class="cat-filter-item"><input type="checkbox" class="cat-filter-cb"> Uplifting</label>
+          <label class="cat-filter-item"><input type="checkbox" class="cat-filter-cb"> Energizing</label>
+          <label class="cat-filter-item"><input type="checkbox" class="cat-filter-cb"> Calming</label>
+          <label class="cat-filter-item"><input type="checkbox" class="cat-filter-cb"> Backorder</label>
+          <label class="cat-filter-item"><input type="checkbox" class="cat-filter-cb"> Soothing</label>
+        </div>
+      </div>
+      <div class="cat-filter-section">
+        <button class="cat-filter-heading" onclick="this.closest('.cat-filter-section').classList.toggle('collapsed')">Aroma <span class="cat-filter-chevron">∧</span></button>
+        <div class="cat-filter-items">
+          <label class="cat-filter-item"><input type="checkbox" class="cat-filter-cb"> Citrusy</label>
+          <label class="cat-filter-item"><input type="checkbox" class="cat-filter-cb"> Earthy</label>
+          <label class="cat-filter-item"><input type="checkbox" class="cat-filter-cb"> Fresh</label>
+          <label class="cat-filter-item"><input type="checkbox" class="cat-filter-cb"> Fruity</label>
+          <label class="cat-filter-item"><input type="checkbox" class="cat-filter-cb"> Floral</label>
+          <label class="cat-filter-item"><input type="checkbox" class="cat-filter-cb"> Herbaceous</label>
+          <label class="cat-filter-item"><input type="checkbox" class="cat-filter-cb"> Medicinal</label>
+          <label class="cat-filter-item"><input type="checkbox" class="cat-filter-cb"> Minty</label>
+          <label class="cat-filter-item"><input type="checkbox" class="cat-filter-cb"> Pine Like</label>
+          <label class="cat-filter-item"><input type="checkbox" class="cat-filter-cb"> Spicy</label>
+          <label class="cat-filter-item"><input type="checkbox" class="cat-filter-cb"> Sweet</label>
+          <label class="cat-filter-item"><input type="checkbox" class="cat-filter-cb"> Woody</label>
+        </div>
+      </div>
+      <div class="cat-filter-section">
+        <button class="cat-filter-heading" onclick="this.closest('.cat-filter-section').classList.toggle('collapsed')">Safety <span class="cat-filter-chevron">∧</span></button>
+        <div class="cat-filter-items">
+          <label class="cat-filter-item"><input type="checkbox" class="cat-filter-cb"> For Ages 2+</label>
+          <label class="cat-filter-item"><input type="checkbox" class="cat-filter-cb"> For Ages 10+</label>
+          <label class="cat-filter-item"><input type="checkbox" class="cat-filter-cb"> For Ages 12+</label>
+          <label class="cat-filter-item"><input type="checkbox" class="cat-filter-cb"> Cat Safe</label>
+          <label class="cat-filter-item"><input type="checkbox" class="cat-filter-cb"> Dog Safe</label>
+          <label class="cat-filter-item"><input type="checkbox" class="cat-filter-cb"> Pregnancy Safe</label>
+          <label class="cat-filter-item"><input type="checkbox" class="cat-filter-cb"> Not Phototoxic</label>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="ds-divider"></div>
+
+<!-- CAT BLOCK 09 — CATEGORY LISTING LAYOUT -->
+<div class="block-section" id="cat-listing-layout">
+  <div class="block-label">Cat Block 09 — Category Listing Layout <span class="tag">Off-white bg · Count + Sort bar · 3-col product grid · Low stock badge · Organic certification badge</span></div>
+  <section style="background:var(--color-bg-app);padding:24px;">
+    <div class="cat-listing-wrap" style="max-width:960px;margin:0 auto;">
+      <div class="cat-listing-bar">
+        <span class="cat-listing-count">72 Products</span>
+        <select class="cat-sort-select"><option>Sort by: Most Popular</option><option>Price: Low to High</option><option>Price: High to Low</option><option>Newest</option></select>
+      </div>
+      <div class="cat-listing-grid">
+        <!-- Standard card -->
+        <div class="cat-listing-card">
+          <div class="cat-product-img">
+            <div class="cat-bottle"><div class="cat-bottle-inner">
+              <div class="cat-bottle-cap-sm"></div>
+              <div class="cat-bottle-glass" style="background:linear-gradient(160deg,#C8A860,#A88840);">
+                <div class="cat-bottle-label-strip" style="background:#8860A8;"></div>
+                <div class="cat-bottle-label">Lavender 40/42</div>
+              </div>
+            </div></div>
+          </div>
+          <div class="cat-listing-body">
+            <span class="cat-listing-name">Lavender 40/42 Essential Oil</span>
+            <div class="cat-listing-stars"><span class="cat-listing-star-icons">★★★★★</span><span class="cat-listing-review-count">155 reviews</span></div>
+            <div class="cat-listing-price-row"><span class="cat-listing-was">$37.33</span><span class="cat-listing-now">$11.99</span><span class="cat-listing-size-label">(15mL)</span><span class="cat-listing-save">Save $25.34</span></div>
+            <select class="cat-listing-size-select"><option>15mL</option><option>30mL</option></select>
+            <button class="cat-listing-atc">Add To Cart</button>
+          </div>
+        </div>
+        <!-- Standard card -->
+        <div class="cat-listing-card">
+          <div class="cat-product-img">
+            <div class="cat-bottle"><div class="cat-bottle-inner">
+              <div class="cat-bottle-cap-sm"></div>
+              <div class="cat-bottle-glass" style="background:linear-gradient(160deg,#C8A860,#A88840);">
+                <div class="cat-bottle-label-strip" style="background:#48A860;"></div>
+                <div class="cat-bottle-label">Peppermint</div>
+              </div>
+            </div></div>
+          </div>
+          <div class="cat-listing-body">
+            <span class="cat-listing-name">Peppermint Essential Oil</span>
+            <div class="cat-listing-stars"><span class="cat-listing-star-icons">★★★★★</span><span class="cat-listing-review-count">126 reviews</span></div>
+            <div class="cat-listing-price-row"><span class="cat-listing-was">$33.33</span><span class="cat-listing-now">$12.99</span><span class="cat-listing-size-label">(15mL)</span><span class="cat-listing-save">Save $20.34</span></div>
+            <select class="cat-listing-size-select"><option>15mL</option><option>30mL</option></select>
+            <button class="cat-listing-atc">Add To Cart</button>
+          </div>
+        </div>
+        <!-- Standard card -->
+        <div class="cat-listing-card">
+          <div class="cat-product-img">
+            <div class="cat-bottle"><div class="cat-bottle-inner">
+              <div class="cat-bottle-cap-sm"></div>
+              <div class="cat-bottle-glass" style="background:linear-gradient(160deg,#C8A860,#A88840);">
+                <div class="cat-bottle-label-strip" style="background:#E87828;"></div>
+                <div class="cat-bottle-label">Orange</div>
+              </div>
+            </div></div>
+          </div>
+          <div class="cat-listing-body">
+            <span class="cat-listing-name">Orange (Sweet) Essential Oil</span>
+            <div class="cat-listing-stars"><span class="cat-listing-star-icons">★★★★★</span><span class="cat-listing-review-count">51 reviews</span></div>
+            <div class="cat-listing-price-row"><span class="cat-listing-was">$16.45</span><span class="cat-listing-now">$8.99</span><span class="cat-listing-size-label">(15mL)</span><span class="cat-listing-save">Save $7.46</span></div>
+            <select class="cat-listing-size-select"><option>15mL</option><option>30mL</option></select>
+            <button class="cat-listing-atc">Add To Cart</button>
+          </div>
+        </div>
+        <!-- Low stock variant -->
+        <div class="cat-listing-card">
+          <div class="cat-product-img">
+            <div class="cat-listing-urgency">Only 82 Left</div>
+            <div class="cat-bottle"><div class="cat-bottle-inner">
+              <div class="cat-bottle-cap-sm"></div>
+              <div class="cat-bottle-glass" style="background:linear-gradient(160deg,#C8A860,#A88840);">
+                <div class="cat-bottle-label-strip" style="background:#7B4A2A;"></div>
+                <div class="cat-bottle-label">Myrrh</div>
+              </div>
+            </div></div>
+          </div>
+          <div class="cat-listing-body">
+            <span class="cat-listing-name">Myrrh Essential Oil</span>
+            <div class="cat-listing-stars"><span class="cat-listing-star-icons">★★★★½</span><span class="cat-listing-review-count">15 reviews</span></div>
+            <div class="cat-listing-price-row"><span class="cat-listing-was">$98.68</span><span class="cat-listing-now">$19.99</span><span class="cat-listing-size-label">(5mL)</span><span class="cat-listing-save">Save $78.69</span></div>
+            <select class="cat-listing-size-select"><option>5mL</option></select>
+            <button class="cat-listing-atc">Add To Cart</button>
+          </div>
+        </div>
+        <!-- USDA Organic certification variant -->
+        <div class="cat-listing-card">
+          <div class="cat-product-img">
+            <div class="cat-listing-certs">
+              <div class="cat-cert-badge mosa">MOSA</div>
+              <div class="cat-cert-badge usda">USDA ORGANIC</div>
+            </div>
+            <div class="cat-bottle"><div class="cat-bottle-inner">
+              <div class="cat-bottle-cap-sm"></div>
+              <div class="cat-bottle-glass" style="background:linear-gradient(160deg,#C8A860,#A88840);">
+                <div class="cat-bottle-label-strip" style="background:#A85830;"></div>
+                <div class="cat-bottle-label">Cinnamon</div>
+              </div>
+            </div></div>
+          </div>
+          <div class="cat-listing-body">
+            <span class="cat-listing-name">Organic Cinnamon Leaf Essential Oil</span>
+            <div class="cat-listing-stars"><span class="cat-listing-star-icons">★★★★★</span><span class="cat-listing-review-count">25 reviews</span></div>
+            <div class="cat-listing-price-row"><span class="cat-listing-was">$42.67</span><span class="cat-listing-now">$12.99</span><span class="cat-listing-size-label">(15mL)</span><span class="cat-listing-save">Save $29.68</span></div>
+            <select class="cat-listing-size-select"><option>15mL</option></select>
+            <button class="cat-listing-atc">Add To Cart</button>
+          </div>
+        </div>
+        <!-- Standard card -->
+        <div class="cat-listing-card">
+          <div class="cat-product-img">
+            <div class="cat-bottle"><div class="cat-bottle-inner">
+              <div class="cat-bottle-cap-sm"></div>
+              <div class="cat-bottle-glass" style="background:linear-gradient(160deg,#C8A860,#A88840);">
+                <div class="cat-bottle-label-strip" style="background:#68A068;"></div>
+                <div class="cat-bottle-label">Bergamot</div>
+              </div>
+            </div></div>
+          </div>
+          <div class="cat-listing-body">
+            <span class="cat-listing-name">Bergamot Essential Oil</span>
+            <div class="cat-listing-stars"><span class="cat-listing-star-icons">★★★★★</span><span class="cat-listing-review-count">44 reviews</span></div>
+            <div class="cat-listing-price-row"><span class="cat-listing-was">$53.33</span><span class="cat-listing-now">$16.99</span><span class="cat-listing-size-label">(15mL)</span><span class="cat-listing-save">Save $36.34</span></div>
+            <select class="cat-listing-size-select"><option>15mL</option></select>
+            <button class="cat-listing-atc">Add To Cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="ds-divider"></div>
+
+<!-- PDP BLOCK 01 — REVIEW TICKER -->
+<div class="block-section" id="pdp-ticker">
+  <div class="block-label">PDP Block 01 — Review Ticker Strip <span class="tag">White bg · Horizontal scroll · Mini rating cards with quote + name</span></div>
+  <div class="pdp-ticker">
+    <div class="pdp-ticker-track">
+      <div class="pdp-ticker-card"><div class="pdp-ticker-stars">★★★★★</div><div class="pdp-ticker-quote">Smells amazing!</div><div class="pdp-ticker-name">– Felicia B.</div></div>
+      <div class="pdp-ticker-card"><div class="pdp-ticker-stars">★★★★★</div><div class="pdp-ticker-quote">Love these oils!</div><div class="pdp-ticker-name">– Leslie G.</div></div>
+      <div class="pdp-ticker-card"><div class="pdp-ticker-stars">★★★★★</div><div class="pdp-ticker-quote">Best essential oils ever!</div><div class="pdp-ticker-name">– Amber R.</div></div>
+      <div class="pdp-ticker-card"><div class="pdp-ticker-stars">★★★★★</div><div class="pdp-ticker-quote">Good quality! SCORE!</div><div class="pdp-ticker-name">– Christy B.</div></div>
+      <div class="pdp-ticker-card"><div class="pdp-ticker-stars">★★★★★</div><div class="pdp-ticker-quote">Great product!</div><div class="pdp-ticker-name">– Jeri S.</div></div>
+      <div class="pdp-ticker-card"><div class="pdp-ticker-stars">★★★★★</div><div class="pdp-ticker-quote">Smells amazing!</div><div class="pdp-ticker-name">– Felicia B.</div></div>
+      <div class="pdp-ticker-card"><div class="pdp-ticker-stars">★★★★★</div><div class="pdp-ticker-quote">Love these oils!</div><div class="pdp-ticker-name">– Leslie G.</div></div>
+    </div>
+  </div>
+</div>
+<div class="ds-divider"></div>
+
+<!-- PDP BLOCK 02 — PRODUCT HERO -->
+<div class="block-section" id="pdp-hero">
+  <div class="block-label">PDP Block 02 — Product Detail Hero <span class="tag">White bg · Gallery left (main + thumbnails) · Purchase panel right · Size selector · Purchase options · ATC</span></div>
+  <div class="pdp-hero">
+    <div class="pdp-hero-inner">
+      <!-- GALLERY -->
+      <div>
+        <div class="pdp-gallery-main">
+          <div class="cat-bottle"><div class="cat-bottle-inner">
+            <div class="cat-bottle-cap-sm" style="width:30px;height:40px;border-radius:4px 4px 3px 3px;"></div>
+            <div class="cat-bottle-glass" style="width:90px;height:220px;border-radius:6px 6px 8px 8px;">
+              <div class="cat-bottle-label-strip" style="background:#8860A8;height:72px;"></div>
+              <div class="cat-bottle-label" style="font-size:13px;">Lavender 40/42</div>
+            </div>
+          </div></div>
+        </div>
+        <div class="pdp-gallery-thumbs">
+          <div class="pdp-thumb active"><div style="width:28px;height:52px;background:linear-gradient(160deg,#C8A860,#A88840);border-radius:3px;position:relative;overflow:hidden;"><div style="position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);height:18px;background:#8860A8;"></div></div></div>
+          <div class="pdp-thumb"><div style="background:var(--color-bg-mint);width:100%;height:100%;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:20px;">🫙</div></div>
+          <div class="pdp-thumb"><div style="background:#F5EFE4;width:100%;height:100%;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:20px;">🌿</div></div>
+          <div class="pdp-thumb"><div style="background:#EDE8F5;width:100%;height:100%;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:20px;">💜</div></div>
+          <div class="pdp-thumb"><div style="background:#F5F0EC;width:100%;height:100%;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:18px;">🙋</div></div>
+          <div class="pdp-thumb"><div style="background:var(--color-bg-mint);width:100%;height:100%;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:20px;">🫙</div></div>
+          <div class="pdp-thumb"><div style="background:#FFF8EC;width:100%;height:100%;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:20px;">🌸</div></div>
+        </div>
+      </div>
+      <!-- PURCHASE PANEL -->
+      <div>
+        <h1 class="pdp-info-title">Lavender 40/42 Essential Oil</h1>
+        <div class="pdp-info-stars">
+          <span class="pdp-info-star-icons">★★★★★</span>
+          <span class="pdp-info-review-count">155 reviews</span>
+        </div>
+        <div class="pdp-price-row">
+          <span class="pdp-price-now">$11.99</span>
+          <span class="pdp-price-was">$37.33</span>
+          <span class="pdp-price-save">(YOU SAVE $25.34) ⓘ</span>
+        </div>
+        <div class="pdp-subscribe-pill">🌿 SUBSCRIBE &amp; SAVE – 13% OFF</div>
+        <div class="pdp-attrs">
+          <div class="pdp-attr"><span class="pdp-attr-check">✔</span> Benefits: Uplifts &amp; Promotes Brain Health</div>
+          <div class="pdp-attr"><span class="pdp-attr-check">✔</span> Aroma: Fresh &amp; Floral</div>
+          <div class="pdp-attr"><span class="pdp-attr-check">✔</span> Certified Pure: Batch-specific GC/MS Reports available with every bottle.</div>
+        </div>
+        <div class="pdp-size-label">Size:</div>
+        <div class="pdp-size-options">
+          <button class="pdp-size-btn active"><span class="pdp-size-radio"><span class="pdp-size-dot"></span></span> 15mL</button>
+          <button class="pdp-size-btn"><span class="pdp-size-radio"></span> 8oz</button>
+        </div>
+        <div class="pdp-purchase-label">Purchase Options:</div>
+        <div class="pdp-purchase-options">
+          <div class="pdp-purchase-option active">
+            <div class="pdp-purchase-left">
+              <div class="pdp-purchase-radio"><span class="pdp-size-dot"></span></div>
+              <div><div class="pdp-purchase-option-name">One-Time Purchase</div></div>
+            </div>
+            <div class="pdp-purchase-price">$11.99</div>
+          </div>
+          <div class="pdp-purchase-option">
+            <div class="pdp-purchase-left">
+              <div class="pdp-purchase-radio"></div>
+              <div>
+                <div class="pdp-purchase-option-name">Subscribe &amp; Save 13%</div>
+                <div class="pdp-purchase-option-sub">Pause and Cancel Anytime.</div>
+              </div>
+            </div>
+            <div class="pdp-purchase-price">$10.43</div>
+          </div>
+        </div>
+        <button class="pdp-atc-btn">ADD TO CART</button>
+        <div class="pdp-guarantees">
+          <div class="pdp-guarantee"><span class="pdp-guarantee-icon">🌍</span> 100% EARTH-TASTIC GUARANTEE ⓘ</div>
+          <div class="pdp-guarantee"><span class="pdp-guarantee-icon">📦</span> Free shipping for orders over $29.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ds-divider"></div>
+
+<!-- PDP BLOCK 03 — TAB NAVIGATION -->
+<div class="block-section" id="pdp-tabs">
+  <div class="block-label">PDP Block 03 — Product Tab Navigation <span class="tag">White bg · QUALITY / DETAILS / REVIEWS · Active underline</span></div>
+  <div style="background:white;padding:0 24px;">
+    <div class="pdp-tabs">
+      <button class="pdp-tab active">Quality</button>
+      <button class="pdp-tab">Details</button>
+      <button class="pdp-tab">Reviews</button>
+    </div>
+  </div>
+</div>
+<div class="ds-divider"></div>
+
+<!-- PDP BLOCK 04 — BENEFITS SECTION -->
+<div class="block-section" id="pdp-benefits">
+  <div class="block-label">PDP Block 04 — Product Benefits Section <span class="tag">White bg · H2 + icon benefit cards left · Bottle visual with labels + video play right</span></div>
+  <div class="pdp-benefits">
+    <div class="pdp-benefits-inner">
+      <div>
+        <h2 class="pdp-benefits-h2">Uncover The Secrets That Make This Oil Life Changing</h2>
+        <div class="pdp-benefit-cards">
+          <div class="pdp-benefit-card"><div class="pdp-benefit-icon">☀️</div><span class="pdp-benefit-label">Uplifts</span></div>
+          <div class="pdp-benefit-card"><div class="pdp-benefit-icon">🧠</div><span class="pdp-benefit-label">Promotes brain health</span></div>
+          <div class="pdp-benefit-card"><div class="pdp-benefit-icon">🤲</div><span class="pdp-benefit-label">Soothes skin</span></div>
+        </div>
+      </div>
+      <div class="pdp-benefits-visual">
+        <div class="pdp-benefit-float" style="top:18px;left:30px;"><div class="pdp-benefit-float-icon">☀️</div>UPLIFTS</div>
+        <div class="pdp-benefit-float" style="top:18px;right:20px;"><div class="pdp-benefit-float-icon">🧠</div>PROMOTES<br>BRAIN HEALTH</div>
+        <div class="pdp-benefit-float" style="bottom:24px;left:16px;"><div class="pdp-benefit-float-icon">🤲</div>SOOTHES SKIN</div>
+        <div class="cat-bottle" style="width:80px;"><div class="cat-bottle-inner">
+          <div class="cat-bottle-cap-sm" style="width:22px;height:32px;"></div>
+          <div class="cat-bottle-glass" style="width:70px;height:170px;">
+            <div class="cat-bottle-label-strip" style="background:#8860A8;height:56px;"></div>
+            <div class="cat-bottle-label" style="font-size:10px;">Lavender 40/42</div>
+          </div>
+        </div></div>
+        <div class="pdp-benefits-play">▶</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ds-divider"></div>
+
+<!-- PDP BLOCK 05 — MARQUEE TRUST TICKER -->
+<div class="block-section" id="pdp-marquee">
+  <div class="block-label">PDP Block 05 — Marquee Trust Ticker <span class="tag">Teal bg · Full-width scrolling · EARTH-TASTIC GUARANTEE · TRY IT RISK-FREE</span></div>
+  <div class="pdp-marquee">
+    <div class="pdp-marquee-track">
+      <span class="pdp-marquee-item">EARTH-TASTIC GUARANTEE <span class="pdp-marquee-dot"></span></span>
+      <span class="pdp-marquee-item">TRY IT RISK-FREE <span class="pdp-marquee-dot"></span></span>
+      <span class="pdp-marquee-item">EARTH-TASTIC GUARANTEE <span class="pdp-marquee-dot"></span></span>
+      <span class="pdp-marquee-item">TRY IT RISK-FREE <span class="pdp-marquee-dot"></span></span>
+      <span class="pdp-marquee-item">EARTH-TASTIC GUARANTEE <span class="pdp-marquee-dot"></span></span>
+      <span class="pdp-marquee-item">TRY IT RISK-FREE <span class="pdp-marquee-dot"></span></span>
+      <span class="pdp-marquee-item">EARTH-TASTIC GUARANTEE <span class="pdp-marquee-dot"></span></span>
+      <span class="pdp-marquee-item">TRY IT RISK-FREE <span class="pdp-marquee-dot"></span></span>
+    </div>
+  </div>
+</div>
+<div class="ds-divider"></div>
+
+<!-- PDP BLOCK 06 — QUALITY + ACCORDION -->
+<div class="block-section" id="pdp-quality">
+  <div class="block-label">PDP Block 06 — Quality + Details Accordion <span class="tag">White bg · Photo with cert badge overlays left · Accordion right · CTA button</span></div>
+  <div class="pdp-quality">
+    <div class="pdp-quality-inner">
+      <div class="pdp-quality-img-wrap">
+        <div class="cat-bottle"><div class="cat-bottle-inner">
+          <div class="cat-bottle-cap-sm" style="width:22px;height:32px;"></div>
+          <div class="cat-bottle-glass" style="width:70px;height:170px;">
+            <div class="cat-bottle-label-strip" style="background:#8860A8;height:56px;"></div>
+            <div class="cat-bottle-label" style="font-size:10px;">Lavender 40/42</div>
+          </div>
+        </div></div>
+        <div class="pdp-quality-badge" style="top:24px;left:-10px;">GC/MS<br>TESTED</div>
+        <div class="pdp-quality-badge" style="top:24px;right:-10px;">CERTIFIED<br>PURE</div>
+        <div class="pdp-quality-badge" style="bottom:24px;left:10px;">ETHICALLY<br>SOURCED</div>
+      </div>
+      <div>
+        <h2 class="pdp-quality-h2">Don't Settle For Fake Lavender 40/42 Essential Oil</h2>
+        <div class="pdp-accordion">
+          <div class="pdp-accordion-item"><button class="pdp-accordion-header">Details <span class="pdp-accordion-minus">—</span></button></div>
+          <div class="pdp-accordion-item"><button class="pdp-accordion-header">How To Use <span class="pdp-accordion-minus">—</span></button></div>
+          <div class="pdp-accordion-item"><button class="pdp-accordion-header">Safety and Shelf Life <span class="pdp-accordion-minus">—</span></button></div>
+          <div class="pdp-accordion-item"><button class="pdp-accordion-header">Certificate of Purity <span class="pdp-accordion-minus">—</span></button></div>
+          <div class="pdp-accordion-item"><button class="pdp-accordion-header">Planning a Bulk Purchase? <span class="pdp-accordion-minus">—</span></button></div>
+        </div>
+        <button class="pdp-cert-btn">View Certificate of Purity</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ds-divider"></div>
+
+<!-- PDP BLOCK 07 — COMPARISON TABLE -->
+<div class="block-section" id="pdp-compare">
+  <div class="block-label">PDP Block 07 — Competitor Comparison Table <span class="tag">White bg · "Switch to a Better Oil" heading · 3-col · Simply Earth highlighted · Green checks vs red Xs</span></div>
+  <div class="pdp-compare">
+    <div class="pdp-compare-inner">
+      <h2 class="pdp-compare-h2">Switch to a Better Essential Oil Now</h2>
+      <table class="pdp-compare-table">
+        <thead>
+          <tr>
+            <th class="pdp-th-label">US VS. THEM</th>
+            <th class="pdp-th-se">Simply Earth</th>
+            <th class="pdp-th-other">Amazon Brands</th>
+            <th class="pdp-th-other">MLM Companies</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Direct-to-Consumer Pricing</td><td class="pdp-col-se"><span class="pdp-check-green">✔</span></td><td><span class="pdp-check-gray">✔</span></td><td><span class="pdp-check-x">✕</span></td></tr>
+          <tr><td>100% Pure From the Highest Quality Farms</td><td class="pdp-col-se"><span class="pdp-check-green">✔</span></td><td><span class="pdp-check-x">✕</span></td><td><span class="pdp-check-gray">✔</span></td></tr>
+          <tr><td>Teaches Easy-to-Make Recipes</td><td class="pdp-col-se"><span class="pdp-check-green">✔</span></td><td><span class="pdp-check-x">✕</span></td><td><span class="pdp-check-x">✕</span></td></tr>
+          <tr><td>Bottled in the USA</td><td class="pdp-col-se"><span class="pdp-check-green">✔</span></td><td><span class="pdp-check-x">✕</span></td><td><span class="pdp-check-gray">✔</span></td></tr>
+          <tr><td>Certificate of Oil Purity Available with Every Order</td><td class="pdp-col-se"><span class="pdp-check-green">✔</span></td><td><span class="pdp-check-x">✕</span></td><td><span class="pdp-check-x">✕</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="ds-divider"></div>
+
+<!-- PDP BLOCK 08 — REVIEWS SECTION -->
+<div class="block-section" id="pdp-reviews">
+  <div class="block-label">PDP Block 08 — Product Reviews Section <span class="tag">White bg · Rating summary + star bars · Filter chips + sort · Review card + brand reply</span></div>
+  <div class="pdp-reviews">
+    <div class="pdp-reviews-inner">
+      <div class="pdp-rating-summary">
+        <div>
+          <div class="pdp-rating-big">5.0</div>
+          <div class="pdp-rating-stars-row">★★★★★</div>
+          <div class="pdp-rating-based">Based on 1 Reviews</div>
+        </div>
+        <div class="pdp-rating-right">
+          <div class="pdp-rating-bars">
+            <div class="pdp-rating-bar-row">★★★★★ <div class="pdp-rating-bar-track"><div class="pdp-rating-bar-fill" style="width:100%;"></div></div> (1)</div>
+            <div class="pdp-rating-bar-row">★★★★☆ <div class="pdp-rating-bar-track"><div class="pdp-rating-bar-fill" style="width:0%;"></div></div> (0)</div>
+            <div class="pdp-rating-bar-row">★★★☆☆ <div class="pdp-rating-bar-track"><div class="pdp-rating-bar-fill" style="width:0%;"></div></div> (0)</div>
+            <div class="pdp-rating-bar-row">★★☆☆☆ <div class="pdp-rating-bar-track"><div class="pdp-rating-bar-fill" style="width:0%;"></div></div> (0)</div>
+            <div class="pdp-rating-bar-row">★☆☆☆☆ <div class="pdp-rating-bar-track"><div class="pdp-rating-bar-fill" style="width:0%;"></div></div> (0)</div>
+          </div>
+        </div>
+        <div class="pdp-rating-actions">
+          <button class="pdp-rating-action-btn">✉ Ask a Question</button>
+          <button class="pdp-rating-action-btn">✏ Write a Review</button>
+        </div>
+      </div>
+      <div class="pdp-review-tabs">
+        <button class="pdp-review-tab active">Reviews 1</button>
+        <button class="pdp-review-tab">Questions 0</button>
+      </div>
+      <div class="pdp-review-filter-row">
+        <span style="font-size:13px;color:var(--color-text-mid);font-weight:500;">Filter Reviews:</span>
+        <div class="pdp-review-search-wrap">
+          <span class="pdp-review-search-icon">🔍</span>
+          <input class="pdp-review-search" type="text" placeholder="Search Reviews">
+        </div>
+        <button class="pdp-review-chip">Praise</button>
+        <button class="pdp-review-chip">Product Costs</button>
+        <button class="pdp-review-chip">Increase</button>
+        <button class="pdp-review-chip">20mL</button>
+        <button class="pdp-review-chip">40/42</button>
+        <select class="pdp-review-sort"><option>Most Recent</option></select>
+      </div>
+      <div class="pdp-review-card">
+        <div class="pdp-review-card-top">
+          <div class="pdp-review-avatar">RM</div>
+          <div class="pdp-review-author">
+            <div class="pdp-review-name">Robert M. 🇺🇸 United States</div>
+          </div>
+          <div class="pdp-review-date">01/23/2026</div>
+        </div>
+        <div class="pdp-review-stars">★★★★★</div>
+        <div class="pdp-review-title">It keeps getting better with Simply Earth!</div>
+        <div class="pdp-review-body">In a world where everything is becoming insanely expensive, Simply Earth is one of the few places you can spend money without feeling robbed. They give me hope that there's still good in the world: just look at the price attached to an 8oz bottle of certified, pure lavender 40/42 essential oil!</div>
+        <div class="pdp-review-variant">Lavender 40/42 Essential Oil · 15mL</div>
+        <div class="pdp-review-footer">
+          <span class="pdp-review-share">↗ Share</span>
+          <span class="pdp-review-helpful">Was this helpful? 👍 2 &nbsp; 👎 0</span>
+        </div>
+        <div class="pdp-brand-reply">
+          <div class="pdp-brand-reply-header"><span>Simply Earth</span><span>01/28/2026</span></div>
+          <div class="pdp-brand-reply-body">Thank you so much for your kind words and thoughtful review! We're happy to hear that Simply Earth has been a reliable source of high-quality oils and products for you over the past two years. ❤️</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ds-divider"></div>
+
+<!-- PDP BLOCK 09 — RELATED PRODUCTS -->
+<div class="block-section" id="pdp-related">
+  <div class="block-label">PDP Block 09 — Related Products Grid <span class="tag">Off-white bg · "Other Products You May Like" heading · 4-col product cards</span></div>
+  <div class="pdp-related">
+    <div class="pdp-related-inner">
+      <h2 class="pdp-related-h2">Other Products You May Like</h2>
+      <div class="pdp-related-grid">
+        <div class="pdp-related-card">
+          <div class="pdp-related-img"><div class="cat-bottle"><div class="cat-bottle-inner"><div class="cat-bottle-cap-sm"></div><div class="cat-bottle-glass" style="background:linear-gradient(160deg,#C8A860,#A88840);"><div class="cat-bottle-label-strip" style="background:#D87030;"></div><div class="cat-bottle-label">Thyme</div></div></div></div></div>
+          <div class="pdp-related-body"><div class="pdp-related-name">Thyme (Red) Essential Oil</div><div class="pdp-related-stars">★★★★½</div><div class="pdp-related-reviews">5 reviews</div><div class="pdp-related-price-row"><span class="pdp-related-was">$51.64</span><span class="pdp-related-now">$18.99</span><span class="pdp-related-size">(15mL)</span><span class="pdp-related-save">Save $32.65</span></div><button class="pdp-related-atc">Add To Cart</button></div>
+        </div>
+        <div class="pdp-related-card">
+          <div class="pdp-related-img"><div class="cat-bottle"><div class="cat-bottle-inner"><div class="cat-bottle-cap-sm"></div><div class="cat-bottle-glass" style="background:linear-gradient(160deg,#C8A860,#A88840);"><div class="cat-bottle-label-strip" style="background:#78A848;"></div><div class="cat-bottle-label">Palmarosa</div></div></div></div></div>
+          <div class="pdp-related-body"><div class="pdp-related-name">Palmarosa Essential Oil</div><div class="pdp-related-stars">★★★★★</div><div class="pdp-related-reviews">8 reviews</div><div class="pdp-related-price-row"><span class="pdp-related-was">$29.93</span><span class="pdp-related-now">$13.99</span><span class="pdp-related-size">(15mL)</span><span class="pdp-related-save">Save $15.94</span></div><button class="pdp-related-atc">Add To Cart</button></div>
+        </div>
+        <div class="pdp-related-card">
+          <div class="pdp-related-img"><div class="cat-bottle"><div class="cat-bottle-inner"><div class="cat-bottle-cap-sm"></div><div class="cat-bottle-glass" style="background:linear-gradient(160deg,#C8A860,#A88840);"><div class="cat-bottle-label-strip" style="background:#38A898;"></div><div class="cat-bottle-label">Eucalyptus</div></div></div></div></div>
+          <div class="pdp-related-body"><div class="pdp-related-name">Eucalyptus (Globulus) Essential Oil</div><div class="pdp-related-stars">★★★★★</div><div class="pdp-related-reviews">48 reviews</div><div class="pdp-related-price-row"><span class="pdp-related-was">$27.96</span><span class="pdp-related-now">$10.99</span><span class="pdp-related-size">(15mL)</span><span class="pdp-related-save">Save $16.97</span></div><select class="pdp-related-select"><option>15mL</option></select><button class="pdp-related-atc">Add To Cart</button></div>
+        </div>
+        <div class="pdp-related-card">
+          <div class="pdp-related-img"><div class="cat-bottle"><div class="cat-bottle-inner"><div class="cat-bottle-cap-sm"></div><div class="cat-bottle-glass" style="background:linear-gradient(160deg,#C8A860,#A88840);"><div class="cat-bottle-label-strip" style="background:#48A860;"></div><div class="cat-bottle-label">Peppermint</div></div></div></div></div>
+          <div class="pdp-related-body"><div class="pdp-related-name">Peppermint Essential Oil</div><div class="pdp-related-stars">★★★★★</div><div class="pdp-related-reviews">126 reviews</div><div class="pdp-related-price-row"><span class="pdp-related-was">$33.33</span><span class="pdp-related-now">$12.99</span><span class="pdp-related-size">(15mL)</span><span class="pdp-related-save">Save $20.34</span></div><select class="pdp-related-select"><option>15mL</option></select><button class="pdp-related-atc">Add To Cart</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ds-divider"></div>
+
+<!-- PDP BLOCK 10 — STICKY ATC BAR -->
+<div class="block-section" id="pdp-sticky">
+  <div class="block-label">PDP Block 10 — Sticky Add to Cart Bar <span class="tag">White bg · Product name + stars left · Teal ATC price button right · Fixed-bottom style</span></div>
+  <div style="background:var(--color-bg-app);padding:24px;">
+    <div class="pdp-sticky-bar" style="border-radius:var(--r-lg);border:1.5px solid var(--color-border);">
+      <div class="pdp-sticky-left">
+        <div class="pdp-sticky-name">Lavender 40/42 Essential Oil</div>
+        <div class="pdp-sticky-stars">★★★★★</div>
+      </div>
+      <button class="pdp-sticky-btn">Add To Cart – $11.99 <span style="opacity:0.65;font-weight:400;">($37.33)</span></button>
+    </div>
+  </div>
 </div>
 <div class="ds-divider"></div>
 
