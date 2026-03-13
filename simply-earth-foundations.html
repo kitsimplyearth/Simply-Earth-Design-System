@@ -1133,6 +1133,46 @@ body {
             <code id="fontsCssUrl" style="font-family:'SFMono-Regular','Consolas',monospace;font-size:12px;color:rgba(255,255,255,0.85);flex:1;word-break:break-all;">https://kitsimplyearth.github.io/Simply-Earth-Design-System/fonts.css</code>
             <button onclick="navigator.clipboard.writeText('https://kitsimplyearth.github.io/Simply-Earth-Design-System/fonts.css').then(()=>{this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',1500)})" style="font-family:'Brandon Text',sans-serif;font-size:11px;font-weight:700;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:white;border-radius:var(--r-sm);padding:4px 10px;cursor:pointer;flex-shrink:0;transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.12)'">Copy</button>
           </div>
+          <!-- AI-READABLE FONT CSS — visible pre block so web fetchers/markdown converters can read it -->
+          <pre data-ai-font-css="true" style="background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.1);border-radius:var(--r-md);padding:14px 16px;margin-bottom:12px;font-family:'SFMono-Regular','Consolas',monospace;font-size:11px;color:rgba(255,255,255,0.75);line-height:1.7;overflow-x:auto;white-space:pre;">/* Simply Earth — Font Face CSS
+   Fetch this file: https://kitsimplyearth.github.io/Simply-Earth-Design-System/fonts.css */
+
+@font-face {
+  font-family: 'Brandon Grotesque';
+  src: url('https://kitsimplyearth.github.io/Simply-Earth-Design-System/fonts/BrandonGrotesque-Regular.woff2') format('woff2'),
+       url('https://kitsimplyearth.github.io/Simply-Earth-Design-System/fonts/BrandonGrotesque-Regular.woff') format('woff');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Brandon Grotesque';
+  src: url('https://kitsimplyearth.github.io/Simply-Earth-Design-System/fonts/BrandonGrotesque-Bold.woff2') format('woff2'),
+       url('https://kitsimplyearth.github.io/Simply-Earth-Design-System/fonts/BrandonGrotesque-Bold.woff') format('woff');
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Brandon Text';
+  src: url('https://kitsimplyearth.github.io/Simply-Earth-Design-System/fonts/BrandonText-Regular.woff2') format('woff2'),
+       url('https://kitsimplyearth.github.io/Simply-Earth-Design-System/fonts/BrandonText-Regular.woff') format('woff');
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: 'Brandon Text';
+  src: url('https://kitsimplyearth.github.io/Simply-Earth-Design-System/fonts/BrandonText-RegularItalic.woff2') format('woff2'),
+       url('https://kitsimplyearth.github.io/Simply-Earth-Design-System/fonts/BrandonText-RegularItalic.woff') format('woff');
+  font-weight: 400; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: 'Brandon Text';
+  src: url('https://kitsimplyearth.github.io/Simply-Earth-Design-System/fonts/BrandonText-Bold.woff2') format('woff2'),
+       url('https://kitsimplyearth.github.io/Simply-Earth-Design-System/fonts/BrandonText-Bold.woff') format('woff');
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+
+:root {
+  --font-display : 'Brandon Grotesque', 'Futura', 'Century Gothic', sans-serif;
+  --font-body    : 'Brandon Text', 'Gill Sans', 'Trebuchet MS', sans-serif;
+  --font-ui      : 'Brandon Text', 'Gill Sans', 'Trebuchet MS', sans-serif;
+}</pre>
           <div style="font-size:11px;color:rgba(255,255,255,0.4);line-height:1.6;">
             <strong style="color:rgba(255,255,255,0.6);">AI Agent note:</strong> All font files live at <code style="background:rgba(0,0,0,0.2);padding:1px 6px;border-radius:3px;">fonts/Brandon*.woff2</code> relative to this page. Minimum weight in use is <strong style="color:rgba(255,255,255,0.6);">400 (Regular)</strong> — never use 300 or lighter. CSS vars: <code style="background:rgba(0,0,0,0.2);padding:1px 6px;border-radius:3px;">--font-display</code> → Brandon Grotesque · <code style="background:rgba(0,0,0,0.2);padding:1px 6px;border-radius:3px;">--font-body</code> → Brandon Text.
           </div>
