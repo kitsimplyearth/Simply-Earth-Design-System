@@ -1,0 +1,64 @@
+/*
+ * Simply Earth Design System — Font Face Declarations
+ * ─────────────────────────────────────────────────────
+ * Fetch URL : https://kitsimplyearth.github.io/Simply-Earth-Design-System/fonts.css
+ *
+ * Usage (HTML) : <link rel="stylesheet" href="https://kitsimplyearth.github.io/Simply-Earth-Design-System/fonts.css">
+ * Usage (CSS)  : @import url('https://kitsimplyearth.github.io/Simply-Earth-Design-System/fonts.css');
+ *
+ * Fonts       : Brandon Grotesque (Display) · Brandon Text (Body/UI)
+ * Min weight  : 400 — never use 300 or lighter
+ * CSS vars    : --font-display → Brandon Grotesque
+ *               --font-body / --font-ui → Brandon Text
+ */
+
+/* ── Brandon Grotesque · Display Font ─────────────────────── */
+@font-face {
+  font-family: 'Brandon Grotesque';
+  src: url('https://kitsimplyearth.github.io/Simply-Earth-Design-System/fonts/BrandonGrotesque-Regular.woff2') format('woff2'),
+       url('https://kitsimplyearth.github.io/Simply-Earth-Design-System/fonts/BrandonGrotesque-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Brandon Grotesque';
+  src: url('https://kitsimplyearth.github.io/Simply-Earth-Design-System/fonts/BrandonGrotesque-Bold.woff2') format('woff2'),
+       url('https://kitsimplyearth.github.io/Simply-Earth-Design-System/fonts/BrandonGrotesque-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Brandon Text · Body / UI Font ────────────────────────── */
+@font-face {
+  font-family: 'Brandon Text';
+  src: url('https://kitsimplyearth.github.io/Simply-Earth-Design-System/fonts/BrandonText-Regular.woff2') format('woff2'),
+       url('https://kitsimplyearth.github.io/Simply-Earth-Design-System/fonts/BrandonText-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Brandon Text';
+  src: url('https://kitsimplyearth.github.io/Simply-Earth-Design-System/fonts/BrandonText-RegularItalic.woff2') format('woff2'),
+       url('https://kitsimplyearth.github.io/Simply-Earth-Design-System/fonts/BrandonText-RegularItalic.woff') format('woff');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Brandon Text';
+  src: url('https://kitsimplyearth.github.io/Simply-Earth-Design-System/fonts/BrandonText-Bold.woff2') format('woff2'),
+       url('https://kitsimplyearth.github.io/Simply-Earth-Design-System/fonts/BrandonText-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── CSS Custom Properties ─────────────────────────────────── */
+:root {
+  --font-display : 'Brandon Grotesque', 'Futura', 'Century Gothic', sans-serif;
+  --font-body    : 'Brandon Text', 'Gill Sans', 'Trebuchet MS', sans-serif;
+  --font-ui      : 'Brandon Text', 'Gill Sans', 'Trebuchet MS', sans-serif;
+}

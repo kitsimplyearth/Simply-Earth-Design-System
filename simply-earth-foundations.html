@@ -1127,6 +1127,12 @@ body {
               </div>
             </div>
           </div>
+          <!-- Fetch URL row -->
+          <div style="background:rgba(0,0,0,0.2);border:1px solid rgba(255,255,255,0.1);border-radius:var(--r-md);padding:10px 14px;margin-bottom:12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+            <span style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.45);flex-shrink:0;">CSS Fetch URL</span>
+            <code id="fontsCssUrl" style="font-family:'SFMono-Regular','Consolas',monospace;font-size:12px;color:rgba(255,255,255,0.85);flex:1;word-break:break-all;">https://kitsimplyearth.github.io/Simply-Earth-Design-System/fonts.css</code>
+            <button onclick="navigator.clipboard.writeText('https://kitsimplyearth.github.io/Simply-Earth-Design-System/fonts.css').then(()=>{this.textContent='Copied!';setTimeout(()=>this.textContent='Copy',1500)})" style="font-family:'Brandon Text',sans-serif;font-size:11px;font-weight:700;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);color:white;border-radius:var(--r-sm);padding:4px 10px;cursor:pointer;flex-shrink:0;transition:background 0.15s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.12)'">Copy</button>
+          </div>
           <div style="font-size:11px;color:rgba(255,255,255,0.4);line-height:1.6;">
             <strong style="color:rgba(255,255,255,0.6);">AI Agent note:</strong> All font files live at <code style="background:rgba(0,0,0,0.2);padding:1px 6px;border-radius:3px;">fonts/Brandon*.woff2</code> relative to this page. Minimum weight in use is <strong style="color:rgba(255,255,255,0.6);">400 (Regular)</strong> — never use 300 or lighter. CSS vars: <code style="background:rgba(0,0,0,0.2);padding:1px 6px;border-radius:3px;">--font-display</code> → Brandon Grotesque · <code style="background:rgba(0,0,0,0.2);padding:1px 6px;border-radius:3px;">--font-body</code> → Brandon Text.
           </div>
