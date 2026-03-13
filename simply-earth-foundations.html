@@ -835,6 +835,10 @@ body {
     <a class="sidenav-link" href="index.html">
       <span style="font-size:13px;">◈</span> Component Library
     </a>
+    <a class="sidenav-link" href="simply-earth-changelog.html" id="changelogLink" style="justify-content:space-between;">
+      <span style="display:flex;align-items:center;gap:8px;"><span style="font-size:13px;">🔔</span> What's New</span>
+      <span id="foundationsNotifBadge" style="display:none;width:7px;height:7px;border-radius:50%;background:#E67272;flex-shrink:0;"></span>
+    </a>
 
     <div class="sidenav-back">
       <a href="index.html">← Back to Design System</a>
@@ -1743,6 +1747,18 @@ function selectGrid(device, btn) {
   document.getElementById('gMargin').textContent  = d.margin;
   document.getElementById('gBreak').textContent   = d.bp;
 }
+
+// ── Notification badge ─────────────────────────────────────
+(function() {
+  const CURRENT_VERSION = '1.5.0';
+  const badge = document.getElementById('foundationsNotifBadge');
+  if (!badge) return;
+  const seen = localStorage.getItem('se_ds_seen_version');
+  if (seen !== CURRENT_VERSION) {
+    badge.style.display = 'block';
+    badge.style.animation = 'none'; // subtle — just a static dot on sidebar
+  }
+})();
 </script>
 
 </body>

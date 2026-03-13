@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simply Earth — Changelog</title>
+<style>
+@font-face {
+  font-family: 'Brandon Text';
+  src: url('fonts/BrandonText-Regular.woff2') format('woff2'), url('fonts/BrandonText-Regular.woff') format('woff');
+  font-weight: 400; font-style: normal;
+}
+@font-face {
+  font-family: 'Brandon Text';
+  src: url('fonts/BrandonText-RegularItalic.woff2') format('woff2'), url('fonts/BrandonText-RegularItalic.woff') format('woff');
+  font-weight: 400; font-style: italic;
+}
+@font-face {
+  font-family: 'Brandon Text';
+  src: url('fonts/BrandonText-Bold.woff2') format('woff2'), url('fonts/BrandonText-Bold.woff') format('woff');
+  font-weight: 700; font-style: normal;
+}
+@font-face {
+  font-family: 'Brandon Grotesque';
+  src: url('fonts/BrandonGrotesque-Regular.woff2') format('woff2'), url('fonts/BrandonGrotesque-Regular.woff') format('woff');
+  font-weight: 400; font-style: normal;
+}
+@font-face {
+  font-family: 'Brandon Grotesque';
+  src: url('fonts/BrandonGrotesque-Bold.woff2') format('woff2'), url('fonts/BrandonGrotesque-Bold.woff') format('woff');
+  font-weight: 700; font-style: normal;
+}
+</style>
+<style>
+
+/* ─────────────────────────────────────────────
+   RESET & ROOT
+───────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --coral:           #E67272;
+  --coral-hover:     #C45050;
+  --teal:            #375D5A;
+  --teal-light:      #4E8480;
+  --teal-dark:       #2D5450;
+  --green:           #0A4A3C;
+  --cream:           #F3EEE0;
+  --cream-dark:      #E8E0CC;
+  --mint:            #D1E5E1;
+  --mint-dark:       #A8CFCA;
+  --white:           #FEFEFE;
+  --bg:              #F7F7F5;
+  --border:          #E8E8E4;
+  --text-dark:       #1A1A1A;
+  --text-mid:        #555555;
+  --text-light:      #888888;
+  --text-xlight:     #BBBBBB;
+  --font-display:    'Brandon Grotesque', 'Futura', 'Century Gothic', sans-serif;
+  --font-body:       'Brandon Text', 'Gill Sans', 'Trebuchet MS', sans-serif;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 20px;
+  --sp-6: 24px; --sp-8: 32px; --sp-10: 40px; --sp-12: 48px; --sp-16: 64px;
+  --r-sm: 6px; --r-md: 10px; --r-lg: 14px; --r-xl: 20px; --r-pill: 999px;
+  --shadow-xs: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 20px rgba(0,0,0,0.10);
+}
+
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text-dark);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ─────────────────────────────────────────────
+   LAYOUT SHELL
+───────────────────────────────────────────── */
+.shell { display: flex; min-height: 100vh; }
+
+.sidenav {
+  width: 220px; min-width: 220px;
+  background: var(--white);
+  border-right: 1px solid var(--border);
+  position: sticky; top: 0; height: 100vh;
+  overflow-y: auto;
+  display: flex; flex-direction: column;
+  z-index: 100;
+}
+.sidenav-logo {
+  padding: var(--sp-5) var(--sp-5) var(--sp-4);
+  border-bottom: 1px solid var(--border);
+  display: flex; flex-direction: column;
+  align-items: flex-start; gap: var(--sp-2);
+}
+.sidenav-logo img { height: 22px; width: auto; max-width: 140px; display: block; }
+.sidenav-logo-label {
+  font-size: 10px; font-weight: 700; color: var(--text-light);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  line-height: 1.3; font-family: var(--font-body);
+}
+.sidenav-section {
+  padding: var(--sp-4) var(--sp-5) var(--sp-2);
+  font-size: 10px; font-weight: 700; letter-spacing: 0.10em;
+  text-transform: uppercase; color: var(--text-xlight);
+}
+.sidenav-link {
+  display: flex; align-items: center; gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-5);
+  font-size: 13px; font-weight: 500; color: var(--text-mid);
+  text-decoration: none; cursor: pointer;
+  border: none; background: none; width: 100%; text-align: left;
+  transition: background 0.12s, color 0.12s;
+}
+.sidenav-link:hover { background: var(--bg); color: var(--teal); }
+.sidenav-link.active { background: #EBF4F3; color: var(--teal); font-weight: 600; }
+.sidenav-link .nav-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.sidenav-back {
+  margin-top: auto; padding: var(--sp-4) var(--sp-5);
+  border-top: 1px solid var(--border);
+}
+.sidenav-back a {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; color: var(--text-light); text-decoration: none;
+  transition: color 0.15s;
+}
+.sidenav-back a:hover { color: var(--teal); }
+
+.main { flex: 1; overflow-x: hidden; }
+
+.page-header {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: var(--sp-10) var(--sp-12);
+  display: flex; align-items: flex-end;
+  justify-content: space-between; gap: var(--sp-8);
+}
+.page-eyebrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--cream); border-radius: var(--r-pill);
+  padding: 3px 12px; font-size: 11px; font-weight: 700;
+  color: var(--teal); letter-spacing: 0.05em; text-transform: uppercase;
+  margin-bottom: var(--sp-3);
+}
+.page-title {
+  font-family: var(--font-display); font-size: 40px;
+  color: var(--text-dark); line-height: 1.15; margin-bottom: var(--sp-3);
+}
+.page-desc { font-size: 14px; color: var(--text-mid); max-width: 480px; line-height: 1.7; }
+.page-header-logo { opacity: 0.12; }
+.page-header-logo img { height: 60px; width: auto; }
+
+.content {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: var(--sp-12);
+  display: flex; flex-direction: column; gap: var(--sp-4);
+}
+
+/* ─────────────────────────────────────────────
+   VERSION ENTRY
+───────────────────────────────────────────── */
+.version-entry {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 0;
+  position: relative;
+}
+
+/* Timeline line through the version col */
+.version-entry + .version-entry .version-meta::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 17px;
+  width: 2px; height: 28px;
+  background: var(--border);
+}
+
+.version-meta {
+  padding: 0 var(--sp-6) var(--sp-8) 0;
+  position: relative;
+  display: flex; flex-direction: column;
+  align-items: flex-start; gap: var(--sp-2);
+  padding-top: 3px;
+}
+
+/* Connector dot */
+.version-meta::after {
+  content: '';
+  position: absolute;
+  right: -1px; top: 11px;
+  width: 8px; height: 2px;
+  background: var(--border);
+}
+
+.version-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'SFMono-Regular', 'Consolas', monospace;
+  font-size: 13px; font-weight: 700;
+  color: var(--teal);
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-pill);
+  padding: 4px 11px;
+  white-space: nowrap;
+}
+.version-badge.latest {
+  background: var(--teal); color: white;
+  border-color: var(--teal);
+}
+.version-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: currentColor; opacity: 0.6; flex-shrink: 0;
+}
+.version-date {
+  font-size: 11px; color: var(--text-light);
+  font-family: var(--font-body);
+  padding-left: 4px;
+}
+
+.version-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  padding: var(--sp-6);
+  margin-bottom: var(--sp-4);
+  transition: box-shadow 0.15s;
+}
+.version-card:hover { box-shadow: var(--shadow-sm); }
+.version-card.is-latest {
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(55,93,90,0.06);
+}
+
+.version-title {
+  font-family: var(--font-display);
+  font-size: 18px; font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: var(--sp-2);
+}
+.version-summary {
+  font-size: 13px; color: var(--text-mid);
+  line-height: 1.65; margin-bottom: var(--sp-5);
+}
+
+.change-list { display: flex; flex-direction: column; gap: var(--sp-3); }
+.change-item {
+  display: flex; align-items: flex-start; gap: var(--sp-3);
+  font-size: 13px; color: var(--text-dark); line-height: 1.6;
+}
+.change-tag {
+  display: inline-flex; align-items: center;
+  font-size: 9px; font-weight: 800; letter-spacing: 0.1em;
+  text-transform: uppercase; border-radius: var(--r-sm);
+  padding: 2px 7px; flex-shrink: 0; margin-top: 3px;
+  white-space: nowrap;
+}
+.tag-new      { background: #E8F5EE; color: #1A7A44; border: 1px solid #B6E0C8; }
+.tag-updated  { background: #EBF4F3; color: var(--teal); border: 1px solid var(--mint-dark); }
+.tag-removed  { background: #FEF0F0; color: #C04040; border: 1px solid #F5C0C0; }
+.tag-fixed    { background: #FFF7E6; color: #8A5A00; border: 1px solid #F0D890; }
+
+.change-text { flex: 1; }
+.change-text code {
+  font-family: 'SFMono-Regular', 'Consolas', monospace;
+  font-size: 11px; background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 3px; padding: 1px 5px;
+  color: var(--teal);
+}
+
+/* ─────────────────────────────────────────────
+   MOBILE TOPBAR
+───────────────────────────────────────────── */
+.mobile-topbar {
+  display: none; background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: var(--sp-3) var(--sp-4);
+  align-items: center; justify-content: space-between;
+  gap: var(--sp-3); position: sticky; top: 0; z-index: 200;
+}
+.mobile-topbar img { height: 20px; max-width: 120px; }
+.mobile-menu-btn {
+  width: 36px; height: 36px; border-radius: var(--r-md);
+  border: 1px solid var(--border); background: var(--bg);
+  font-size: 16px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .sidenav { display: none; }
+  .mobile-topbar { display: flex; }
+  .page-header { padding: var(--sp-8) var(--sp-6); flex-direction: column; align-items: flex-start; }
+  .page-header-logo { display: none; }
+  .content { padding: var(--sp-8) var(--sp-5); }
+}
+
+@media (max-width: 600px) {
+  .version-entry { grid-template-columns: 1fr; }
+  .version-meta { padding-bottom: var(--sp-3); flex-direction: row; align-items: center; }
+  .version-meta::after { display: none; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- Mobile top bar -->
+<div class="mobile-topbar">
+  <img src="simplyearth-logo.svg" alt="Simply Earth" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+  <span style="display:none;font-family:'Brandon Grotesque','Futura',sans-serif;font-size:18px;color:#0A4A3C;">Simply Earth</span>
+  <button class="mobile-menu-btn" onclick="document.querySelector('.sidenav').style.display='flex'">☰</button>
+</div>
+
+<div class="shell">
+
+  <!-- ── SIDEBAR ─────────────────────────────── -->
+  <nav class="sidenav">
+    <div class="sidenav-logo">
+      <img src="simplyearth-logo.svg" alt="Simply Earth"
+        onerror="this.style.display='none';this.parentElement.querySelector('.logo-fallback').style.display='block'">
+      <span class="logo-fallback" style="display:none;font-family:'Brandon Grotesque','Futura',sans-serif;font-size:16px;color:#0A4A3C;font-weight:400;">Simply Earth</span>
+      <div class="sidenav-logo-label">Design System<br>Changelog</div>
+    </div>
+
+    <div class="sidenav-section">Releases</div>
+    <a class="sidenav-link active" onclick="scrollTo({top:0,behavior:'smooth'})">
+      <span class="nav-dot" style="background:#E67272;"></span> v1.5 · AI Reference
+    </a>
+    <a class="sidenav-link" onclick="document.getElementById('v1-4').scrollIntoView({behavior:'smooth'})">
+      <span class="nav-dot" style="background:#375D5A;"></span> v1.4 · Typography
+    </a>
+    <a class="sidenav-link" onclick="document.getElementById('v1-3').scrollIntoView({behavior:'smooth'})">
+      <span class="nav-dot" style="background:#4E8480;"></span> v1.3 · Brand Colors
+    </a>
+    <a class="sidenav-link" onclick="document.getElementById('v1-2').scrollIntoView({behavior:'smooth'})">
+      <span class="nav-dot" style="background:#D1E5E1;border:1px solid #A8CFCA;"></span> v1.2 · Fonts
+    </a>
+    <a class="sidenav-link" onclick="document.getElementById('v1-1').scrollIntoView({behavior:'smooth'})">
+      <span class="nav-dot" style="background:#F3EEE0;border:1px solid #C8C0A8;"></span> v1.1 · Foundations
+    </a>
+    <a class="sidenav-link" onclick="document.getElementById('v1-0').scrollIntoView({behavior:'smooth'})">
+      <span class="nav-dot" style="background:#0A4A3C;"></span> v1.0 · Initial Launch
+    </a>
+
+    <div class="sidenav-section" style="margin-top:8px;">Links</div>
+    <a class="sidenav-link" href="index.html">
+      <span style="font-size:13px;">◈</span> Component Library
+    </a>
+    <a class="sidenav-link" href="simply-earth-foundations.html">
+      <span style="font-size:13px;">◇</span> Design Foundations
+    </a>
+
+    <div class="sidenav-back">
+      <a href="index.html">← Back to Design System</a>
+    </div>
+  </nav>
+
+  <!-- ── MAIN ──────────────────────────────────── -->
+  <main class="main">
+
+    <div class="page-header">
+      <div class="page-header-left">
+        <div class="page-eyebrow">🌿 Simply Earth · Design System</div>
+        <h1 class="page-title">Changelog</h1>
+        <p class="page-desc">Version history and update log for the Simply Earth Design System — components, tokens, foundations, and tooling.</p>
+      </div>
+      <div class="page-header-logo">
+        <img src="simplyearth-logo.svg" alt="">
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- ══════════════════════════════════════
+           v1.5.0
+      ═══════════════════════════════════════ -->
+      <div class="version-entry" id="v1-5">
+        <div class="version-meta">
+          <div class="version-badge latest"><span class="version-dot"></span>v1.5.0</div>
+          <div class="version-date">Mar 13, 2026</div>
+        </div>
+        <div class="version-card is-latest">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <div class="version-title" style="margin-bottom:0;">AI Reference & Logo Assets</div>
+            <span style="font-size:10px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;background:var(--teal);color:white;padding:3px 9px;border-radius:var(--r-pill);">Latest</span>
+          </div>
+          <div class="version-summary">Added font assets and logo as downloadable/self-hosted resources with a dedicated AI-readable reference block in the Design Foundations page — making it easier to onboard AI agents to the design system in future sessions.</div>
+          <div class="change-list">
+            <div class="change-item">
+              <span class="change-tag tag-new">New</span>
+              <span class="change-text">Font Assets AI Reference block added to Typography section — includes download links for all <code>.woff2</code> files, CSS variable mapping, and plain-text notes for AI agents</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-new">New</span>
+              <span class="change-text">Simply Earth SVG logo extracted from <code>simplyearth.com</code> and saved as <code>simplyearth-logo.svg</code> — self-hosted, no external dependency</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-updated">Updated</span>
+              <span class="change-text">Sidebar and page header logo references changed from remote URL to local <code>simplyearth-logo.svg</code></span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-new">New</span>
+              <span class="change-text">Inline white SVG logo displayed inside the teal AI reference card with a clickable <code>↓ SVG</code> download button</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-new">New</span>
+              <span class="change-text">This Changelog page and notification bell system added across all pages</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════
+           v1.4.0
+      ═══════════════════════════════════════ -->
+      <div class="version-entry" id="v1-4">
+        <div class="version-meta">
+          <div class="version-badge"><span class="version-dot"></span>v1.4.0</div>
+          <div class="version-date">Feb 2026</div>
+        </div>
+        <div class="version-card">
+          <div class="version-title">Typography Scale Finalized</div>
+          <div class="version-summary">Complete 3-breakpoint type scale synced across both the component library and the Design Foundations page, with all line-heights locked to the 4pt grid.</div>
+          <div class="change-list">
+            <div class="change-item">
+              <span class="change-tag tag-updated">Updated</span>
+              <span class="change-text">Typography scale fully defined at Desktop ≥1024px, Tablet 768–1023px, and Mobile &lt;768px breakpoints for all heading levels H1–H5</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-updated">Updated</span>
+              <span class="change-text">All heading line-heights locked to the 4pt grid — e.g. H1: 60px/64lh, H2: 40px/48lh, H3: 28px/36lh</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-new">New</span>
+              <span class="change-text">Desktop / Tablet / Mobile toggle UI added to Typography section on Foundations page</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-new">New</span>
+              <span class="change-text">Mobile scale note banner with <code>clamp()</code> guidance added to Foundations page</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════
+           v1.3.0
+      ═══════════════════════════════════════ -->
+      <div class="version-entry" id="v1-3">
+        <div class="version-meta">
+          <div class="version-badge"><span class="version-dot"></span>v1.3.0</div>
+          <div class="version-date">Jan 2026</div>
+        </div>
+        <div class="version-card">
+          <div class="version-title">Brand Color Refinement</div>
+          <div class="version-summary">Hover state tokens added to the design system and Coral Light removed entirely. All three <code>:root</code> blocks in the component library updated.</div>
+          <div class="change-list">
+            <div class="change-item">
+              <span class="change-tag tag-new">New</span>
+              <span class="change-text">Added <code>--color-primary-hover: #C45050</code> — used exclusively on primary button <code>:hover</code> state</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-new">New</span>
+              <span class="change-text">Added <code>--color-secondary-hover: #0A4A3C</code> — used on secondary button <code>:hover</code> and as text-only color</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-removed">Removed</span>
+              <span class="change-text">Coral Light <code>#F4A8A8</code> removed from the color system — not used in any components</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-updated">Updated</span>
+              <span class="change-text">COLOR ROLES on Foundations page updated: PRIMARY / HOVER / SECONDARY / HOVER·TEXT badges added to all swatches</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════
+           v1.2.0
+      ═══════════════════════════════════════ -->
+      <div class="version-entry" id="v1-2">
+        <div class="version-meta">
+          <div class="version-badge"><span class="version-dot"></span>v1.2.0</div>
+          <div class="version-date">Dec 2025</div>
+        </div>
+        <div class="version-card">
+          <div class="version-title">Self-Hosted Fonts</div>
+          <div class="version-summary">Brandon Text and Brandon Grotesque moved to self-hosted <code>.woff2</code> files — no external font service dependency. Light 300 weight removed from the system.</div>
+          <div class="change-list">
+            <div class="change-item">
+              <span class="change-tag tag-new">New</span>
+              <span class="change-text">Brandon Grotesque Regular (400) and Bold (700) added as self-hosted <code>.woff2 / .woff</code> files in <code>/fonts/</code></span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-new">New</span>
+              <span class="change-text">Brandon Text Regular (400), Regular Italic (400i), and Bold (700) added as self-hosted font files</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-new">New</span>
+              <span class="change-text">CSS variables introduced: <code>--font-display</code> → Brandon Grotesque · <code>--font-body</code> → Brandon Text</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-removed">Removed</span>
+              <span class="change-text">Brandon Text Light (300) removed — minimum weight in system is now 400 (Regular)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════
+           v1.1.0
+      ═══════════════════════════════════════ -->
+      <div class="version-entry" id="v1-1">
+        <div class="version-meta">
+          <div class="version-badge"><span class="version-dot"></span>v1.1.0</div>
+          <div class="version-date">Nov 2025</div>
+        </div>
+        <div class="version-card">
+          <div class="version-title">Design Foundations Page</div>
+          <div class="version-summary">Standalone foundations reference page created — documents all core visual tokens including colors, typography, spacing, grid, and radius/shadows with live interactive examples.</div>
+          <div class="change-list">
+            <div class="change-item">
+              <span class="change-tag tag-new">New</span>
+              <span class="change-text"><code>simply-earth-foundations.html</code> — standalone page with sticky sidebar and 5 sections</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-new">New</span>
+              <span class="change-text">Colors section — brand palette swatches with hex, CSS var, and usage role labels</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-new">New</span>
+              <span class="change-text">Typography section — heading + body scale specimens with interactive breakpoint toggle</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-new">New</span>
+              <span class="change-text">Spacing section — 4pt grid scale with visual bar representations</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-new">New</span>
+              <span class="change-text">Grid section — 12-column system with live visualizer for Desktop / Tablet / Mobile</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-new">New</span>
+              <span class="change-text">Radius & Shadows section — all <code>--r-*</code> and <code>--shadow-*</code> tokens with live chip previews</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-fixed">Fixed</span>
+              <span class="change-text">Sidebar scroll conflict resolved — renamed <code>scrollTo</code> function to <code>scrollToSection</code> to avoid browser API collision</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════
+           v1.0.0
+      ═══════════════════════════════════════ -->
+      <div class="version-entry" id="v1-0">
+        <div class="version-meta">
+          <div class="version-badge"><span class="version-dot"></span>v1.0.0</div>
+          <div class="version-date">Oct 2025</div>
+        </div>
+        <div class="version-card">
+          <div class="version-title">Initial Launch</div>
+          <div class="version-summary">First release of the Simply Earth Design System — a single-file component library with 51 blocks across 5 page types, published to GitHub Pages.</div>
+          <div class="change-list">
+            <div class="change-item">
+              <span class="change-tag tag-new">New</span>
+              <span class="change-text">Component library (<code>index.html</code>) — single-file Flowbase-style design system</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-new">New</span>
+              <span class="change-text">UI Kit page — 11 blocks (buttons, forms, cards, badges, typography specimens)</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-new">New</span>
+              <span class="change-text">Recipe Box page — 13 blocks (hero, features, subscription steps, testimonials, FAQ, CTA)</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-new">New</span>
+              <span class="change-text">Shop, Category, and Product Detail pages — 8, 9, and 10 blocks respectively</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-new">New</span>
+              <span class="change-text">Global topbar with search, filter bar, and export-all functionality</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-new">New</span>
+              <span class="change-text">Dual CSS pattern — every block's CSS stored twice (main stylesheet + inside <code>&lt;template&gt;</code>) for export fidelity</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-new">New</span>
+              <span class="change-text">Published to GitHub Pages at <code>kitsimplyearth.github.io/Simply-Earth-Design-System</code></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </main>
+</div><!-- /shell -->
+
+<script>
+  // Mark changelog as seen for this version
+  const CURRENT_VERSION = '1.5.0';
+  localStorage.setItem('se_ds_seen_version', CURRENT_VERSION);
+
+  // Highlight active nav link on scroll
+  const entries = ['v1-5','v1-4','v1-3','v1-2','v1-1','v1-0'];
+  const links = document.querySelectorAll('.sidenav-link');
+  window.addEventListener('scroll', () => {
+    let current = entries[0];
+    entries.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= 120) current = id;
+    });
+    const idx = entries.indexOf(current);
+    links.forEach((l, i) => {
+      if (i < entries.length) l.classList.toggle('active', i === idx);
+    });
+  }, { passive: true });
+</script>
+
+</body>
+</html>
