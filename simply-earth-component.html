@@ -55,10 +55,11 @@ body{font-family:var(--font-ui);background:var(--color-bg-app);color:var(--color
 
 /* ── Main layout ── */
 .comp-layout{
-  max-width:1200px;margin:0 auto;padding:32px 24px 80px;
-  display:grid;grid-template-columns:1fr 340px;gap:32px;align-items:start;
+  max-width:1520px;margin:0 auto;padding:32px 24px 80px;
+  display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:start;
 }
-@media(max-width:900px){.comp-layout{grid-template-columns:1fr;}}
+@media(max-width:1024px){.comp-layout{grid-template-columns:1fr 280px;}}
+@media(max-width:768px){.comp-layout{grid-template-columns:1fr;}}
 
 /* ── Left column ── */
 .comp-preview-col{}
@@ -75,6 +76,7 @@ body{font-family:var(--font-ui);background:var(--color-bg-app);color:var(--color
   background:#fff;border-radius:var(--r-lg);border:1px solid var(--color-border);
   overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.07);
 }
+.comp-preview-wrap .comp-iframe-outer{border-radius:0 0 var(--r-lg) var(--r-lg);overflow:hidden;}
 .comp-preview-toolbar{
   display:flex;align-items:center;gap:6px;padding:10px 16px;
   border-bottom:1px solid var(--color-border);background:var(--color-bg-app);
@@ -86,14 +88,14 @@ body{font-family:var(--font-ui);background:var(--color-bg-app);color:var(--color
 }
 .preview-vp-btn.active{background:var(--color-secondary);color:#fff;border-color:var(--color-secondary);}
 .preview-vp-label{font-size:11px;color:#AAA;margin-left:6px;}
-.comp-iframe-outer{padding:16px;background:#F0F0EC;}
+.comp-iframe-outer{padding:0;background:#F0F0EC;}
 .comp-iframe-wrap{
-  background:#fff;border-radius:8px;overflow:hidden;
+  background:#fff;overflow:hidden;
   box-shadow:0 2px 12px rgba(0,0,0,0.1);
   transition:width 0.3s ease;width:100%;margin:0 auto;
 }
-.comp-iframe-wrap.tablet{width:768px;max-width:100%;}
-.comp-iframe-wrap.mobile{width:390px;max-width:100%;}
+.comp-iframe-wrap.tablet{width:768px;max-width:100%;margin:12px auto;border-radius:8px;}
+.comp-iframe-wrap.mobile{width:390px;max-width:100%;margin:12px auto;border-radius:8px;}
 .comp-iframe{width:100%;border:none;display:block;min-height:400px;}
 
 /* Related components */
