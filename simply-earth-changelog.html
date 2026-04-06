@@ -330,7 +330,10 @@ body {
 
     <div class="sidenav-section">Releases</div>
     <a class="sidenav-link active" onclick="scrollTo({top:0,behavior:'smooth'})">
-      <span class="nav-dot" style="background:#375D5A;"></span> v1.8 · Hero 3 Social Proof Removed
+      <span class="nav-dot" style="background:#E67272;"></span> v1.8.1 · Hero 3 CTA Fix
+    </a>
+    <a class="sidenav-link" onclick="document.getElementById('v1-8').scrollIntoView({behavior:'smooth'})">
+      <span class="nav-dot" style="background:#375D5A;"></span> v1.8 · Hero 3 Refinements
     </a>
     <a class="sidenav-link" onclick="document.getElementById('v1-7').scrollIntoView({behavior:'smooth'})">
       <span class="nav-dot" style="background:#E67272;"></span> v1.7 · Hero 3 & Component Page
@@ -387,14 +390,36 @@ body {
     <div class="content">
 
       <!-- ══════════════════════════════════════
+           v1.8.1
+      ═══════════════════════════════════════ -->
+      <div class="version-entry" id="v1-8-1">
+        <div class="version-meta">
+          <div class="version-badge latest"><span class="version-dot"></span>v1.8.1</div>
+          <div class="version-date">Apr 7, 2026</div>
+        </div>
+        <div class="version-card is-latest">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <div class="version-title" style="margin-bottom:0;">Hero 3 — CTA Button Fix</div>
+          </div>
+          <div class="version-summary">CTA button href set to <code>#</code> with <code>onclick="return false;"</code> to prevent page jump on click.</div>
+          <div class="change-list">
+            <div class="change-item">
+              <span class="change-tag tag-updated">Updated</span>
+              <span class="change-text">Hero 3 — CTA button <code>href="#"</code> with <code>onclick="return false;"</code> added as empty redirect placeholder</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════
            v1.8.0
       ═══════════════════════════════════════ -->
       <div class="version-entry" id="v1-8">
         <div class="version-meta">
-          <div class="version-badge latest"><span class="version-dot"></span>v1.8.0</div>
+          <div class="version-badge"><span class="version-dot"></span>v1.8.0</div>
           <div class="version-date">Apr 6, 2026</div>
         </div>
-        <div class="version-card is-latest">
+        <div class="version-card">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
             <div class="version-title" style="margin-bottom:0;">Hero 3 — Layout, Spacing & Media Refinements</div>
           </div>
