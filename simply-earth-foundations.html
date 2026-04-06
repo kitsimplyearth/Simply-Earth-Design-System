@@ -47,7 +47,7 @@
   /* Brand Palette */
   --coral:           #E67272; /* Primary button, hero & sales sections */
   --coral-hover:     #C45050; /* Primary button :hover state */
-  --teal:            #375D5A; /* Secondary button, backgrounds */
+  --teal:            #375D5A; /* Secondary buttons, subtle section backgrounds only — not nav */
   --teal-light:      #4E8480;
   --teal-dark:       #2D5450;
   --green:           #0A4A3C; /* Text color only · Secondary button :hover */
@@ -102,7 +102,7 @@
   --grid-gutter-desktop: 24px;
   --grid-gutter-tablet:  16px;
   --grid-gutter-mobile:  12px;
-  --container-max: 1248px;
+  --container-max: 1325px;
 }
 
 html { font-size: 16px; scroll-behavior: smooth; }
@@ -260,6 +260,7 @@ body {
 .section-header {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: var(--sp-3);
   margin-bottom: var(--sp-8);
   padding-bottom: var(--sp-4);
@@ -489,20 +490,21 @@ body {
 .t-label-sm   { font-family: var(--font-body); font-size: 10px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; line-height: 1; }
 
 /* Tablet 768–1023px */
-.type-specimens[data-view="tablet"] .t-display-xl  { font-size: 48px; } /* lh ≈ 56px */
-.type-specimens[data-view="tablet"] .t-display-lg  { font-size: 36px; } /* lh ≈ 44px */
-.type-specimens[data-view="tablet"] .t-display-md  { font-size: 26px; } /* lh ≈ 32px */
-.type-specimens[data-view="tablet"] .t-display-sm  { font-size: 20px; }
-.type-specimens[data-view="tablet"] .t-display-xs  { font-size: 16px; }
+.type-specimens[data-view="tablet"] .t-display-xl  { font-size: 48px; line-height: 1.167; } /* lh = 56px */
+.type-specimens[data-view="tablet"] .t-display-lg  { font-size: 36px; line-height: 1.222; } /* lh = 44px */
+.type-specimens[data-view="tablet"] .t-display-md  { font-size: 26px; line-height: 1.231; } /* lh = 32px */
+.type-specimens[data-view="tablet"] .t-display-sm  { font-size: 20px; line-height: 1.4;   } /* lh = 28px */
+.type-specimens[data-view="tablet"] .t-display-xs  { font-size: 16px; line-height: 1.5;   } /* lh = 24px */
 
 /* Mobile < 768px */
-.type-specimens[data-view="mobile"] .t-display-xl  { font-size: 36px; } /* lh ≈ 40px */
-.type-specimens[data-view="mobile"] .t-display-lg  { font-size: 28px; } /* lh ≈ 32px */
-.type-specimens[data-view="mobile"] .t-display-md  { font-size: 22px; } /* lh ≈ 28px */
-.type-specimens[data-view="mobile"] .t-display-sm  { font-size: 18px; } /* lh ≈ 24px */
-.type-specimens[data-view="mobile"] .t-display-xs  { font-size: 16px; }
+.type-specimens[data-view="mobile"] .t-display-xl  { font-size: 36px; line-height: 1.111; } /* lh = 40px */
+.type-specimens[data-view="mobile"] .t-display-lg  { font-size: 28px; line-height: 1.143; } /* lh = 32px */
+.type-specimens[data-view="mobile"] .t-display-md  { font-size: 22px; line-height: 1.273; } /* lh = 28px */
+.type-specimens[data-view="mobile"] .t-display-sm  { font-size: 18px; line-height: 1.333; } /* lh = 24px */
+.type-specimens[data-view="mobile"] .t-display-xs  { font-size: 16px; line-height: 1.5;   } /* lh = 24px */
 /* Body stays consistent across all breakpoints */
 
+.type-specimens[data-view="tablet"] .type-specs::after { content: ' · tablet'; color: var(--teal); opacity: 0.6; }
 .type-specimens[data-view="mobile"] .type-specs::after { content: ' · mobile'; color: var(--coral); }
 
 /* Scale indicator dots */
@@ -766,6 +768,8 @@ body {
   .type-row-inner { grid-template-columns: 1fr; }
   .type-meta { border-right: none; border-bottom: 1px solid var(--border); height: auto; }
   .radius-row { gap: var(--sp-4); }
+  .type-font-grid { grid-template-columns: 1fr !important; }
+  .type-view-toggle { flex-wrap: wrap; }
 }
 
 /* ─────────────────────────────────────────────
@@ -909,7 +913,7 @@ body {
                   <div class="swatch-name">Teal <span style="display:inline-block;background:#375D5A;color:white;font-size:9px;font-weight:700;padding:1px 6px;border-radius:4px;letter-spacing:0.04em;vertical-align:middle;">SECONDARY</span></div>
                   <div class="swatch-hex">#375D5A</div>
                   <div class="swatch-var">--teal</div>
-                  <div style="margin-top:4px;font-size:10px;color:var(--text-light);line-height:1.4;">Secondary buttons<br>Section backgrounds, nav</div>
+                  <div style="margin-top:4px;font-size:10px;color:var(--text-light);line-height:1.4;">Secondary buttons<br>Subtle section backgrounds only<br><span style="color:#C45050;">Not for nav backgrounds</span></div>
                 </div>
               </div>
               <div class="color-swatch" onclick="copyHex('#0A4A3C')">
@@ -1032,7 +1036,8 @@ body {
             <div class="color-usage">
               <div class="usage-chip"><div class="usage-dot" style="background:#E67272;"></div><strong>Primary only</strong> — Add to Cart, hero CTAs, sales sections</div>
               <div class="usage-chip"><div class="usage-dot" style="background:#C45050;"></div><strong>Primary :hover only</strong> — never use as a base color</div>
-              <div class="usage-chip"><div class="usage-dot" style="background:#375D5A;"></div><strong>Secondary</strong> — secondary buttons, nav, section backgrounds</div>
+              <div class="usage-chip"><div class="usage-dot" style="background:#375D5A;"></div><strong>Secondary</strong> — secondary buttons, subtle section backgrounds only — never on nav</div>
+              <div class="usage-chip"><div class="usage-dot" style="background:#FFFFFF;border:1px solid #E8E8E4;"></div><strong>Nav backgrounds</strong> — use #FFFFFF or #F8F8F8 with #434343 text</div>
               <div class="usage-chip"><div class="usage-dot" style="background:#0A4A3C;"></div><strong>Text + Secondary :hover</strong> — headings, body text, secondary button hover</div>
               <div class="usage-chip"><div class="usage-dot" style="background:#F3EEE0;border:1px solid #E8E0CC;"></div>Cream — hero backgrounds, card fills</div>
               <div class="usage-chip"><div class="usage-dot" style="background:#D1E5E1;border:1px solid #A8CFCA;"></div>Mint — section backgrounds, trust bars</div>
@@ -1059,7 +1064,7 @@ body {
         </div>
 
         <!-- Font families -->
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px;">
+        <div class="type-font-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px;">
           <div style="background:var(--white);border:1px solid var(--border);border-radius:var(--r-xl);padding:28px;overflow:hidden;">
             <div style="font-size:10px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-light);margin-bottom:12px;">Display Font</div>
             <div style="font-family:'Brandon Grotesque','Futura','Century Gothic',sans-serif;font-size:32px;color:var(--teal);line-height:1.15;margin-bottom:8px;" style="font-family:'Brandon Grotesque','Futura',sans-serif;font-weight:700;">Brandon Grotesque</div>
@@ -1098,7 +1103,7 @@ body {
             <span style="flex:1;height:1px;background:rgba(255,255,255,0.15);"></span>
             <span style="font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:rgba(255,255,255,0.45);">Self-hosted woff2 + woff</span>
           </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+          <div class="type-font-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
             <!-- Brandon Grotesque -->
             <div style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:var(--r-lg);padding:16px;">
               <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:10px;">Brandon Grotesque · Display Font · <code style="font-size:10px;background:rgba(0,0,0,0.2);padding:1px 5px;border-radius:3px;font-style:normal;">--font-display</code></div>
@@ -1275,7 +1280,7 @@ body {
             <div class="type-row-inner">
               <div class="type-meta">
                 <div class="type-label">Body MD</div>
-                <div class="type-specs">14px / 400 / 20lh</div>
+                <div class="type-specs">15px / 400 / 24lh</div>
               </div>
               <div class="type-preview on-cream">
                 <span class="t-body-md">Each month, you'll receive 4 full-size essential oils and everything you need to make natural products at home.</span>
@@ -1287,7 +1292,7 @@ body {
             <div class="type-row-inner">
               <div class="type-meta">
                 <div class="type-label">Body SM</div>
-                <div class="type-specs">13px / 400 / 20lh</div>
+                <div class="type-specs">14px / 400 / 20lh</div>
               </div>
               <div class="type-preview">
                 <span class="t-body-sm">Each month, you'll receive 4 full-size essential oils and everything you need to make natural products at home.</span>
@@ -1498,7 +1503,7 @@ body {
           </div>
           <div class="grid-spec-card">
             <div class="grid-spec-name">Container Max</div>
-            <div class="grid-spec-value" id="gMax">1248px</div>
+            <div class="grid-spec-value" id="gMax">1325px</div>
             <div class="grid-spec-sub">Centered, padded sides</div>
           </div>
           <div class="grid-spec-card">
@@ -1778,9 +1783,9 @@ function setTypeView(view, btn) {
 
 // ── Grid device toggle ─────────────────────────
 var gridData = {
-  desktop: { cols: '12', gutter: '24px', max: '1248px', margin: '60px', bp: '≥ 1024px' },
+  desktop: { cols: '12', gutter: '24px', max: '1325px', margin: '60px', bp: '≥ 1024px' },
   tablet:  { cols: '8',  gutter: '16px', max: '1024px', margin: '40px', bp: '768–1023px' },
-  mobile:  { cols: '4',  gutter: '12px', max: '100%',   margin: '20px', bp: '< 768px' }
+  mobile:  { cols: '4',  gutter: '12px', max: '100%',   margin: '16px', bp: '< 768px' }
 };
 
 function selectGrid(device, btn) {

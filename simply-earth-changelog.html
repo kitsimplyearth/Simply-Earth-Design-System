@@ -330,6 +330,12 @@ body {
 
     <div class="sidenav-section">Releases</div>
     <a class="sidenav-link active" onclick="scrollTo({top:0,behavior:'smooth'})">
+      <span class="nav-dot" style="background:#E67272;"></span> v1.7 · Hero 3 & Component Page
+    </a>
+    <a class="sidenav-link" onclick="document.getElementById('v1-6').scrollIntoView({behavior:'smooth'})">
+      <span class="nav-dot" style="background:#5B7A6E;"></span> v1.6 · Layout & Nav
+    </a>
+    <a class="sidenav-link" onclick="document.getElementById('v1-5').scrollIntoView({behavior:'smooth'})">
       <span class="nav-dot" style="background:#E67272;"></span> v1.5 · AI Reference
     </a>
     <a class="sidenav-link" onclick="document.getElementById('v1-4').scrollIntoView({behavior:'smooth'})">
@@ -378,17 +384,96 @@ body {
     <div class="content">
 
       <!-- ══════════════════════════════════════
+           v1.7.0
+      ═══════════════════════════════════════ -->
+      <div class="version-entry" id="v1-7">
+        <div class="version-meta">
+          <div class="version-badge latest"><span class="version-dot"></span>v1.7.0</div>
+          <div class="version-date">Apr 6, 2026</div>
+        </div>
+        <div class="version-card is-latest">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <div class="version-title" style="margin-bottom:0;">Hero 3 Real Media, Arc Curves & Component Detail Page</div>
+          </div>
+          <div class="version-summary">Updated the Hero 3 (Recipe Box) block with a live video and real product image, added arc curves matching the simplyearth.com design, renamed and redescribed the block, and launched a new Component Detail page (<code>simply-earth-component.html</code>) with preview iframe, export CTAs, overview, component metadata, and related components — plus a "View Details →" button in the preview modal.</div>
+          <div class="change-list">
+            <div class="change-item">
+              <span class="change-tag tag-updated">Updated</span>
+              <span class="change-text">Block renamed from "Hero – Video 58/42 Split" to <strong>Hero 3</strong> — description updated to match the actual block anatomy (split-layout, category label, benefit bullets, CTA + urgency sub-label, social proof)</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-updated">Updated</span>
+              <span class="change-text">Hero 3 video placeholder replaced with real <code>&lt;video autoplay muted loop playsinline&gt;</code> — source: <code>April2026Montagev111.mp4</code>, poster fallback: <code>recipe-box.webp</code> (both from images.simplyearth.com CDN)</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-new">New</span>
+              <span class="change-text">Arc curves added to Hero 3: <code>.rb-hero-curve-right</code> (desktop — SVG bezier arc on the right edge of the video panel, cream-filled) and <code>.rb-hero-curve-bottom</code> (mobile — convex arc transitioning to cream content card), matching the <code>.curve-bottom</code> pattern on simplyearth.com</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-new">New</span>
+              <span class="change-text"><code>simply-earth-component.html</code> — Component Detail page. URL-param driven (<code>?id=rb-hero</code>). Includes: live block preview via <code>srcdoc</code> iframe, Desktop / Tablet / Mobile viewport switcher, Copy for Figma + Copy HTML export buttons, Overview description, Component Details table (category, collection, tags, responsive, release, author), and Related Components grid (4 same-page blocks)</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-new">New</span>
+              <span class="change-text">"View Details →" button added to the preview modal footer in <code>index.html</code> — links to <code>simply-earth-component.html?id={blockId}</code>, dynamically set when any block is opened</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-updated">Updated</span>
+              <span class="change-text"><code>settings.local.json</code> — added allowed Bash permissions: <code>npx puppeteer:*</code>, <code>node -e ":*</code> (both quote styles), <code>netlify --version</code></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════
+           v1.6.0
+      ═══════════════════════════════════════ -->
+      <div class="version-entry" id="v1-6">
+        <div class="version-meta">
+          <div class="version-badge"><span class="version-dot"></span>v1.6.0</div>
+          <div class="version-date">Mar 25, 2026</div>
+        </div>
+        <div class="version-card">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <div class="version-title" style="margin-bottom:0;">Layout & Nav Color Updates</div>
+          </div>
+          <div class="version-summary">Container max-width expanded to 1325px for desktop, mobile padding tightened to 16px, and secondary teal color removed from nav backgrounds — navbars now use light neutral backgrounds with balanced dark text.</div>
+          <div class="change-list">
+            <div class="change-item">
+              <span class="change-tag tag-updated">Updated</span>
+              <span class="change-text">Container max-width updated from 1248px to 1325px across all container types — <code>.container</code>, <code>.rb-container</code>, <code>.sp-container</code>, <code>.cat-container</code> — and all <code>--container-max</code> tokens</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-updated">Updated</span>
+              <span class="change-text">Mobile container padding reduced from <code>20px</code> to <code>16px</code> (base/default — tablet and desktop padding unchanged at 40px and 60px)</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-updated">Updated</span>
+              <span class="change-text">Sub-nav background changed from <code>var(--color-secondary)</code> (#375D5A) to <code>#F8F8F8</code> with a <code>#E8E8E4</code> border — link color updated from white to <code>#434343</code>, active state uses teal bottom border accent</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-updated">Updated</span>
+              <span class="change-text">Color rule clarified: <code>#375D5A</code> is no longer permitted on nav backgrounds — restricted to secondary buttons and subtle section backgrounds only</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-updated">Updated</span>
+              <span class="change-text">Design Foundations page updated — swatch description, usage rules chip, and CSS comment all reflect the new nav color restriction. Nav background rule added: use <code>#FFFFFF</code> or <code>#F8F8F8</code> with <code>#434343</code> text</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════
            v1.5.0
       ═══════════════════════════════════════ -->
       <div class="version-entry" id="v1-5">
         <div class="version-meta">
-          <div class="version-badge latest"><span class="version-dot"></span>v1.5.0</div>
+          <div class="version-badge"><span class="version-dot"></span>v1.5.0</div>
           <div class="version-date">Mar 13, 2026</div>
         </div>
-        <div class="version-card is-latest">
+        <div class="version-card">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
             <div class="version-title" style="margin-bottom:0;">AI Reference & Logo Assets</div>
-            <span style="font-size:10px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;background:var(--teal);color:white;padding:3px 9px;border-radius:var(--r-pill);">Latest</span>
           </div>
           <div class="version-summary">Added font assets and logo as downloadable/self-hosted resources with a dedicated AI-readable reference block in the Design Foundations page — making it easier to onboard AI agents to the design system in future sessions.</div>
           <div class="change-list">
@@ -606,11 +691,11 @@ body {
 
 <script>
   // Mark changelog as seen for this version
-  const CURRENT_VERSION = '1.5.0';
+  const CURRENT_VERSION = '1.6.0';
   localStorage.setItem('se_ds_seen_version', CURRENT_VERSION);
 
   // Highlight active nav link on scroll
-  const entries = ['v1-5','v1-4','v1-3','v1-2','v1-1','v1-0'];
+  const entries = ['v1-6','v1-5','v1-4','v1-3','v1-2','v1-1','v1-0'];
   const links = document.querySelectorAll('.sidenav-link');
   window.addEventListener('scroll', () => {
     let current = entries[0];

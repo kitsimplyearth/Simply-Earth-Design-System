@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Component Detail — Simply Earth Design System</title>
+<style>
+/* ── Reset ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --color-primary:#E67272;--color-primary-hover:#C45050;
+  --color-secondary:#375D5A;--color-secondary-hover:#0A4A3C;
+  --color-text-dark:#1A1A1A;--color-text-mid:#555;--color-text-light:#888;
+  --color-bg-app:#F5F5F2;--color-bg-cream:#F3EEE0;--color-border:#E8E8E4;
+  --r-sm:6px;--r-md:10px;--r-lg:16px;--r-xl:20px;
+  --font-ui:'Brandon Text','DM Sans',system-ui,sans-serif;
+}
+body{font-family:var(--font-ui);background:var(--color-bg-app);color:var(--color-text-dark);min-height:100vh;}
+
+/* ── Topbar ── */
+.topbar{
+  height:52px;background:#fff;border-bottom:1px solid var(--color-border);
+  display:flex;align-items:center;gap:12px;padding:0 24px;
+  position:sticky;top:0;z-index:100;
+}
+.topbar-logo{
+  font-size:13px;font-weight:700;color:var(--color-secondary);
+  text-decoration:none;display:flex;align-items:center;gap:8px;
+}
+.topbar-logo-icon{
+  width:28px;height:28px;border-radius:8px;background:var(--color-secondary);
+  color:white;display:flex;align-items:center;justify-content:center;font-size:13px;
+}
+.topbar-sep{color:#CCC;font-size:12px;}
+.topbar-crumb{font-size:13px;color:var(--color-text-light);text-decoration:none;}
+.topbar-crumb:hover{color:var(--color-text-dark);}
+.topbar-current{font-size:13px;font-weight:700;color:var(--color-text-dark);}
+.topbar-actions{margin-left:auto;display:flex;align-items:center;gap:8px;}
+.btn{
+  height:34px;padding:0 16px;border-radius:8px;font-size:13px;font-weight:700;
+  cursor:pointer;border:none;display:flex;align-items:center;gap:6px;
+  text-decoration:none;white-space:nowrap;transition:all 0.15s;
+}
+.btn-ghost{background:transparent;color:var(--color-secondary);border:1.5px solid var(--color-secondary);}
+.btn-ghost:hover{background:var(--color-secondary);color:#fff;}
+.btn-primary{background:var(--color-primary);color:#fff;}
+.btn-primary:hover{background:var(--color-primary-hover);}
+
+/* ── Page badge ── */
+.page-badge{
+  display:inline-flex;align-items:center;height:22px;padding:0 10px;
+  border-radius:20px;font-size:11px;font-weight:700;letter-spacing:0.03em;
+  color:#fff;white-space:nowrap;
+}
+
+/* ── Main layout ── */
+.comp-layout{
+  max-width:1200px;margin:0 auto;padding:32px 24px 80px;
+  display:grid;grid-template-columns:1fr 340px;gap:32px;align-items:start;
+}
+@media(max-width:900px){.comp-layout{grid-template-columns:1fr;}}
+
+/* ── Left column ── */
+.comp-preview-col{}
+
+/* Title row */
+.comp-title-row{display:flex;align-items:center;gap:12px;margin-bottom:8px;flex-wrap:wrap;}
+.comp-title{font-size:26px;font-weight:700;color:var(--color-text-dark);line-height:1.2;}
+.comp-added{font-size:12px;color:var(--color-text-light);margin-bottom:20px;}
+.comp-added a{color:var(--color-secondary);text-decoration:none;font-weight:600;}
+.comp-added a:hover{text-decoration:underline;}
+
+/* Preview frame */
+.comp-preview-wrap{
+  background:#fff;border-radius:var(--r-lg);border:1px solid var(--color-border);
+  overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,0.07);
+}
+.comp-preview-toolbar{
+  display:flex;align-items:center;gap:6px;padding:10px 16px;
+  border-bottom:1px solid var(--color-border);background:var(--color-bg-app);
+}
+.preview-vp-btn{
+  height:28px;padding:0 12px;border-radius:20px;font-size:11px;font-weight:700;
+  cursor:pointer;border:1.5px solid var(--color-border);background:#fff;
+  color:var(--color-text-mid);transition:all 0.15s;
+}
+.preview-vp-btn.active{background:var(--color-secondary);color:#fff;border-color:var(--color-secondary);}
+.preview-vp-label{font-size:11px;color:#AAA;margin-left:6px;}
+.comp-iframe-outer{padding:16px;background:#F0F0EC;}
+.comp-iframe-wrap{
+  background:#fff;border-radius:8px;overflow:hidden;
+  box-shadow:0 2px 12px rgba(0,0,0,0.1);
+  transition:width 0.3s ease;width:100%;margin:0 auto;
+}
+.comp-iframe-wrap.tablet{width:768px;max-width:100%;}
+.comp-iframe-wrap.mobile{width:390px;max-width:100%;}
+.comp-iframe{width:100%;border:none;display:block;min-height:400px;}
+
+/* Related components */
+.related-section{margin-top:40px;}
+.related-title{font-size:17px;font-weight:700;color:var(--color-text-dark);margin-bottom:16px;}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;}
+.related-card{
+  background:#fff;border-radius:var(--r-md);border:1px solid var(--color-border);
+  overflow:hidden;cursor:pointer;text-decoration:none;color:inherit;
+  transition:box-shadow 0.15s,transform 0.15s;display:block;
+}
+.related-card:hover{box-shadow:0 6px 20px rgba(0,0,0,0.1);transform:translateY(-2px);}
+.related-thumb{
+  height:100px;display:flex;align-items:center;justify-content:center;
+  font-size:32px;position:relative;overflow:hidden;
+}
+.related-card-info{padding:10px 12px;}
+.related-card-name{font-size:12px;font-weight:700;color:var(--color-text-dark);line-height:1.3;}
+.related-card-date{font-size:11px;color:var(--color-text-light);margin-top:3px;}
+
+/* ── Right sidebar ── */
+.comp-sidebar{}
+
+/* Copy for Figma panel */
+.sidebar-panel{
+  background:#fff;border-radius:var(--r-lg);border:1px solid var(--color-border);
+  overflow:hidden;margin-bottom:16px;
+}
+.sidebar-panel-head{
+  padding:14px 18px;border-bottom:1px solid var(--color-border);
+  font-size:13px;font-weight:700;color:var(--color-text-dark);
+}
+.sidebar-panel-body{padding:14px 18px;display:flex;flex-direction:column;gap:10px;}
+
+.copy-btn{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 14px;border-radius:8px;cursor:pointer;border:none;
+  font-size:13px;font-weight:700;width:100%;text-align:left;
+  transition:all 0.15s;
+}
+.copy-btn-figma{background:#1E1E2E;color:#fff;}
+.copy-btn-figma:hover{background:#2D2D40;}
+.copy-btn-html{background:var(--color-bg-app);color:var(--color-text-dark);border:1.5px solid var(--color-border);}
+.copy-btn-html:hover{border-color:var(--color-secondary);color:var(--color-secondary);}
+.copy-btn-icon{font-size:16px;flex-shrink:0;}
+.copy-btn-text{display:flex;flex-direction:column;gap:1px;}
+.copy-btn-label{font-size:13px;font-weight:700;}
+.copy-btn-sub{font-size:11px;font-weight:400;opacity:0.6;}
+
+/* Overview panel */
+.overview-text{
+  font-size:13px;color:var(--color-text-mid);line-height:1.7;
+}
+
+/* Product description */
+.prod-table{width:100%;border-collapse:collapse;}
+.prod-table tr{border-bottom:1px solid var(--color-border);}
+.prod-table tr:last-child{border-bottom:none;}
+.prod-table td{padding:9px 0;font-size:13px;vertical-align:top;}
+.prod-table td:first-child{color:var(--color-text-light);font-weight:600;width:110px;padding-right:12px;flex-shrink:0;}
+.prod-table td:last-child{color:var(--color-text-dark);}
+.prod-tag-pill{
+  display:inline-flex;align-items:center;height:20px;padding:0 8px;
+  border-radius:20px;font-size:10px;font-weight:700;
+  background:var(--color-bg-app);color:var(--color-text-mid);
+  margin:2px 2px 0 0;
+}
+
+/* Toast */
+.toast{
+  position:fixed;bottom:24px;right:24px;z-index:9999;
+  background:#1A1A1A;color:#fff;padding:12px 20px;border-radius:10px;
+  font-size:13px;font-weight:600;box-shadow:0 4px 20px rgba(0,0,0,0.25);
+  opacity:0;transform:translateY(12px);transition:all 0.25s;pointer-events:none;
+}
+.toast.show{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<!-- Topbar -->
+<header class="topbar">
+  <a class="topbar-logo" href="index.html">
+    <div class="topbar-logo-icon">SE</div>
+    Design System
+  </a>
+  <span class="topbar-sep">/</span>
+  <a class="topbar-crumb" href="index.html" id="breadcrumbPage">Recipe Box</a>
+  <span class="topbar-sep">/</span>
+  <span class="topbar-current" id="breadcrumbName">Hero 3</span>
+  <div class="topbar-actions">
+    <button class="btn btn-ghost" id="btnCopyFigma">◈ Copy for Figma</button>
+    <button class="btn btn-primary" id="btnCopyHTML">⎘ Copy HTML</button>
+  </div>
+</header>
+
+<!-- Main -->
+<div class="comp-layout">
+
+  <!-- Left: Preview + Related -->
+  <div class="comp-preview-col">
+    <div class="comp-title-row">
+      <h1 class="comp-title" id="compTitle">Hero 3</h1>
+      <span class="page-badge" id="compBadge" style="background:#E67272;">Recipe Box</span>
+    </div>
+    <p class="comp-added">Added <span id="compDate">March 5, 2026</span> in <a href="index.html" id="compCollection">Recipe Box Collection</a></p>
+
+    <!-- Preview frame -->
+    <div class="comp-preview-wrap">
+      <div class="comp-preview-toolbar">
+        <button class="preview-vp-btn active" onclick="setVp('desktop',this)">🖥 Desktop</button>
+        <button class="preview-vp-btn" onclick="setVp('tablet',this)">📱 Tablet</button>
+        <button class="preview-vp-btn" onclick="setVp('mobile',this)">📲 Mobile</button>
+        <span class="preview-vp-label" id="vpLabel">1440px</span>
+      </div>
+      <div class="comp-iframe-outer">
+        <div class="comp-iframe-wrap" id="iframeWrap">
+          <iframe class="comp-iframe" id="compIframe" src="" scrolling="no"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <!-- Related components -->
+    <div class="related-section">
+      <h2 class="related-title" id="relatedTitle">More from Recipe Box</h2>
+      <div class="related-grid" id="relatedGrid"></div>
+    </div>
+  </div>
+
+  <!-- Right: Sidebar -->
+  <div class="comp-sidebar">
+
+    <!-- Copy CTAs -->
+    <div class="sidebar-panel">
+      <div class="sidebar-panel-head">Export</div>
+      <div class="sidebar-panel-body">
+        <button class="copy-btn copy-btn-figma" id="sidebarCopyFigma">
+          <span class="copy-btn-icon">◈</span>
+          <span class="copy-btn-text">
+            <span class="copy-btn-label">Copy for Figma</span>
+            <span class="copy-btn-sub">Paste via HTML to Figma plugin</span>
+          </span>
+        </button>
+        <button class="copy-btn copy-btn-html" id="sidebarCopyHTML">
+          <span class="copy-btn-icon">⎘</span>
+          <span class="copy-btn-text">
+            <span class="copy-btn-label">Copy HTML</span>
+            <span class="copy-btn-sub">Responsive, ready to paste</span>
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Overview -->
+    <div class="sidebar-panel">
+      <div class="sidebar-panel-head">Overview</div>
+      <div class="sidebar-panel-body">
+        <p class="overview-text" id="compOverview">
+          The hero block is a split-layout banner (desktop) / stacked card (mobile) featuring a lifestyle photo on one side and copy on the other. A category label sits above the headline, followed by three short benefit bullets, a primary CTA button with an urgency sub-label, and a social proof line at the bottom.
+        </p>
+      </div>
+    </div>
+
+    <!-- Product Description -->
+    <div class="sidebar-panel">
+      <div class="sidebar-panel-head">Component Details</div>
+      <div class="sidebar-panel-body" style="padding:0 18px;">
+        <table class="prod-table">
+          <tbody id="prodTable">
+            <tr>
+              <td>Category</td>
+              <td><span id="detailCategory">Hero</span></td>
+            </tr>
+            <tr>
+              <td>Collection</td>
+              <td><a id="detailCollection" href="index.html" style="color:var(--color-secondary);font-weight:600;text-decoration:none;">Recipe Box</a></td>
+            </tr>
+            <tr>
+              <td>Tags</td>
+              <td id="detailTags"></td>
+            </tr>
+            <tr>
+              <td>Responsive</td>
+              <td>🖥 Desktop · 📱 Tablet · 📲 Mobile</td>
+            </tr>
+            <tr>
+              <td>Release</td>
+              <td id="detailRelease">March 5, 2026</td>
+            </tr>
+            <tr id="detailUpdatedRow" style="display:none;">
+              <td>Updated</td>
+              <td id="detailUpdated">—</td>
+            </tr>
+            <tr>
+              <td>Author</td>
+              <td>Simply Earth</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ── Block data (mirrors index.html BLOCKS_DATA) ───────────────
+const BLOCKS_DATA = [
+  { id:'rb-announcement', name:'Announcement Bar', page:'recipe-box', tags:['announcement','sticky','bg-dark'], date:'2026-03-05', thumb_emoji:'📢', thumb_bg:'#2D5450', desc:'Dark teal sticky top bar with promotional message.' },
+  { id:'rb-hero', name:'Hero 3', page:'recipe-box', tags:['hero','split','cta','bg-cream'], date:'2026-03-05', updated:'2026-04-06', thumb_emoji:'🎥', thumb_bg:'#F3EEE0', desc:'The hero block is a split-layout banner (desktop) / stacked card (mobile) featuring a lifestyle photo on one side and copy on the other. A category label sits above the headline, followed by three short benefit bullets, a primary CTA button with an urgency sub-label, and a social proof line at the bottom.' },
+  { id:'rb-recipes', name:'Recipe Slider (4-col)', page:'recipe-box', tags:['slider','product','bg-white'], date:'2026-03-05', thumb_emoji:'🧴', thumb_bg:'#FFF8F8', desc:'4 recipe product cards with brush-stroke labels. Horizontal scroll on mobile.' },
+  { id:'rb-3steps', name:'3-Step Plan', page:'recipe-box', tags:['content','grid','bg-cream'], date:'2026-03-05', thumb_emoji:'1️⃣', thumb_bg:'#F3EEE0', desc:'Square photos with green brush-stroke step badges.' },
+  { id:'rb-testimonials', name:'Testimonials – UGC Cards', page:'recipe-box', tags:['testimonial','slider','ugc','bg-white'], date:'2026-03-05', thumb_emoji:'💬', thumb_bg:'#FFF5EE', desc:'Cream cards with user quote, photo, and category badge.' },
+  { id:'rb-bonuses', name:'Bonus Value Stack', page:'recipe-box', tags:['content','split','cta','bg-cream'], date:'2026-03-05', thumb_emoji:'🎁', thumb_bg:'#F3EEE0', desc:'50/50 split: checklist table left, woman+box image right.' },
+  { id:'rb-press', name:'As Seen On (Press Logos)', page:'recipe-box', tags:['press','centered','bg-white'], date:'2026-03-05', thumb_emoji:'📰', thumb_bg:'#F7F7F7', desc:'FOX, USA TODAY, Hello Subscription logo row.' },
+  { id:'rb-nature', name:'From Nature – Split + Photo Grid', page:'recipe-box', tags:['content','split','bg-mint'], date:'2026-03-05', thumb_emoji:'🌿', thumb_bg:'#D1E5E1', desc:'Mint bg. Left: heading + icon rows. Right: 2x2 farm photo grid.' },
+  { id:'rb-product', name:'Product Purchase Block', page:'recipe-box', tags:['product','split','cta','bg-white'], date:'2026-03-05', thumb_emoji:'🛒', thumb_bg:'#F7F7F5', desc:'Gallery+thumbnails left, price/CTA/checks right.' },
+  { id:'rb-founder', name:'Founder / Community', page:'recipe-box', tags:['content','split','bg-cream'], date:'2026-03-05', thumb_emoji:'👩', thumb_bg:'#F3EEE0', desc:'Cream bg. Left: quote + 3 feature rows + CTA. Right: Katie photo.' },
+  { id:'rb-lastchance', name:'Last Chance CTA', page:'recipe-box', tags:['cta','split','bg-white'], date:'2026-03-05', thumb_emoji:'⏰', thumb_bg:'#FFF5EE', desc:'3x2 photo collage left, trust cards + big CTA button right.' },
+  { id:'rb-faq', name:'FAQ Accordion', page:'recipe-box', tags:['faq','centered','bg-mint'], date:'2026-03-05', thumb_emoji:'❓', thumb_bg:'#D1E5E1', desc:'5 interactive accordion items on mint bg. CTA below.' },
+  { id:'rb-ugc', name:'UGC Photo Strip', page:'recipe-box', tags:['ugc','full-width','bg-white'], date:'2026-03-05', thumb_emoji:'📷', thumb_bg:'#F8F8F8', desc:'Full-bleed horizontal scroll photo strip.' },
+];
+
+const PAGE_COLORS = {
+  'ui-kit':'#D05A5A','recipe-box':'#E67272','shop':'#375D5A',
+  'category':'#C87878','product-detail':'#5B7A6E'
+};
+const PAGE_LABELS = {
+  'ui-kit':'UI Kit','recipe-box':'Recipe Box','shop':'Shop',
+  'category':'Category','product-detail':'Product Detail'
+};
+
+// ── Init ──────────────────────────────────────────────────────
+const params = new URLSearchParams(location.search);
+const blockId = params.get('id') || 'rb-hero';
+const block = BLOCKS_DATA.find(b => b.id === blockId) || BLOCKS_DATA.find(b => b.id === 'rb-hero');
+
+function formatDate(d) {
+  const [y,m,day] = d.split('-');
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return months[parseInt(m)-1] + ' ' + parseInt(day) + ', ' + y;
+}
+
+function init() {
+  if (!block) return;
+
+  // Title / badge
+  document.getElementById('compTitle').textContent = block.name;
+  document.getElementById('breadcrumbName').textContent = block.name;
+  document.title = block.name + ' — Simply Earth Design System';
+
+  const pageLabel = PAGE_LABELS[block.page] || block.page;
+  const pageColor = PAGE_COLORS[block.page] || '#AAA';
+
+  document.getElementById('compBadge').textContent = pageLabel;
+  document.getElementById('compBadge').style.background = pageColor;
+  document.getElementById('compDate').textContent = formatDate(block.date);
+  document.getElementById('compCollection').textContent = pageLabel + ' Collection';
+  document.getElementById('breadcrumbPage').textContent = pageLabel;
+  document.getElementById('compOverview').textContent = block.desc || '';
+
+  // Details table
+  const firstTag = block.tags[0] || '—';
+  document.getElementById('detailCategory').textContent =
+    firstTag.charAt(0).toUpperCase() + firstTag.slice(1);
+  document.getElementById('detailCollection').textContent = pageLabel;
+  document.getElementById('detailRelease').textContent = formatDate(block.date);
+  if (block.updated) {
+    document.getElementById('detailUpdated').textContent = formatDate(block.updated);
+    document.getElementById('detailUpdatedRow').style.display = '';
+  }
+
+  const tagsEl = document.getElementById('detailTags');
+  tagsEl.innerHTML = block.tags.map(t =>
+    `<span class="prod-tag-pill">${t}</span>`
+  ).join('');
+
+  // Related components (same page, exclude self, max 4)
+  const related = BLOCKS_DATA.filter(b => b.page === block.page && b.id !== block.id).slice(0, 4);
+  document.getElementById('relatedTitle').textContent = 'More from ' + pageLabel;
+  const grid = document.getElementById('relatedGrid');
+  grid.innerHTML = related.map(b => `
+    <a class="related-card" href="simply-earth-component.html?id=${b.id}">
+      <div class="related-thumb" style="background:${b.thumb_bg};">
+        <span style="font-size:28px;">${b.thumb_emoji}</span>
+      </div>
+      <div class="related-card-info">
+        <div class="related-card-name">${b.name}</div>
+        <div class="related-card-date">Added ${formatDate(b.date)}</div>
+      </div>
+    </a>
+  `).join('');
+}
+
+// ── Viewport controls ─────────────────────────────────────────
+const VP_LABELS = { desktop:'1440px', tablet:'768px', mobile:'390px' };
+function setVp(size, btn) {
+  document.querySelectorAll('.preview-vp-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('vpLabel').textContent = VP_LABELS[size];
+  const wrap = document.getElementById('iframeWrap');
+  wrap.className = 'comp-iframe-wrap' + (size !== 'desktop' ? ' ' + size : '');
+}
+
+// ── Fetch cache (single fetch for all operations) ─────────────
+let _fetchCache = null;
+async function fetchDS() {
+  if (_fetchCache) return _fetchCache;
+  const res = await fetch('index.html');
+  const text = await res.text();
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(text, 'text/html');
+  _fetchCache = doc;
+  return doc;
+}
+
+async function getBlockHTML(doc) {
+  const blockEl = doc.getElementById(block.id);
+  if (!blockEl) return null;
+  const clone = blockEl.cloneNode(true);
+  clone.querySelectorAll('.block-label,.ds-divider').forEach(el => el.remove());
+  return clone.innerHTML.trim();
+}
+
+function getBlockCSS(doc) {
+  const brandCSS = doc.getElementById('brandCSS');
+  return brandCSS ? brandCSS.innerHTML : '';
+}
+
+// ── Build iframe srcdoc (same pattern as main modal) ──────────
+async function buildPreview() {
+  try {
+    const doc = await fetchDS();
+    const html = await getBlockHTML(doc);
+    const css = getBlockCSS(doc);
+    if (!html) return;
+    const srcdoc = `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">${css}</head><body style="margin:0;padding:0;">${html}</body></html>`;
+    const iframe = document.getElementById('compIframe');
+    iframe.srcdoc = srcdoc;
+    iframe.onload = function() {
+      try {
+        const h = this.contentDocument.body.scrollHeight;
+        this.style.height = Math.max(360, h + 20) + 'px';
+      } catch(e) { this.style.height = '520px'; }
+    };
+  } catch(e) {
+    console.error('Preview build failed', e);
+  }
+}
+
+// ── Copy helpers ──────────────────────────────────────────────
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+async function doCopyHTML() {
+  try {
+    const doc = await fetchDS();
+    const html = await getBlockHTML(doc);
+    if (!html) { showToast('Could not fetch block HTML'); return; }
+    await navigator.clipboard.writeText(html);
+    showToast('✓ HTML copied to clipboard!');
+  } catch(e) { showToast('Copy failed'); }
+}
+
+async function doCopyFigma() {
+  try {
+    const doc = await fetchDS();
+    const [html, css] = [await getBlockHTML(doc), getBlockCSS(doc)];
+    if (!html) { showToast('Could not fetch block HTML'); return; }
+    const full = `<!DOCTYPE html><html><head><meta charset="UTF-8">${css}</head><body style="margin:0;padding:0;">${html}</body></html>`;
+    await navigator.clipboard.writeText(full);
+    showToast('✓ Copied for Figma! Paste into HTML to Figma plugin.');
+  } catch(e) { showToast('Copy failed'); }
+}
+
+// Wire buttons
+document.getElementById('btnCopyFigma').onclick =
+document.getElementById('sidebarCopyFigma').onclick = doCopyFigma;
+document.getElementById('btnCopyHTML').onclick =
+document.getElementById('sidebarCopyHTML').onclick = doCopyHTML;
+
+init();
+buildPreview();
+</script>
+</body>
+</html>

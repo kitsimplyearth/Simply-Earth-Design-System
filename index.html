@@ -48,7 +48,7 @@
   /* Brand colors */
   --color-primary:           #E67272; /* Primary buttons, hero & sales sections */
   --color-primary-hover:     #C45050; /* Primary button :hover only */
-  --color-secondary:         #375D5A; /* Secondary buttons, backgrounds, nav */
+  --color-secondary:         #375D5A; /* Secondary buttons, subtle section backgrounds only */
   --color-secondary-hover:   #0A4A3C; /* Secondary button :hover — also text color */
   --color-text-green: #0A4A3C;
   --color-text-dark: #1A1A1A;
@@ -603,7 +603,11 @@ body {
 }
 .card-date {
   font-size: 11px; color: var(--color-text-light);
-  display: flex; align-items: center; gap: 4px;
+  display: flex; flex-direction: column; gap: 2px;
+}
+.card-date-updated {
+  font-size: 10px; color: var(--color-secondary);
+  display: flex; align-items: center; gap: 3px; font-weight: 600;
 }
 .card-responsive-badges {
   display: flex; gap: 3px;
@@ -694,6 +698,20 @@ body {
   transition: all 0.15s;
 }
 .modal-close:hover { background: #FFE8E8; color: var(--color-primary); }
+.modal-footer {
+  display: flex; align-items: center; justify-content: flex-end;
+  padding: 12px 20px; border-top: 1px solid var(--color-border);
+  flex-shrink: 0; background: white;
+}
+.modal-view-details-btn {
+  font-family: var(--font-ui); font-size: 13px; font-weight: 700;
+  color: var(--color-secondary); text-decoration: none;
+  display: flex; align-items: center; gap: 4px;
+  padding: 8px 16px; border-radius: 8px;
+  border: 1.5px solid var(--color-secondary);
+  transition: all 0.15s;
+}
+.modal-view-details-btn:hover { background: var(--color-secondary); color: white; }
 
 /* ============================================================
    FIGMA COPY MODAL
@@ -1154,6 +1172,9 @@ body > .ds-divider { display: none !important; }
     <div class="modal-code-panel" id="modalCodePane">
       <pre class="modal-code" id="modalCodeContent"></pre>
     </div>
+    <div class="modal-footer">
+      <a class="modal-view-details-btn" id="modalViewDetailsBtn" href="#" target="_blank">View Details →</a>
+    </div>
   </div>
 </div>
 
@@ -1313,7 +1334,7 @@ body > .ds-divider { display: none !important; }
   --section-v-pad:var(--sp-12);
 }
 body{font-family:var(--font-body);color:var(--color-text-dark);background:white;}
-.container{width:100%;max-width:1248px;margin:0 auto;padding:0 20px;}
+.container{width:100%;max-width:1325px;margin:0 auto;padding:0 16px;}
 @media(min-width:768px){.container{padding:0 40px;}}
 @media(min-width:1024px){.container{padding:0 60px;}}
 </style>
@@ -1472,7 +1493,7 @@ body{font-family:var(--font-body);color:var(--color-text-dark);background:white;
   --shadow-xs:0px 1px 2px rgba(16,24,40,0.05);
   --shadow-sm:0px 2px 8px rgba(16,24,40,0.08);
   --shadow-md:0px 4px 16px rgba(16,24,40,0.10);
-  --container-max:1248px;
+  --container-max:1325px;
 
   /* === MOBILE-FIRST TYPOGRAPHY SCALE === */
   --text-display-size: 36px;
@@ -1768,9 +1789,9 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
 .rb-wrap { width: 100%; }
 .rb-container {
   width: 100%;
-  max-width: 1248px;
+  max-width: 1325px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 16px;
 }
 @media (min-width: 768px) { .rb-container { padding: 0 40px; } }
 @media (min-width: 1024px) { .rb-container { padding: 0 60px; } }
@@ -1812,9 +1833,9 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
 .rb-hero-video {
   width: 100%;
   position: relative;
-  overflow: hidden;
   background: #1A3530;
   flex-shrink: 0;
+  overflow: visible;
 }
 .rb-hero-video-inner {
   aspect-ratio: 16/9;
@@ -1824,6 +1845,7 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
   justify-content: center;
   background: linear-gradient(140deg, #1E4540 0%, #0D2825 100%);
   position: relative;
+  overflow: hidden;
 }
 @media (min-width: 900px) {
   .rb-hero-video { width: 58%; }
@@ -1852,6 +1874,43 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
   font-size: 11px; color: rgba(255,255,255,0.6);
   text-transform: uppercase; letter-spacing: 0.1em;
 }
+
+/* Real video element */
+.rb-hero-video-el {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Arc curve — right edge (desktop only) */
+.rb-hero-curve-right {
+  display: none;
+  position: absolute;
+  right: -2px;
+  top: 0;
+  height: 100%;
+  width: 120px;
+  pointer-events: none;
+  z-index: 2;
+}
+.rb-hero-curve-right svg { width: 100%; height: 100%; display: block; }
+@media (min-width: 900px) { .rb-hero-curve-right { display: block; } }
+
+/* Arc curve — bottom edge (mobile only) */
+.rb-hero-curve-bottom {
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 72px;
+  pointer-events: none;
+  z-index: 2;
+}
+.rb-hero-curve-bottom svg { width: 100%; height: 100%; display: block; }
+@media (min-width: 900px) { .rb-hero-curve-bottom { display: none; } }
 
 /* Hero text side */
 .rb-hero-text {
@@ -2938,7 +2997,7 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
 
 /* Teal sub-nav */
 .sub-nav {
-  background: var(--color-secondary);
+  background: #F8F8F8; border-bottom: 1px solid #E8E8E4;
   display: flex; align-items: center; justify-content: flex-start;
   padding: 0 8px; overflow-x: auto; scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
@@ -2948,13 +3007,13 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
 .sub-nav a {
   display: block; padding: 10px 12px;
   font-family: var(--font-body); font-size: 12px; font-weight: 600;
-  color: rgba(255,255,255,0.72); text-decoration: none;
+  color: #434343; text-decoration: none;
   white-space: nowrap; letter-spacing: 0.03em; transition: color 0.15s;
   border-bottom: 2px solid transparent;
 }
 @media (min-width: 768px) { .sub-nav a { padding: 11px 16px; font-size: 13px; } }
-.sub-nav a:hover { color: white; }
-.sub-nav a.active { color: white; border-bottom-color: rgba(255,255,255,0.55); }
+.sub-nav a:hover { color: #1A1A1A; }
+.sub-nav a.active { color: #1A1A1A; border-bottom-color: var(--color-secondary); }
 
 /* ═══════════════════════════════════════════════════════════════
    BLOCK 02 — HERO: LIVE RECIPE BOX REVEAL
@@ -3554,7 +3613,7 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
 /* ═══════════════════════════════════════════════════════════════
    SHOP PAGE BLOCKS — simplyearth.com/pages/products
    ═══════════════════════════════════════════════════════════════ */
-.sp-container { width:100%;max-width:1248px;margin:0 auto;padding:0 20px; }
+.sp-container { width:100%;max-width:1325px;margin:0 auto;padding:0 16px; }
 @media(min-width:768px){.sp-container{padding:0 40px;}}
 @media(min-width:1024px){.sp-container{padding:0 60px;}}
 
@@ -3688,7 +3747,7 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
 /* ═══════════════════════════════════════════════════════════════
    CATEGORY PAGE — simplyearth.com/shop/categories/essential-oils
    ═══════════════════════════════════════════════════════════════ */
-.cat-container { width:100%; max-width:1248px; margin:0 auto; padding:0 20px; }
+.cat-container { width:100%; max-width:1325px; margin:0 auto; padding:0 16px; }
 @media(min-width:768px){.cat-container{padding:0 40px;}}
 @media(min-width:1024px){.cat-container{padding:0 60px;}}
 
@@ -3988,7 +4047,7 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
 /* ═══════════════════════════════════════════════════════════════
    SHOP PAGE BLOCKS — simplyearth.com/pages/products
    ═══════════════════════════════════════════════════════════════ */
-.sp-container { width:100%;max-width:1248px;margin:0 auto;padding:0 20px; }
+.sp-container { width:100%;max-width:1325px;margin:0 auto;padding:0 16px; }
 @media(min-width:768px){.sp-container{padding:0 40px;}}
 @media(min-width:1024px){.sp-container{padding:0 60px;}}
 
@@ -4122,7 +4181,7 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
 /* ═══════════════════════════════════════════════════════════════
    CATEGORY PAGE — simplyearth.com/shop/categories/essential-oils
    ═══════════════════════════════════════════════════════════════ */
-.cat-container { width:100%; max-width:1248px; margin:0 auto; padding:0 20px; }
+.cat-container { width:100%; max-width:1325px; margin:0 auto; padding:0 16px; }
 @media(min-width:768px){.cat-container{padding:0 40px;}}
 @media(min-width:1024px){.cat-container{padding:0 60px;}}
 
@@ -4499,13 +4558,14 @@ const BLOCKS_DATA = [
   },
   {
     id: 'rb-hero',
-    name: 'Hero – Video 58/42 Split',
+    name: 'Hero 3',
     page: 'recipe-box',
     tags: ['hero','split','cta','bg-cream'],
     date: '2026-03-05',
+    updated: '2026-04-06',
     thumb_emoji: '🎥',
     thumb_bg: '#F3EEE0',
-    desc: 'Desktop: 58% video left, 42% text right. Mobile: stacked. Includes trust ticker.'
+    desc: 'The hero block is a split-layout banner (desktop) / stacked card (mobile) featuring a lifestyle photo on one side and copy on the other. A category label sits above the headline, followed by three short benefit bullets, a primary CTA button with an urgency sub-label, and a social proof line at the bottom.'
   },
   {
     id: 'rb-recipes',
@@ -5165,18 +5225,26 @@ function getBlockPreview(block) {
   }
 
   if (id === 'rb-hero') {
-    return '<div style="background:' + cream + ';display:flex;height:100%;">'
-      + '<div style="flex:1.2;background:linear-gradient(160deg,#1A3A38,#2D5450,#4A2C2A);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;gap:6px;">'
-      +   '<div style="background:rgba(230,114,114,0.85);border-radius:4px;padding:2px 6px;font-size:7px;color:white;font-weight:700;">LIVE RECIPE BOX REVEAL</div>'
-      +   '<div style="color:white;font-size:9px;font-weight:700;text-align:center;line-height:1.3;">EASY NATURAL<br>FACE CARE</div>'
-      +   '<div style="width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,0.85);display:flex;align-items:center;justify-content:center;font-size:7px;">&#9654;</div>'
+    return '<div style="background:' + cream + ';display:flex;height:100%;overflow:hidden;">'
+      // 58% video side — real poster image
+      + '<div style="flex:1.45;position:relative;overflow:hidden;">'
+      +   '<img src="https://images.simplyearth.com/bucket/images/24649/recipe-box.webp" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;" onerror="this.style.display=\'none\'">'
+      +   '<div style="position:absolute;inset:0;background:linear-gradient(to right,transparent 70%,'+cream+' 100%);"></div>'
       + '</div>'
-      + '<div style="flex:1;padding:8px;display:flex;flex-direction:column;gap:5px;justify-content:center;">'
-      +   '<div style="background:' + coral + ';border-radius:10px;padding:2px 6px;width:fit-content;display:flex;align-items:center;gap:3px;"><div style="width:4px;height:4px;border-radius:50%;background:#FF3B30;"></div>' + bar('45px', 4, 'rgba(255,255,255,0.8)', 2) + '</div>'
-      +   bar('85%', 8, teal, 4, 0.8)
-      +   bar('70%', 6, teal, 3, 0.5)
-      +   bar('60%', 5, '#999', 2, 0.4)
-      +   pill('50%', coral)
+      // 42% text side
+      + '<div style="flex:1;padding:8px 10px 8px 6px;display:flex;flex-direction:column;gap:5px;justify-content:center;">'
+      +   '<div style="display:flex;align-items:center;gap:4px;margin-bottom:2px;">'
+      +     '<div style="width:10px;height:10px;background:'+cream+';border:1px solid rgba(0,0,0,0.1);border-radius:2px;font-size:6px;text-align:center;line-height:10px;">📦</div>'
+      +     '<div style="font-size:7px;font-weight:700;color:#555;">Recipe Box</div>'
+      +   '</div>'
+      +   bar('95%', 8, teal, 4, 0.9)
+      +   bar('80%', 7, teal, 3, 0.6)
+      +   '<div style="margin-top:2px;display:flex;flex-direction:column;gap:3px;">'
+      +     bar('88%', 4, '#666', 2, 0.5)
+      +     bar('75%', 4, '#666', 2, 0.4)
+      +     bar('65%', 4, '#666', 2, 0.35)
+      +   '</div>'
+      +   pill('92%', coral)
       + '</div></div>';
   }
 
@@ -5467,6 +5535,7 @@ function createCard(block) {
   const pageLabel = block.page === 'ui-kit' ? 'UI Kit' : block.page === 'recipe-box' ? 'Recipe Box' : block.page === 'shop' ? 'Shop' : block.page === 'category' ? 'Category' : block.page === 'product-detail' ? 'Product Detail' : 'Other';
   const pageColor = block.page === 'ui-kit' ? '#D05A5A' : block.page === 'recipe-box' ? '#E67272' : block.page === 'shop' ? '#375D5A' : block.page === 'category' ? '#C87878' : block.page === 'product-detail' ? '#5B7A6E' : '#AAA';
   const dateStr = formatDate(block.date);
+  const updatedStr = block.updated ? formatDate(block.updated) : null;
 
   const displayTags = block.tags.slice(0, 3);
   const tagPills = displayTags.map(t =>
@@ -5501,7 +5570,10 @@ function createCard(block) {
         ${extraCount > 0 ? `<span class="card-tag">+${extraCount}</span>` : ''}
       </div>
       <div class="card-meta">
-        <span class="card-date">📅 Added ${dateStr}</span>
+        <span class="card-date">
+          <span>📅 Added ${dateStr}</span>
+          ${updatedStr ? `<span class="card-date-updated">↺ Updated ${updatedStr}</span>` : ''}
+        </span>
         <div class="card-responsive-badges">
           <span class="responsive-badge" title="Desktop">🖥</span>
           <span class="responsive-badge" title="Tablet">📱</span>
@@ -5653,6 +5725,10 @@ function openModal(id) {
 
   // Show preview tab
   switchModalTab(document.querySelector('.modal-tab'), 'preview');
+
+  // Update View Details link
+  var detailsBtn = document.getElementById('modalViewDetailsBtn');
+  if (detailsBtn) detailsBtn.href = 'simply-earth-component.html?id=' + id;
 
   document.getElementById('previewModal').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -6286,7 +6362,7 @@ function reapplyCachedThumbs() {
   --shadow-xs:0px 1px 2px rgba(16,24,40,0.05);
   --shadow-sm:0px 2px 8px rgba(16,24,40,0.08);
   --shadow-md:0px 4px 16px rgba(16,24,40,0.10);
-  --container-max:1248px;
+  --container-max:1325px;
 
   /* === MOBILE-FIRST TYPOGRAPHY SCALE === */
   --text-display-size: 36px;
@@ -6582,9 +6658,9 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
 .rb-wrap { width: 100%; }
 .rb-container {
   width: 100%;
-  max-width: 1248px;
+  max-width: 1325px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 16px;
 }
 @media (min-width: 768px) { .rb-container { padding: 0 40px; } }
 @media (min-width: 1024px) { .rb-container { padding: 0 60px; } }
@@ -6626,9 +6702,9 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
 .rb-hero-video {
   width: 100%;
   position: relative;
-  overflow: hidden;
   background: #1A3530;
   flex-shrink: 0;
+  overflow: visible;
 }
 .rb-hero-video-inner {
   aspect-ratio: 16/9;
@@ -6638,6 +6714,7 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
   justify-content: center;
   background: linear-gradient(140deg, #1E4540 0%, #0D2825 100%);
   position: relative;
+  overflow: hidden;
 }
 @media (min-width: 900px) {
   .rb-hero-video { width: 58%; }
@@ -6666,6 +6743,43 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
   font-size: 11px; color: rgba(255,255,255,0.6);
   text-transform: uppercase; letter-spacing: 0.1em;
 }
+
+/* Real video element */
+.rb-hero-video-el {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Arc curve — right edge (desktop only) */
+.rb-hero-curve-right {
+  display: none;
+  position: absolute;
+  right: -2px;
+  top: 0;
+  height: 100%;
+  width: 120px;
+  pointer-events: none;
+  z-index: 2;
+}
+.rb-hero-curve-right svg { width: 100%; height: 100%; display: block; }
+@media (min-width: 900px) { .rb-hero-curve-right { display: block; } }
+
+/* Arc curve — bottom edge (mobile only) */
+.rb-hero-curve-bottom {
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 72px;
+  pointer-events: none;
+  z-index: 2;
+}
+.rb-hero-curve-bottom svg { width: 100%; height: 100%; display: block; }
+@media (min-width: 900px) { .rb-hero-curve-bottom { display: none; } }
 
 /* Hero text side */
 .rb-hero-text {
@@ -7757,7 +7871,7 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
 
 /* Teal sub-nav */
 .sub-nav {
-  background: var(--color-secondary);
+  background: #F8F8F8; border-bottom: 1px solid #E8E8E4;
   display: flex; align-items: center; justify-content: flex-start;
   padding: 0 8px; overflow-x: auto; scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
@@ -7767,13 +7881,13 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
 .sub-nav a {
   display: block; padding: 10px 12px;
   font-family: var(--font-body); font-size: 12px; font-weight: 600;
-  color: rgba(255,255,255,0.72); text-decoration: none;
+  color: #434343; text-decoration: none;
   white-space: nowrap; letter-spacing: 0.03em; transition: color 0.15s;
   border-bottom: 2px solid transparent;
 }
 @media (min-width: 768px) { .sub-nav a { padding: 11px 16px; font-size: 13px; } }
-.sub-nav a:hover { color: white; }
-.sub-nav a.active { color: white; border-bottom-color: rgba(255,255,255,0.55); }
+.sub-nav a:hover { color: #1A1A1A; }
+.sub-nav a.active { color: #1A1A1A; border-bottom-color: var(--color-secondary); }
 
 /* ═══════════════════════════════════════════════════════════════
    BLOCK 02 — HERO: LIVE RECIPE BOX REVEAL
@@ -8418,7 +8532,7 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
 
 <!-- BLOCK: NAV -->
 <div class="block-section" id="block-nav">
-  <div class="block-label">Block 01 — Navigation / Header <span class="tag">Subscriber Homepage · Announcement + Main Nav + Teal Sub-Nav</span></div>
+  <div class="block-label">Block 01 — Navigation / Header <span class="tag">Subscriber Homepage · Announcement + Main Nav + Sub-Nav</span></div>
   <!-- Announcement bar -->
   <div class="sub-announce">Welcome back! You're logged in as <a href="#">Hope Vander Muelen</a> 👤</div>
   <!-- Main nav -->
@@ -8897,9 +9011,9 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
 .rb-wrap { width: 100%; }
 .rb-container {
   width: 100%;
-  max-width: 1248px;
+  max-width: 1325px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 16px;
 }
 @media (min-width: 768px) { .rb-container { padding: 0 40px; } }
 @media (min-width: 1024px) { .rb-container { padding: 0 60px; } }
@@ -8941,9 +9055,9 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
 .rb-hero-video {
   width: 100%;
   position: relative;
-  overflow: hidden;
   background: #1A3530;
   flex-shrink: 0;
+  overflow: visible;
 }
 .rb-hero-video-inner {
   aspect-ratio: 16/9;
@@ -8953,6 +9067,7 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
   justify-content: center;
   background: linear-gradient(140deg, #1E4540 0%, #0D2825 100%);
   position: relative;
+  overflow: hidden;
 }
 @media (min-width: 900px) {
   .rb-hero-video { width: 58%; }
@@ -8981,6 +9096,43 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
   font-size: 11px; color: rgba(255,255,255,0.6);
   text-transform: uppercase; letter-spacing: 0.1em;
 }
+
+/* Real video element */
+.rb-hero-video-el {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Arc curve — right edge (desktop only) */
+.rb-hero-curve-right {
+  display: none;
+  position: absolute;
+  right: -2px;
+  top: 0;
+  height: 100%;
+  width: 120px;
+  pointer-events: none;
+  z-index: 2;
+}
+.rb-hero-curve-right svg { width: 100%; height: 100%; display: block; }
+@media (min-width: 900px) { .rb-hero-curve-right { display: block; } }
+
+/* Arc curve — bottom edge (mobile only) */
+.rb-hero-curve-bottom {
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 72px;
+  pointer-events: none;
+  z-index: 2;
+}
+.rb-hero-curve-bottom svg { width: 100%; height: 100%; display: block; }
+@media (min-width: 900px) { .rb-hero-curve-bottom { display: none; } }
 
 /* Hero text side */
 .rb-hero-text {
@@ -9977,11 +10129,21 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
     <!-- Video (left on desktop) -->
     <div class="rb-hero-video">
       <div class="rb-hero-video-inner">
-        <div class="rb-hero-video-person">
-          <div style="font-size:72px;margin-bottom:8px;">👩‍🍳</div>
-          <div class="rb-hero-video-play">▶</div>
-          <span class="rb-hero-video-label">March 2026 Unboxing</span>
-        </div>
+        <video class="rb-hero-video-el" autoplay muted loop playsinline poster="https://images.simplyearth.com/bucket/images/24649/recipe-box.webp">
+          <source src="https://images.simplyearth.com/bucket/media_library/24601/April2026Montagev111.mp4" type="video/mp4">
+        </video>
+      </div>
+      <!-- Arc: right curve (desktop only) — cream fills from curved left boundary to right edge -->
+      <div class="rb-hero-curve-right">
+        <svg viewBox="0 0 120 600" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M80,0 Q0,300 80,600 L120,600 L120,0 Z" fill="#F3EEE0"/>
+        </svg>
+      </div>
+      <!-- Arc: bottom curve (mobile only) — cream fills bottom arc transitioning to cream section -->
+      <div class="rb-hero-curve-bottom">
+        <svg viewBox="0 0 390 72" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,72 Q195,0 390,72 L390,72 L0,72 Z" fill="#F3EEE0"/>
+        </svg>
       </div>
     </div>
     <!-- Text (right on desktop) -->
