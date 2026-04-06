@@ -330,6 +330,9 @@ body {
 
     <div class="sidenav-section">Releases</div>
     <a class="sidenav-link active" onclick="scrollTo({top:0,behavior:'smooth'})">
+      <span class="nav-dot" style="background:#375D5A;"></span> v1.8 · Hero 3 Social Proof Removed
+    </a>
+    <a class="sidenav-link" onclick="document.getElementById('v1-7').scrollIntoView({behavior:'smooth'})">
       <span class="nav-dot" style="background:#E67272;"></span> v1.7 · Hero 3 & Component Page
     </a>
     <a class="sidenav-link" onclick="document.getElementById('v1-6').scrollIntoView({behavior:'smooth'})">
@@ -384,14 +387,60 @@ body {
     <div class="content">
 
       <!-- ══════════════════════════════════════
+           v1.8.0
+      ═══════════════════════════════════════ -->
+      <div class="version-entry" id="v1-8">
+        <div class="version-meta">
+          <div class="version-badge latest"><span class="version-dot"></span>v1.8.0</div>
+          <div class="version-date">Apr 6, 2026</div>
+        </div>
+        <div class="version-card is-latest">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+            <div class="version-title" style="margin-bottom:0;">Hero 3 — Layout, Spacing & Media Refinements</div>
+          </div>
+          <div class="version-summary">Hero 3 fully refined — trust ticker removed, product image added, mobile/tablet layout centred with full-width CTA, padding corrected across all breakpoints, and component page viewport switching fixed.</div>
+          <div class="change-list">
+            <div class="change-item">
+              <span class="change-tag tag-updated">Updated</span>
+              <span class="change-text">Hero 3 — trust ticker (scrolling social proof bar) removed from below the hero section</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-updated">Updated</span>
+              <span class="change-text">Hero 3 — category label replaced with standalone <code>recipe-box.webp</code> product image at <code>150px × 28px</code>, <code>object-fit: contain</code></span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-updated">Updated</span>
+              <span class="change-text">Hero 3 — mobile &amp; tablet text aligned to centre; bullet list items centred; product image centred on mobile/tablet, left-aligned on desktop</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-updated">Updated</span>
+              <span class="change-text">Hero 3 — CTA button full-width on mobile &amp; tablet (<code>max-width: 420px</code> restricted to desktop ≥900px)</span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-updated">Updated</span>
+              <span class="change-text">Hero 3 — padding corrected: mobile <code>0px 24px 48px</code> · tablet <code>10px 40px 48px 40px</code> · desktop <code>60px 52px 60px 0px</code></span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-updated">Updated</span>
+              <span class="change-text">Hero 3 — overview description updated in <code>index.html</code> and <code>simply-earth-component.html</code></span>
+            </div>
+            <div class="change-item">
+              <span class="change-tag tag-updated">Updated</span>
+              <span class="change-text">Component Detail page — iframe height now recalculates on viewport switch (Desktop / Tablet / Mobile) so the full block is visible at all breakpoints</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════
            v1.7.0
       ═══════════════════════════════════════ -->
       <div class="version-entry" id="v1-7">
         <div class="version-meta">
-          <div class="version-badge latest"><span class="version-dot"></span>v1.7.0</div>
+          <div class="version-badge"><span class="version-dot"></span>v1.7.0</div>
           <div class="version-date">Apr 6, 2026</div>
         </div>
-        <div class="version-card is-latest">
+        <div class="version-card">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
             <div class="version-title" style="margin-bottom:0;">Hero 3 Real Media, Arc Curves & Component Detail Page</div>
           </div>

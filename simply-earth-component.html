@@ -308,7 +308,7 @@ body{font-family:var(--font-ui);background:var(--color-bg-app);color:var(--color
 // ── Block data (mirrors index.html BLOCKS_DATA) ───────────────
 const BLOCKS_DATA = [
   { id:'rb-announcement', name:'Announcement Bar', page:'recipe-box', tags:['announcement','sticky','bg-dark'], date:'2026-03-05', thumb_emoji:'📢', thumb_bg:'#2D5450', desc:'Dark teal sticky top bar with promotional message.' },
-  { id:'rb-hero', name:'Hero 3', page:'recipe-box', tags:['hero','split','cta','bg-cream'], date:'2026-03-05', updated:'2026-04-06', thumb_emoji:'🎥', thumb_bg:'#F3EEE0', desc:'The hero block is a split-layout banner (desktop) / stacked card (mobile) featuring a lifestyle photo on one side and copy on the other. A category label sits above the headline, followed by three short benefit bullets, a primary CTA button with an urgency sub-label, and a social proof line at the bottom.' },
+  { id:'rb-hero', name:'Hero 3', page:'recipe-box', tags:['hero','split','cta','bg-cream'], date:'2026-03-05', updated:'2026-04-06', thumb_emoji:'🎥', thumb_bg:'#F3EEE0', desc:'The hero block is a split-layout banner (desktop) / stacked card (mobile) featuring a lifestyle photo on one side and copy on the other. A product image sits above the headline, followed by three short benefit bullets and a primary CTA button with an urgency sub-label.' },
   { id:'rb-recipes', name:'Recipe Slider (4-col)', page:'recipe-box', tags:['slider','product','bg-white'], date:'2026-03-05', thumb_emoji:'🧴', thumb_bg:'#FFF8F8', desc:'4 recipe product cards with brush-stroke labels. Horizontal scroll on mobile.' },
   { id:'rb-3steps', name:'3-Step Plan', page:'recipe-box', tags:['content','grid','bg-cream'], date:'2026-03-05', thumb_emoji:'1️⃣', thumb_bg:'#F3EEE0', desc:'Square photos with green brush-stroke step badges.' },
   { id:'rb-testimonials', name:'Testimonials – UGC Cards', page:'recipe-box', tags:['testimonial','slider','ugc','bg-white'], date:'2026-03-05', thumb_emoji:'💬', thumb_bg:'#FFF5EE', desc:'Cream cards with user quote, photo, and category badge.' },
@@ -395,19 +395,29 @@ function init() {
 
 // ── Viewport controls ─────────────────────────────────────────
 const VP_LABELS = { desktop:'1440px', tablet:'768px', mobile:'390px' };
+function refreshIframeHeight() {
+  const iframe = document.getElementById('compIframe');
+  if (!iframe) return;
+  try {
+    const h = iframe.contentDocument.body.scrollHeight;
+    iframe.style.height = Math.max(360, h + 20) + 'px';
+  } catch(e) {}
+}
 function setVp(size, btn) {
   document.querySelectorAll('.preview-vp-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   document.getElementById('vpLabel').textContent = VP_LABELS[size];
   const wrap = document.getElementById('iframeWrap');
   wrap.className = 'comp-iframe-wrap' + (size !== 'desktop' ? ' ' + size : '');
+  // Re-measure height after transition completes
+  setTimeout(refreshIframeHeight, 350);
 }
 
 // ── Fetch cache (single fetch for all operations) ─────────────
 let _fetchCache = null;
 async function fetchDS() {
   if (_fetchCache) return _fetchCache;
-  const res = await fetch('index.html');
+  const res = await fetch('index.html', { cache: 'no-store' });
   const text = await res.text();
   const parser = new DOMParser();
   const doc = parser.parseFromString(text, 'text/html');

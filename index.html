@@ -1916,29 +1916,31 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
 .rb-hero-text {
   flex: 1;
   background: var(--color-bg-cream);
-  padding: 40px 24px 48px;
+  padding: 0px 24px 48px;
   display: flex;
   flex-direction: column;
   gap: 20px;
   justify-content: center;
+  align-items: center;
+  text-align: center;
 }
-@media (min-width: 768px) { .rb-hero-text { padding: 48px 40px; } }
-@media (min-width: 900px) { .rb-hero-text { padding: 60px 52px; } }
+@media (min-width: 768px) { .rb-hero-text { padding: 10px 40px 48px 40px; } }
+@media (min-width: 900px) {
+  .rb-hero-text { padding: 60px 52px 60px 0px; align-items: flex-start; text-align: left; }
+}
 
 /* Recipe box icon + label */
 .rb-hero-product-label {
   display: flex; align-items: center; gap: 10px;
 }
-.rb-hero-box-icon {
-  width: 48px; height: 48px;
-  background: var(--color-bg-cream);
-  border-radius: var(--radius-sm);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 24px;
-  border: 1px solid rgba(0,0,0,0.08);
-  padding: 6px;
-  overflow: hidden;
+.rb-hero-box-img {
+  width: 150px;
+  height: 28px;
+  object-fit: contain;
+  object-position: center;
+  display: block;
 }
+@media (min-width: 900px) { .rb-hero-box-img { object-position: left center; } }
 .rb-hero-box-title {
   font-family: var(--font-body); font-weight: var(--fw-bold);
   font-size: 14px; color: var(--color-text-dark);
@@ -1957,7 +1959,9 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
   list-style: none;
   display: flex; flex-direction: column; gap: 8px;
   margin: 0; padding: 0;
+  align-items: center;
 }
+@media (min-width: 900px) { .rb-hero-features { align-items: flex-start; } }
 .rb-hero-features li {
   font-family: var(--font-body); font-weight: var(--fw-medium);
   font-size: 15px; color: #444;
@@ -1970,9 +1974,10 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
   background: var(--color-primary); color: white;
   border: none; border-radius: 6px;
   padding: 18px 28px; cursor: pointer;
-  width: 100%; max-width: 420px;
+  width: 100%;
   text-align: center; text-decoration: none;
 }
+@media (min-width: 900px) { .rb-btn-hero { max-width: 420px; } }
 .rb-btn-hero-main {
   font-family: var(--font-body); font-weight: var(--fw-black);
   font-size: 17px; text-transform: uppercase; letter-spacing: 0.04em;
@@ -4567,7 +4572,7 @@ const BLOCKS_DATA = [
     updated: '2026-04-06',
     thumb_emoji: '🎥',
     thumb_bg: '#F3EEE0',
-    desc: 'The hero block is a split-layout banner (desktop) / stacked card (mobile) featuring a lifestyle photo on one side and copy on the other. A category label sits above the headline, followed by three short benefit bullets, a primary CTA button with an urgency sub-label, and a social proof line at the bottom.'
+    desc: 'The hero block is a split-layout banner (desktop) / stacked card (mobile) featuring a lifestyle photo on one side and copy on the other. A product image sits above the headline, followed by three short benefit bullets and a primary CTA button with an urgency sub-label.'
   },
   {
     id: 'rb-recipes',
@@ -6787,29 +6792,31 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
 .rb-hero-text {
   flex: 1;
   background: var(--color-bg-cream);
-  padding: 40px 24px 48px;
+  padding: 0px 24px 48px;
   display: flex;
   flex-direction: column;
   gap: 20px;
   justify-content: center;
+  align-items: center;
+  text-align: center;
 }
-@media (min-width: 768px) { .rb-hero-text { padding: 48px 40px; } }
-@media (min-width: 900px) { .rb-hero-text { padding: 60px 52px; } }
+@media (min-width: 768px) { .rb-hero-text { padding: 10px 40px 48px 40px; } }
+@media (min-width: 900px) {
+  .rb-hero-text { padding: 60px 52px 60px 0px; align-items: flex-start; text-align: left; }
+}
 
 /* Recipe box icon + label */
 .rb-hero-product-label {
   display: flex; align-items: center; gap: 10px;
 }
-.rb-hero-box-icon {
-  width: 48px; height: 48px;
-  background: var(--color-bg-cream);
-  border-radius: var(--radius-sm);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 24px;
-  border: 1px solid rgba(0,0,0,0.08);
-  padding: 6px;
-  overflow: hidden;
+.rb-hero-box-img {
+  width: 150px;
+  height: 28px;
+  object-fit: contain;
+  object-position: center;
+  display: block;
 }
+@media (min-width: 900px) { .rb-hero-box-img { object-position: left center; } }
 .rb-hero-box-title {
   font-family: var(--font-body); font-weight: var(--fw-bold);
   font-size: 14px; color: var(--color-text-dark);
@@ -6828,7 +6835,9 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
   list-style: none;
   display: flex; flex-direction: column; gap: 8px;
   margin: 0; padding: 0;
+  align-items: center;
 }
+@media (min-width: 900px) { .rb-hero-features { align-items: flex-start; } }
 .rb-hero-features li {
   font-family: var(--font-body); font-weight: var(--fw-medium);
   font-size: 15px; color: #444;
@@ -6841,9 +6850,10 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
   background: var(--color-primary); color: white;
   border: none; border-radius: 6px;
   padding: 18px 28px; cursor: pointer;
-  width: 100%; max-width: 420px;
+  width: 100%;
   text-align: center; text-decoration: none;
 }
+@media (min-width: 900px) { .rb-btn-hero { max-width: 420px; } }
 .rb-btn-hero-main {
   font-family: var(--font-body); font-weight: var(--fw-black);
   font-size: 17px; text-transform: uppercase; letter-spacing: 0.04em;
@@ -9142,29 +9152,31 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
 .rb-hero-text {
   flex: 1;
   background: var(--color-bg-cream);
-  padding: 40px 24px 48px;
+  padding: 0px 24px 48px;
   display: flex;
   flex-direction: column;
   gap: 20px;
   justify-content: center;
+  align-items: center;
+  text-align: center;
 }
-@media (min-width: 768px) { .rb-hero-text { padding: 48px 40px; } }
-@media (min-width: 900px) { .rb-hero-text { padding: 60px 52px; } }
+@media (min-width: 768px) { .rb-hero-text { padding: 10px 40px 48px 40px; } }
+@media (min-width: 900px) {
+  .rb-hero-text { padding: 60px 52px 60px 0px; align-items: flex-start; text-align: left; }
+}
 
 /* Recipe box icon + label */
 .rb-hero-product-label {
   display: flex; align-items: center; gap: 10px;
 }
-.rb-hero-box-icon {
-  width: 48px; height: 48px;
-  background: var(--color-bg-cream);
-  border-radius: var(--radius-sm);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 24px;
-  border: 1px solid rgba(0,0,0,0.08);
-  padding: 6px;
-  overflow: hidden;
+.rb-hero-box-img {
+  width: 150px;
+  height: 28px;
+  object-fit: contain;
+  object-position: center;
+  display: block;
 }
+@media (min-width: 900px) { .rb-hero-box-img { object-position: left center; } }
 .rb-hero-box-title {
   font-family: var(--font-body); font-weight: var(--fw-bold);
   font-size: 14px; color: var(--color-text-dark);
@@ -9183,7 +9195,9 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
   list-style: none;
   display: flex; flex-direction: column; gap: 8px;
   margin: 0; padding: 0;
+  align-items: center;
 }
+@media (min-width: 900px) { .rb-hero-features { align-items: flex-start; } }
 .rb-hero-features li {
   font-family: var(--font-body); font-weight: var(--fw-medium);
   font-size: 15px; color: #444;
@@ -9196,9 +9210,10 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
   background: var(--color-primary); color: white;
   border: none; border-radius: 6px;
   padding: 18px 28px; cursor: pointer;
-  width: 100%; max-width: 420px;
+  width: 100%;
   text-align: center; text-decoration: none;
 }
+@media (min-width: 900px) { .rb-btn-hero { max-width: 420px; } }
 .rb-btn-hero-main {
   font-family: var(--font-body); font-weight: var(--fw-black);
   font-size: 17px; text-transform: uppercase; letter-spacing: 0.04em;
@@ -10154,10 +10169,7 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
     </div>
     <!-- Text (right on desktop) -->
     <div class="rb-hero-text">
-      <div class="rb-hero-product-label">
-        <div class="rb-hero-box-icon"><img src="https://images.simplyearth.com/bucket/images/24649/recipe-box.webp" alt="Recipe Box" style="width:100%;height:100%;object-fit:contain;"></div>
-        <span class="rb-hero-box-title">Recipe Box</span>
-      </div>
+      <img src="https://images.simplyearth.com/bucket/images/24649/recipe-box.webp" alt="Recipe Box" class="rb-hero-box-img">
       <h1 class="rb-hero-h1">Make Natural Products at Home—The Easy Way</h1>
       <ul class="rb-hero-features">
         <li>🛠️ New Themes, Delivered Monthly</li>
@@ -10174,20 +10186,6 @@ body{font-family:var(--font-body);font-weight:var(--fw-regular);font-size:var(--
       </div>
     </div>
   </section>
-  <!-- Trust ticker below hero -->
-  <div class="rb-ticker">
-    <div class="rb-ticker-track">
-      <span class="rb-ticker-item"><span class="rb-ticker-dot"></span>13% of Profits End Human Trafficking</span>
-      <span class="rb-ticker-item"><span class="rb-ticker-dot"></span>100% Pure &amp; Ethically Sourced</span>
-      <span class="rb-ticker-item"><span class="rb-ticker-dot"></span>Cancel Anytime</span>
-      <span class="rb-ticker-item"><span class="rb-ticker-dot"></span>13% of Profits End Human Trafficking</span>
-      <span class="rb-ticker-item"><span class="rb-ticker-dot"></span>100% Pure &amp; Ethically Sourced</span>
-      <span class="rb-ticker-item"><span class="rb-ticker-dot"></span>Cancel Anytime</span>
-      <span class="rb-ticker-item"><span class="rb-ticker-dot"></span>13% of Profits End Human Trafficking</span>
-      <span class="rb-ticker-item"><span class="rb-ticker-dot"></span>100% Pure &amp; Ethically Sourced</span>
-      <span class="rb-ticker-item"><span class="rb-ticker-dot"></span>Cancel Anytime</span>
-    </div>
-  </div>
 </div>
 <div class="ds-divider"></div>
 
